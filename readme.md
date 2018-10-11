@@ -1,5 +1,7 @@
 # Project Name
 
+TXAT
+
 ## Description
 
 Real-time chat that allows transcription and search of voice messages.
@@ -105,7 +107,7 @@ User model
 username - String // required
 email - String // required & unique
 password - String // required
-
+imageURL - String
 ```
 Message model
 
