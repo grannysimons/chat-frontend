@@ -6,7 +6,8 @@ import "./Login.css";
 class Login extends Component {
   state = {
     email: "",
-    password: ""
+    password: "",
+    errorMessage: "",
   };
 
   handleFormSubmit = event => {
@@ -16,9 +17,10 @@ class Login extends Component {
     auth
       .login({ email, password })
       .then(user => {
+        console.log('LOGIN user: ', user);
         this.props.setUser(user);
       })
-      .catch(error => console.log(error));
+      .catch(error => console.log('errrrr: ', error));
   };
 
   handleChange = event => {
@@ -37,7 +39,7 @@ class Login extends Component {
       //   <input type="submit" value="Login" />
       // </form>
 
-      <div className="main-container">
+      <div className="login">
         <div className="container-inner">
           <h1>Login</h1>
           <div className="logo">
@@ -51,6 +53,7 @@ class Login extends Component {
                 value={email}
                 onChange={this.handleChange}
                 placeholder="mail"
+                // value="mariona.roca@gmail.com"
               />
               <input
                 type="password"
@@ -58,10 +61,11 @@ class Login extends Component {
                 value={password}
                 onChange={this.handleChange}
                 placeholder="password"
+                // value="1234"
               />
 
               <p>
-                <a href="#">sign up</a>
+                <a href="http://localhost:3000/signup">sign up</a>
               </p>
               <button type="submit">Login</button>
             </form>

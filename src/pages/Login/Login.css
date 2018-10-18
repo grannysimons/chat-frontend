@@ -3,7 +3,7 @@
   margin: 0;
   padding: 0;
 }
-.main-container
+.login
 {
   font-family: 'Source Code Pro', monospace;
   color: white;
@@ -16,7 +16,7 @@
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff670f', endColorstr='#2c617a',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
   height: 100vh;
 }
-.container-inner
+.login .container-inner
 {
   height: 100%;
   text-align: center;
@@ -25,18 +25,18 @@
   margin: auto;
   box-sizing: border-box;
 }
-.container-inner h1
+.login .container-inner h1
 {
   font-size: 40px;
   margin-bottom: 20px;
 }
-.container-inner .logo i
+.login .container-inner .logo i
 {
   font-size: 70px;
   color: white;
   margin-bottom: 20px;
 }
-.container-inner .form input
+.login .container-inner .form input
 {
   display: block;
   padding: 10px 25px;
@@ -48,28 +48,28 @@
   border-bottom: 2px solid #5a5a5a;
   color: #dedede;
 }
-.container-inner .form p
+.login .container-inner .form p
 {
   text-align: right;
   margin-bottom: 30px;
 
 }
-.container-inner .form p a,
-.container-inner .form p a:hover
+.login .container-inner .form p a,
+.login .container-inner .form p a:hover
 {
   color: white;
   text-decoration: none;
 }
-.container-inner .form p a:hover
+.login .container-inner .form p a:hover
 {
   color: #aaaaaa;
 }
-.container-inner .form p a:focus
+.login .container-inner .form p a:focus
 {
   border-width: 0;
   outline: -webkit-focus-ring-color auto 0;
 }
-.container-inner .form button
+.login .container-inner .form button
 {
   padding: 10px 20px;
   border-radius: 4px;
