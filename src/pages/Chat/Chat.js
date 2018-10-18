@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import './Chat.css';
+import { Link } from 'react-router-dom';
 
 export default class Chat extends Component {
   render() {
@@ -41,9 +42,9 @@ export default class Chat extends Component {
             <div className="right message">Lorem, ipsum dolor sit</div>
           </div>
           <div className="send-form">
-            <div className="back-button">
+            <Link to='/chats' className="back-button">
               <i className="fas fa-chevron-left" />
-            </div>
+            </Link>
             <form action="">
               <input type="text" />
               <button className="send-button">
