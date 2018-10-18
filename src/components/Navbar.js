@@ -5,10 +5,10 @@ import { withAuth } from '../components/AuthProvider';
 class Navbar extends Component {
   render() {
     const { isLogged, user, logout } = this.props;
-    const { username } = user;
+    const { email } = user;
     if (isLogged) {
       return <div>
-        <p>username: { username }</p>
+        <p>email: { email }</p>
         <p onClick={logout}>Logout</p>
       </div>
     } else {
