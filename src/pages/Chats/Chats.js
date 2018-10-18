@@ -27,6 +27,12 @@ class Chats extends Component {
       }
     ]
   };
+  componentDidMount = () => {
+    console.log('componentDidMount!');
+    //1. Miro qui soc (/auth/me)
+    //2. base de dades per recuperar les converses en les que he participat (chats/getChats(email))
+    //3. 
+  }
   goToChat = email => {
     console.log("goToChat: ", email);
     this.props.history.push('/login');
