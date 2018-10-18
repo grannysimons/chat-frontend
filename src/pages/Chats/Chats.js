@@ -37,6 +37,9 @@ class Chats extends Component {
     console.log("goToChat: ", email);
     this.props.history.push('/login');
   };
+  handleNewChat = () => {
+    
+  }
   render() {
     return (
       <div className="chats">
@@ -65,7 +68,7 @@ class Chats extends Component {
           <button className="button profile">
             <i className="fas fa-user" />
           </button>
-          <button className="button new-chat">
+          <button onClick={this.handleNewChat} className="button new-chat">
             <i className="fas fa-plus-circle" />
           </button>
           <button onClick={this.props.logout} className="button logout">
