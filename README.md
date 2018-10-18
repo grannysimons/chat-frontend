@@ -158,7 +158,7 @@ user2 - ObjectID
 - POST /auth/logout
   - body: (empty)
   - 204
-- GET /chat/list
+- POST /chat/list (així utilitzem currentuser)
   - get list
 - GET /chat/:id
   - get messages from concrete chat
