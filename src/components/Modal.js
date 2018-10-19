@@ -1,67 +1,97 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
+// import chat from "../lib/chat-service";
+import Button from "../components/Button";
 
 export default class Modal extends Component {
+  state = {
+    mailValue: ""
+  };
+  updateValue = e => {
+    e.preventDefault();
+    this.setState({ mailValue: e.target.value });
+  };
   generateRandomId = () => {
-    let random = parseInt(Math.floor(Math.random()*10));
-    this.generatedId = 'modal'+ random.toString();
-  }
-  getRandomId = (prefix) => {
-    return prefix + '' + this.generatedId;
-  }
+    let random = parseInt(Math.floor(Math.random() * 10));
+    this.generatedId = "modal" + random.toString();
+  };
+  getRandomId = prefix => {
+    return prefix + "" + this.generatedId;
+  };
+  getClass = () => {
+    let classes = "fas " + this.props.buttonClass;
+    return classes;
+  };
+  onSubmitHandler = (e) => {
+    // console.log('onSubmitHandler');
+    e.preventDefault();
+    this.props.onSubmitHandler(this.state.mailValue);
+  };
   render() {
+    this.generateRandomId();
     return (
-      <div>
+      <Fragment>
         {/* <!-- Button trigger modal --> */}
-        <button
+        <Button
           type="button"
-          class="btn btn-primary"
+          // className="btn btn-primary"
           data-toggle="modal"
-          data-target={this.getRandomId('#')}
+          data-target={this.getRandomId("#")}
         >
-          {this.props.textButton}
-        </button>
+          <i className={this.getClass()} />
+        </Button>
 
         {/* <!-- Modal --> */}
         <div
-          class="modal fade"
-          id={this.getRandomId()}
-          tabindex="-1"
+          className="modal fade"
+          id={this.getRandomId("")}
+          tabIndex="-1"
           role="dialog"
           aria-labelledby="exampleModalCenterTitle"
           aria-hidden="true"
         >
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCenterTitle">
-                  Modal title
+          <div className="modal-dialog modal-dialog-centered" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="exampleModalCenterTitle">
+                  {this.props.title}
                 </h5>
                 <button
                   type="button"
-                  class="close"
+                  className="close"
                   data-dismiss="modal"
                   aria-label="Close"
                 >
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div class="modal-body">...</div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  data-dismiss="modal"
-                >
-                  Close
-                </button>
-                <button type="button" class="btn btn-primary">
-                  Save changes
-                </button>
-              </div>
+              <form>
+                <div className="modal-body">
+                  <input
+                    type="email"
+                    className="email"
+                    name="email"
+                    placeholder="user email"
+                    onChange={this.updateValue}
+                    value={this.state.mailValue}
+                  />
+                </div>
+                <div className="modal-footer">
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    data-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button type="submit" className="btn btn-primary" onClick={this.onSubmitHandler}>
+                    {this.props.title}
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
-      </div>
+      </Fragment>
     );
   }
 }

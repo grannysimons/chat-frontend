@@ -3,6 +3,8 @@ import { withAuth } from "../../components/AuthProvider";
 import ChatListElement from "../../components/ChatListElement/ChatListElement";
 import "./Chats.css";
 import { Link } from 'react-router-dom';
+import Modal from '../../components/Modal';
+import chat from '../../lib/chat-service';
 
 class Chats extends Component {
   state = {
@@ -37,8 +39,14 @@ class Chats extends Component {
     console.log("goToChat: ", email);
     this.props.history.push('/login');
   };
-  handleNewChat = () => {
-    
+  handleNewChat = (email) => {
+    console.log('newChat');
+    chat.newChat( email )
+    .then((newChat) => {
+      console.log('newChat: ', newChat);
+      this.props.history.push('/chats/email');
+    })
+    // this.props.history.push();
   }
   render() {
     return (
@@ -68,9 +76,15 @@ class Chats extends Component {
           <button className="button profile">
             <i className="fas fa-user" />
           </button>
-          <button onClick={this.handleNewChat} className="button new-chat">
-            <i className="fas fa-plus-circle" />
-          </button>
+          <Modal buttonClass='fa-plus-circle' title="new Chat" onSubmitHandler={this.handleNewChat}>
+          <form>
+            <div className="form-group">
+              <label>Email address</label>
+              <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
+            </div>
+            <button type="submit" className="btn btn-primary">Submit</button>
+          </form>
+          </Modal>
           <button onClick={this.props.logout} className="button logout">
             <i className="fas fa-sign-out-alt" />
           </button>
