@@ -12,6 +12,10 @@ class Chat {
     console.log('chat-service. mail: ', email);
     return this.chat.post('/newChat', { email })
   }
+
+  getList() {
+    return this.chat.post('/chatList');
+  }
   
   // signup(user) {
   //   const { email, password } = user;

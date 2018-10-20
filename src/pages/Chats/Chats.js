@@ -5,6 +5,8 @@ import "./Chats.css";
 import { Link } from 'react-router-dom';
 import Modal from '../../components/Modal';
 import chat from '../../lib/chat-service';
+import auth from '../../lib/auth-service';
+// import ModalButton from '../../components/ModalButton';
 
 class Chats extends Component {
   state = {
@@ -31,7 +33,33 @@ class Chats extends Component {
   };
   componentDidMount = () => {
     console.log('componentDidMount!');
-    //1. Miro qui soc (/auth/me)
+    auth.me()
+    .then(user => {
+      if(user)
+      {
+        chat.getList()
+        .then(chats => {
+          var chatArray = [];
+          chats.data.chats.forEach(chat => {
+            console.log('chat: ', chat);
+            let name = chat.user1 === user.email ? chat.user2 : chat.user1;
+            let chatObject = {
+              name: name,
+              lastDate: '',
+              num: '',
+              email: name
+            }
+            chatArray.push(chatObject);
+          });
+          console.log('chatList: ', chatArray);
+          this.setState({ chatList: chatArray });
+        })
+      }
+      else
+      {
+        console.log('not logged!!');
+      }
+    })
     //2. base de dades per recuperar les converses en les que he participat (chats/getChats(email))
     //3. 
   }
@@ -45,6 +73,7 @@ class Chats extends Component {
     .then((newChat) => {
       console.log('newChat: ', newChat);
       this.props.history.push('/chats/email');
+      // $('#myModal').modal('hide')
     })
     // this.props.history.push();
   }

@@ -3,6 +3,14 @@ import './Chat.css';
 import { Link } from 'react-router-dom';
 
 export default class Chat extends Component {
+  hideModal = () => {
+    if(document.querySelector('.modal-backdrop')) 
+    {
+      document.querySelector('.modal-backdrop').style.display = "none";
+    }
+  }
+  componentDidMount = () => {this.hideModal()}
+  componentDidUpdate = () => {this.hideModal()}
   render() {
     return (
       <div>
