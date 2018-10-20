@@ -17,6 +17,10 @@ class Chat {
     return this.chat.post('/chatList');
   }
   
+  getMessages(idChat) {
+    console.log('servei ruta: ', '/chat/',idChat);
+    return this.chat.post('/chat/',idChat);
+  }
   // signup(user) {
   //   const { email, password } = user;
   //   return this.auth.post('/signup', {email, password})

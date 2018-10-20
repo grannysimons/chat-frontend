@@ -46,15 +46,16 @@ class Chats extends Component {
     .then(chats => {
       var chatArray = [];
       chats.data.chats.forEach(chat => {
-        console.log('chat: ', chat);
+        // console.log('chat: ', chat);
         let email = chat.user1.email === this.props.user.email ? chat.user2.email : chat.user1.email;
         let name = chat.user1.email === this.props.user.email ? chat.user2.idUser.name : chat.user1.idUser.name;
         // let lastSeen =
         let chatObject = {
           name,
-          lastDate: helpers.dateChatFormat(),
+          lastDate: '',//helpers.dateChatFormat(),
           num: '',
           email,
+          idChat: chat._id,
         }
         chatArray.push(chatObject);
       });
@@ -85,7 +86,9 @@ class Chats extends Component {
         </form>
         <div className="chats-container">
           {this.state.chatList.map((element, index) => {
-            let path = `/chats/${element.email}`;
+            console.log('!!! element: ',element);
+            let path = `/chats/${element.idChat}`;
+            console.log('path: ',path);
             return (
               <Link to={path} key={index}>
                 <ChatListElement

@@ -160,9 +160,9 @@ user2 - ObjectID
   - 204
 - POST /chat/list (així utilitzem currentuser)
   - get list
-- GET /chat/:id
-  - get messages from concrete chat
 - POST /chat/:id
+  - get messages from concrete chat
+- POST /chat/:id/send
   - publish message
 - POST /chat/new
   - creates new chat  

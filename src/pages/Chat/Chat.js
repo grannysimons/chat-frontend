@@ -1,15 +1,20 @@
 import React, { Component } from "react";
 import './Chat.css';
 import { Link } from 'react-router-dom';
+import chat from '../../lib/chat-service';
 
 export default class Chat extends Component {
-  hideModal = () => {
-    if(document.querySelector('.modal-backdrop')) 
-    {
-      document.querySelector('.modal-backdrop').classList.remove('show');
-    }
+  // hideModal = () => {
+  //   if(document.querySelector('.modal-backdrop')) 
+  //   {
+  //     document.querySelector('.modal-backdrop').classList.remove('show');
+  //   }
+  // }
+  componentDidMount = () => {
+    // this.hideModal()
+    console.log('params: ',this.props.match.params);
+    chat.getMessages(this.props.match.params.idChat);
   }
-  componentDidMount = () => {this.hideModal()}
   componentDidUpdate = () => {this.hideModal()}
   render() {
     return (
