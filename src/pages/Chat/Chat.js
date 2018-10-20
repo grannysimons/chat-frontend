@@ -10,21 +10,30 @@ export default class Chat extends Component {
   //     document.querySelector('.modal-backdrop').classList.remove('show');
   //   }
   // }
+  state = {
+    message: '',
+  }
   componentDidMount = () => {
     // this.hideModal()
     console.log('params: ',this.props.match.params);
     chat.getMessages(this.props.match.params.idChat);
   }
-  componentDidUpdate = () => {this.hideModal()}
+  componentDidUpdate = () => {
+    // this.hideModal()
+  }
   handleNewMessage = (e) => {
     e.preventDefault();
     let idChat = this.props.match.params.idChat;
+    let message = this.state.message;
     console.log('newMessage');
-    chat.newMessage( idChat )
+    chat.newMessage( idChat, message)
     .then((newChat) => {
       console.log('newChat: ', newChat);
       this.props.history.push('/chat/',idChat);
     })
+  }
+  handleOnChange = (e) => {
+    this.setState({message: e.target.value});
   }
   render() {
     return (
@@ -69,7 +78,7 @@ export default class Chat extends Component {
               <i className="fas fa-chevron-left" />
             </Link>
             <form onSubmit={this.handleNewMessage} action="">
-              <input type="text" name="message"/>
+              <input type="text" name="message" onChange={this.handleOnChange}/>
               <button className="send-button">
                 <i className="fas fa-chevron-circle-right" />
               </button>

@@ -22,10 +22,10 @@ class Chat {
     return this.chat.post('/chat/',idChat);
   }
 
-  newMessage(idChat) {
+  newMessage(idChat, message) {
     let path = '/' + idChat + '/send';
-    console.log(path);
-    return this.chat.post(path);
+    console.log('chat-service: ',path);
+    return this.chat.post(path, {message});
   }
   // signup(user) {
   //   const { email, password } = user;
