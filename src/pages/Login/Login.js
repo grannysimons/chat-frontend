@@ -20,7 +20,9 @@ class Login extends Component {
         console.log('LOGIN user: ', user);
         this.props.setUser(user);
       })
-      .catch(error => console.log('errrrr: ', error));
+      .catch(error => {
+        this.setState({ errorMessage: 'Authentication error'});
+      });
   };
 
   handleChange = event => {
@@ -71,6 +73,7 @@ class Login extends Component {
             </form>
             <div className="log">
             {/* incorrect data */}
+              {this.state.errorMessage}
             </div>
           </div>
         </div>

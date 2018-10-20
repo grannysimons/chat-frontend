@@ -95,7 +95,6 @@ class Chats extends Component {
         <div className="chats-container">
           {this.state.chatList.map((element, index) => {
             let path = `/chats/${element.email}`;
-            console.log('path: ', path);
             return (
               <Link to={path} key={index}>
                 <ChatListElement

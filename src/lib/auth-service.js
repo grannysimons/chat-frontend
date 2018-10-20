@@ -18,7 +18,10 @@ class Auth {
     console.log('login!');
     const { email, password } = user;
     return this.auth.post('/login', {email, password})
-      .then(({ data }) => data);
+      .then(({ data }) => {
+        console.log('data: ', data);
+        return data;
+      })
   }
 
   logout() {
