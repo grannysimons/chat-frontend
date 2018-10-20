@@ -1,5 +1,5 @@
-export default helpers = {
-  dateChatFormat = ( date ) => {
+const helpers = {
+  dateChatFormat : ( date ) => {
     var dd = date.getDate();
     var mm = date.getMonth()+1; //January is 0!
 
@@ -14,3 +14,5 @@ export default helpers = {
     return today;
   }
 }
+
+export default helpers;

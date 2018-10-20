@@ -5,8 +5,7 @@ import "./Chats.css";
 import { Link } from 'react-router-dom';
 import Modal from '../../components/Modal';
 import chat from '../../lib/chat-service';
-import auth from '../../lib/auth-service';
-// import ModalButton from '../../components/ModalButton';
+import helpers from '../../helpers';
 
 class Chats extends Component {
   state = {
@@ -43,32 +42,24 @@ class Chats extends Component {
   componentDidMount = () => {
     console.log('componentDidMount!');
     this.hideModal();
-    auth.me()
-    .then(user => {
-      if(user)
-      {
-        chat.getList()
-        .then(chats => {
-          var chatArray = [];
-          chats.data.chats.forEach(chat => {
-            console.log('chat: ', chat);
-            let name = chat.user1.email === user.email ? chat.user2.email : chat.user1.email;
-            let chatObject = {
-              name: name,
-              lastDate: '',
-              num: '',
-              email: name
-            }
-            chatArray.push(chatObject);
-          });
-          console.log('chatList: ', chatArray);
-          this.setState({ chatList: chatArray });
-        })
-      }
-      else
-      {
-        console.log('not logged!!');
-      }
+    chat.getList()
+    .then(chats => {
+      var chatArray = [];
+      chats.data.chats.forEach(chat => {
+        console.log('chat: ', chat);
+        let email = chat.user1.email === this.props.user.email ? chat.user2.email : chat.user1.email;
+        let name = chat.user1.email === this.props.user.email ? chat.user2.idUser.name : chat.user1.idUser.name;
+        // let lastSeen =
+        let chatObject = {
+          name,
+          lastDate: helpers.dateChatFormat(),
+          num: '',
+          email,
+        }
+        chatArray.push(chatObject);
+      });
+      console.log('chatList: ', chatArray);
+      this.setState({ chatList: chatArray });
     })
   }
   goToChat = email => {
