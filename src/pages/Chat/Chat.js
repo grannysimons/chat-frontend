@@ -16,6 +16,16 @@ export default class Chat extends Component {
     chat.getMessages(this.props.match.params.idChat);
   }
   componentDidUpdate = () => {this.hideModal()}
+  handleNewMessage = (e) => {
+    e.preventDefault();
+    let idChat = this.props.match.params.idChat;
+    console.log('newMessage');
+    chat.newMessage( idChat )
+    .then((newChat) => {
+      console.log('newChat: ', newChat);
+      this.props.history.push('/chat/',idChat);
+    })
+  }
   render() {
     return (
       <div>
@@ -58,8 +68,8 @@ export default class Chat extends Component {
             <Link to='/chats' className="back-button">
               <i className="fas fa-chevron-left" />
             </Link>
-            <form action="">
-              <input type="text" />
+            <form onSubmit={this.handleNewMessage} action="">
+              <input type="text" name="message"/>
               <button className="send-button">
                 <i className="fas fa-chevron-circle-right" />
               </button>

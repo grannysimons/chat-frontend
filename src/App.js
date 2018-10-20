@@ -19,6 +19,7 @@ class App extends Component {
           <AnonRoute path="/signup" component={Signup} />
           <AnonRoute path="/login" component={Login} />
           <PrivateRoute path="/chats/:idChat" component={Chat} />
+          <PrivateRoute path="/chats/:idChat/send" component={Chat} />
           <PrivateRoute path="/chats" component={Chats} />
           {/* <Route exact path="/" component={Login} /> */}
           {/* <PrivateRoute path="/logout" component={Login} /> */}

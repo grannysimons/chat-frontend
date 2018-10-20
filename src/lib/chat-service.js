@@ -21,6 +21,12 @@ class Chat {
     console.log('servei ruta: ', '/chat/',idChat);
     return this.chat.post('/chat/',idChat);
   }
+
+  newMessage(idChat) {
+    let path = '/' + idChat + '/send';
+    console.log(path);
+    return this.chat.post(path);
+  }
   // signup(user) {
   //   const { email, password } = user;
   //   return this.auth.post('/signup', {email, password})
