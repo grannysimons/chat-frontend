@@ -13,6 +13,7 @@
   background: linear-gradient(135deg, #ff670f 0%,#2c617a 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff670f', endColorstr='#2c617a',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
   padding: 20px;
+  min-height: 100vh;
 }
 /* search form */
 .chats .search-form
@@ -98,4 +99,8 @@
 .chats .button i
 {
   font-size: 30px;
+}
+.modal-backdrop
+{
+  z-index: -10;
 }

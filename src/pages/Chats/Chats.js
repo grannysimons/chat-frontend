@@ -11,28 +11,38 @@ import auth from '../../lib/auth-service';
 class Chats extends Component {
   state = {
     chatList: [
-      {
-        name: "Pepe",
-        lastDate: "9/10/18 14:03",
-        num: "2",
-        email: "Pepe@Pepe.com"
-      },
-      {
-        name: "Maria",
-        lastDate: "9/10/18 11:24",
-        num: "5",
-        email: "Maria@Maria.com"
-      },
-      {
-        name: "Joan",
-        lastDate: "8/10/18 22:41",
-        num: "1",
-        email: "Joan@Joan.com"
-      }
+      // {
+      //   name: "Pepe",
+      //   lastDate: "9/10/18 14:03",
+      //   num: "2",
+      //   email: "Pepe@Pepe.com"
+      // },
+      // {
+      //   name: "Maria",
+      //   lastDate: "9/10/18 11:24",
+      //   num: "5",
+      //   email: "Maria@Maria.com"
+      // },
+      // {
+      //   name: "Joan",
+      //   lastDate: "8/10/18 22:41",
+      //   num: "1",
+      //   email: "Joan@Joan.com"
+      // }
     ]
   };
+  hideModal = () => {
+    if(document.querySelector('.modal-backdrop')) 
+    {
+      document.querySelector('.modal-backdrop').classList.remove('show');
+    }
+  }
+  componentDidUpdate = () => {
+    this.hideModal();
+  }
   componentDidMount = () => {
     console.log('componentDidMount!');
+    this.hideModal();
     auth.me()
     .then(user => {
       if(user)
@@ -42,7 +52,7 @@ class Chats extends Component {
           var chatArray = [];
           chats.data.chats.forEach(chat => {
             console.log('chat: ', chat);
-            let name = chat.user1 === user.email ? chat.user2 : chat.user1;
+            let name = chat.user1.email === user.email ? chat.user2.email : chat.user1.email;
             let chatObject = {
               name: name,
               lastDate: '',
@@ -60,8 +70,6 @@ class Chats extends Component {
         console.log('not logged!!');
       }
     })
-    //2. base de dades per recuperar les converses en les que he participat (chats/getChats(email))
-    //3. 
   }
   goToChat = email => {
     console.log("goToChat: ", email);
@@ -73,9 +81,7 @@ class Chats extends Component {
     .then((newChat) => {
       console.log('newChat: ', newChat);
       this.props.history.push('/chats/email');
-      // $('#myModal').modal('hide')
     })
-    // this.props.history.push();
   }
   render() {
     return (
@@ -89,17 +95,16 @@ class Chats extends Component {
         <div className="chats-container">
           {this.state.chatList.map((element, index) => {
             let path = `/chats/${element.email}`;
+            console.log('path: ', path);
             return (
-              <Link to={path} key={index}><ChatListElement
-                element={element}
-                key={index}
-                // goToChat={() => {
-                //   this.goToChat(element.email);
-                // }}
-              />
+              <Link to={path} key={index}>
+                <ChatListElement
+                  element={element}
+                />
               </Link>
             );
           })}
+          {this.state.chatList.length === 0 && <p>Sorry! You have no chats...</p>}
         </div>
         <div className="buttons">
           <button className="button profile">
@@ -123,5 +128,4 @@ class Chats extends Component {
   }
 }
 
-// export default withAuth()(Chats);
 export default withAuth()(Chats);

@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from "react";
-// import chat from "../lib/chat-service";
 import Button from "../components/Button";
 
 export default class Modal extends Component {
@@ -21,8 +20,7 @@ export default class Modal extends Component {
     let classes = "fas " + this.props.buttonClass;
     return classes;
   };
-  onSubmitHandler = (e) => {
-    // console.log('onSubmitHandler');
+  onSubmitHandler = e => {
     e.preventDefault();
     this.props.onSubmitHandler(this.state.mailValue);
   };
@@ -30,17 +28,24 @@ export default class Modal extends Component {
     this.generateRandomId();
     return (
       <Fragment>
-        {/* <!-- Button trigger modal --> */}
+        {/* button */}
         <Button
           type="button"
-          // className="btn btn-primary"
           data-toggle="modal"
           data-target={this.getRandomId("#")}
         >
           <i className={this.getClass()} />
         </Button>
 
-        {/* <!-- Modal --> */}
+        {/* <button
+          type="button"
+          className="btn btn-primary"
+          data-toggle="modal"
+          data-target="#exampleModalCenter"
+        >
+          Launch demo modal
+        </button> */}
+        {/* modal */}
         <div
           className="modal fade"
           id={this.getRandomId("")}
@@ -91,6 +96,45 @@ export default class Modal extends Component {
             </div>
           </div>
         </div>
+        {/* <div
+          className="modal fade"
+          id="exampleModalCenter"
+          tabIndex="-1"
+          role="dialog"
+          aria-labelledby="exampleModalCenterTitle"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog modal-dialog-centered" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="exampleModalCenterTitle">
+                  Modal title
+                </h5>
+                <button
+                  type="button"
+                  className="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div className="modal-body">...</div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button type="button" className="btn btn-primary">
+                  Save changes
+                </button>
+              </div>
+            </div>
+          </div>
+        </div> */}
       </Fragment>
     );
   }

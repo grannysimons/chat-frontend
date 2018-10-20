@@ -6,7 +6,7 @@ export default class Chat extends Component {
   hideModal = () => {
     if(document.querySelector('.modal-backdrop')) 
     {
-      document.querySelector('.modal-backdrop').style.display = "none";
+      document.querySelector('.modal-backdrop').classList.remove('show');
     }
   }
   componentDidMount = () => {this.hideModal()}
