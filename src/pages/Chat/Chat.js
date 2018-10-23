@@ -9,7 +9,6 @@ export default class Chat extends Component {
     messageList: [],
   }
   componentDidMount = () => {
-    console.log("componentdidmount");
     chat.getMessages(this.props.match.params.email)
     .then(( receivedMessages ) => {
       let messages = receivedMessages.data;
@@ -19,12 +18,12 @@ export default class Chat extends Component {
       {
         messageList.push(messages[i].text);
       }
+      document.querySelector("#name").value="";
       this.setState({ messageList, message: '' });
     })
     document.getElementById('intoView').scrollIntoView();
   }
   componentDidUpdate = () => {
-    // this.hideModal()
     document.getElementById('intoView').scrollIntoView();
   }
   handleNewMessage = (e) => {
@@ -35,7 +34,8 @@ export default class Chat extends Component {
     .then((newMessage) => {
       var messageList = this.state.messageList;
       messageList.push(newMessage.data.text);
-      this.setState({ messageList, message: 'www' });
+      document.querySelector("#name").value="";
+      this.setState({ messageList, message: '' });
 
     })
   }
@@ -95,7 +95,7 @@ export default class Chat extends Component {
               <i className="fas fa-chevron-left" />
             </Link>
             <form onSubmit={this.handleNewMessage} action="">
-              <input type="text" name="message" onChange={this.handleOnChange}/>
+              <input type="text" name="message" onChange={this.handleOnChange} id="name"/>
               <button className="send-button">
                 <i className="fas fa-chevron-circle-right" />
               </button>
