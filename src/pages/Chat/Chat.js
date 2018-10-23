@@ -8,19 +8,20 @@ export default class Chat extends Component {
   state = {
     message: '',
     messageList: [],
+    interlocutor: '',
   }
   componentDidMount = () => {
     chat.getMessages(this.props.match.params.email)
     .then(( receivedMessages ) => {
-      let messages = receivedMessages.data;
-      console.log('messages: ', messages);
+      let messages = receivedMessages.data.messages;
+      console.log('messages: ', receivedMessages);
       let messageList = [];
       for(let i=0; i<messages.length; i++)
       {
         messageList.push(messages[i]);
       }
       document.querySelector("#name").value="";
-      this.setState({ messageList, message: '' });
+      this.setState({ messageList, message: '' , interlocutor: receivedMessages.data.interlocutor});
     })
     document.getElementById('intoView').scrollIntoView();
   }
@@ -47,7 +48,7 @@ export default class Chat extends Component {
     return (
       <div>
         <div className="chat">
-          <div className="name">Pepe</div>
+          <div className="name">{this.state.interlocutor}</div>
           <div className="messages">
             {
               this.state.messageList.map((message, index) => {

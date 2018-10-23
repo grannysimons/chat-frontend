@@ -8,26 +8,7 @@ import chat from '../../lib/chat-service';
 
 class Chats extends Component {
   state = {
-    chatList: [
-      // {
-      //   name: "Pepe",
-      //   lastDate: "9/10/18 14:03",
-      //   num: "2",
-      //   email: "Pepe@Pepe.com"
-      // },
-      // {
-      //   name: "Maria",
-      //   lastDate: "9/10/18 11:24",
-      //   num: "5",
-      //   email: "Maria@Maria.com"
-      // },
-      // {
-      //   name: "Joan",
-      //   lastDate: "8/10/18 22:41",
-      //   num: "1",
-      //   email: "Joan@Joan.com"
-      // }
-    ]
+    chatList: [],
   };
   hideModal = () => {
     if(document.querySelector('.modal-backdrop')) 
@@ -39,16 +20,13 @@ class Chats extends Component {
     this.hideModal();
   }
   componentDidMount = () => {
-    // console.log('componentDidMount!');
     this.hideModal();
     chat.getList()
     .then(chats => {
       var chatArray = [];
       chats.data.chats.forEach(chat => {
-        // console.log('chat: ', chat);
         let email = chat.user1.email === this.props.user.email ? chat.user2.email : chat.user1.email;
         let name = chat.user1.email === this.props.user.email ? chat.user2.idUser.name : chat.user1.idUser.name;
-        // let lastSeen =
         let chatObject = {
           name,
           lastDate: '',//helpers.dateChatFormat(),
@@ -58,19 +36,15 @@ class Chats extends Component {
         }
         chatArray.push(chatObject);
       });
-      // console.log('chatList: ', chatArray);
       this.setState({ chatList: chatArray });
     })
   }
   goToChat = email => {
-    // console.log("goToChat: ", email);
     this.props.history.push('/login');
   };
   handleNewChat = (email) => {
-    // console.log('newChat');
     chat.newChat( email )
     .then((newChat) => {
-      // console.log('newChat: ', newChat);
       this.props.history.push('/chats/email');
     })
   }

@@ -15,6 +15,11 @@ class Chat {
 
   getList() {
     return this.chat.post('/chatList');
+    // retorna un array d'objectes:
+    //   name: "Joan",
+    //   lastDate: "8/10/18 22:41",
+    //   num: "1",
+    //   email: "Joan@Joan.com"
   }
   
   getMessages(email) {
