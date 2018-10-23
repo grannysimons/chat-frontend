@@ -8,7 +8,7 @@ export default class ChatListElement extends Component {
         <button className="chatElement">
           <div className="col8 div1">
             <div className="interlocutor">{this.props.element.name}</div>
-            <div className="date">last {this.props.element.lastDate}</div>
+            <div className="date"><small>last {this.props.element.lastDate}</small></div>
           </div>
           <div className="col2 div2">
           {this.props.element.num}

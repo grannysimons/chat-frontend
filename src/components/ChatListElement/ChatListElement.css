@@ -18,6 +18,10 @@
   text-align: left;
   padding-left: 20px;
 }
+.chats-container .date
+{
+  font-size: 16px;
+}
 .col8
 {
   width: 70%;
