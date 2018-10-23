@@ -9,6 +9,7 @@ export default class Chat extends Component {
     messageList: [],
   }
   componentDidMount = () => {
+    console.log("componentdidmount");
     chat.getMessages(this.props.match.params.email)
     .then(( receivedMessages ) => {
       let messages = receivedMessages.data;
@@ -18,14 +19,13 @@ export default class Chat extends Component {
       {
         messageList.push(messages[i].text);
       }
-      // messages.forEach(message => {
-      //   messageList.push(message.text);
-      // });
       this.setState({ messageList, message: '' });
     })
+    document.getElementById('intoView').scrollIntoView();
   }
   componentDidUpdate = () => {
     // this.hideModal()
+    document.getElementById('intoView').scrollIntoView();
   }
   handleNewMessage = (e) => {
     e.preventDefault();
@@ -33,12 +33,9 @@ export default class Chat extends Component {
     let message = this.state.message;
     chat.newMessage( email, message)
     .then((newMessage) => {
-      // console.log('path: ', '/chats/',email);
-      // this.props.history.push('/chats/',email);
-      console.log('newChat: ', newMessage);
       var messageList = this.state.messageList;
       messageList.push(newMessage.data.text);
-      this.setState({ messageList, message: '' });
+      this.setState({ messageList, message: 'www' });
 
     })
   }
@@ -92,6 +89,7 @@ export default class Chat extends Component {
             </div>
             <div className="right message">Lorem, ipsum dolor sit</div> */}
           </div>
+          <div id="intoView"></div>
           <div className="send-form">
             <Link to='/chats' className="back-button">
               <i className="fas fa-chevron-left" />
