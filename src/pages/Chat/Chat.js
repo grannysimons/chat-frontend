@@ -16,7 +16,7 @@ export default class Chat extends Component {
       let messageList = [];
       for(let i=0; i<messages.length; i++)
       {
-        messageList.push(messages[i].text);
+        messageList.push(messages[i]);
       }
       document.querySelector("#name").value="";
       this.setState({ messageList, message: '' });
@@ -33,16 +33,16 @@ export default class Chat extends Component {
     chat.newMessage( email, message)
     .then((newMessage) => {
       var messageList = this.state.messageList;
-      messageList.push(newMessage.data.text);
+      messageList.push(newMessage.data);
       document.querySelector("#name").value="";
       this.setState({ messageList, message: '' });
-
     })
   }
   handleOnChange = (e) => {
     this.setState({message: e.target.value});
   }
   render() {
+    
     return (
       <div>
         <div className="chat">
@@ -50,44 +50,19 @@ export default class Chat extends Component {
           <div className="messages">
             {
               this.state.messageList.map((message, index) => {
+                let side = message.user === this.props.user._id ? 'right' : 'left';
+                // let side = this.props.user;
+                console.log('this.props.user: ', this.props.user);
+                side += ' message';
                 return (
-                  <div className="left message" key={index}>
-                    {message}
+                 
+                  <div className={side} key={index}>
+                    {message.text}
+                    {/* <small>{message.}</small> */}
                   </div>
                 );
               })
             }
-            {/* <div className="left message">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsam
-              explicabo atque deserunt tempora dolore, ducimus non numquam et
-              ut, eligendi quasi doloremque nostrum. Est accusamus eveniet
-              nesciunt pariatur doloremque autem.
-            </div>
-            <div className="left message">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsam
-              explicabo atque deserunt tempora dolore, ducimus non numquam et
-              ut.
-            </div>
-            <div className="right message">
-              Ipsam explicabo atque deserunt tempora dolore, ducimus non numquam
-              et ut, eligendi quasi doloremque nostrum. Est accusamus eveniet
-              nesciunt pariatur doloremque autem.
-            </div>
-            <div className="left message">Lorem.</div>
-            <div className="right message">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsam
-              explicabo atque deserunt tempora dolore, ducimus non numquam et
-              ut, eligendi quasi doloremque nostrum. Est accusamus eveniet
-              nesciunt pariatur doloremque autem.
-            </div>
-            <div className="right message">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsam
-              explicabo atque deserunt tempora dolore, ducimus non numquam
-            </div>
-            <div className="right message">
-              Lorem, ipsum dolor sit amet consectetur
-            </div>
-            <div className="right message">Lorem, ipsum dolor sit</div> */}
           </div>
           <div id="intoView"></div>
           <div className="send-form">
