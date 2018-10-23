@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import './Chat.css';
 import { Link } from 'react-router-dom';
 import chat from '../../lib/chat-service';
+import helper from '../../helpers';
 
 export default class Chat extends Component {
   state = {
@@ -51,14 +52,12 @@ export default class Chat extends Component {
             {
               this.state.messageList.map((message, index) => {
                 let side = message.user === this.props.user._id ? 'right' : 'left';
-                // let side = this.props.user;
-                console.log('this.props.user: ', this.props.user);
                 side += ' message';
                 return (
                  
                   <div className={side} key={index}>
                     {message.text}
-                    {/* <small>{message.}</small> */}
+                    <div><small>{helper.dateChatFormat(message.time)}</small></div>
                   </div>
                 );
               })
