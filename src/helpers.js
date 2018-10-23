@@ -12,6 +12,12 @@ const helpers = {
     } 
     var today = dd+'/'+mm+'/'+yyyy;
     return today;
+  },
+  log : ( message ) => {
+    if(process.env.DEV)
+    {
+      // console.log(message);
+    }
   }
 }
 

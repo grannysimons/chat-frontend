@@ -5,7 +5,6 @@ import "./Chats.css";
 import { Link } from 'react-router-dom';
 import Modal from '../../components/Modal';
 import chat from '../../lib/chat-service';
-import helpers from '../../helpers';
 
 class Chats extends Component {
   state = {
@@ -40,7 +39,7 @@ class Chats extends Component {
     this.hideModal();
   }
   componentDidMount = () => {
-    console.log('componentDidMount!');
+    // console.log('componentDidMount!');
     this.hideModal();
     chat.getList()
     .then(chats => {
@@ -59,19 +58,19 @@ class Chats extends Component {
         }
         chatArray.push(chatObject);
       });
-      console.log('chatList: ', chatArray);
+      // console.log('chatList: ', chatArray);
       this.setState({ chatList: chatArray });
     })
   }
   goToChat = email => {
-    console.log("goToChat: ", email);
+    // console.log("goToChat: ", email);
     this.props.history.push('/login');
   };
   handleNewChat = (email) => {
-    console.log('newChat');
+    // console.log('newChat');
     chat.newChat( email )
     .then((newChat) => {
-      console.log('newChat: ', newChat);
+      // console.log('newChat: ', newChat);
       this.props.history.push('/chats/email');
     })
   }
@@ -86,9 +85,7 @@ class Chats extends Component {
         </form>
         <div className="chats-container">
           {this.state.chatList.map((element, index) => {
-            console.log('!!! element: ',element);
-            let path = `/chats/${element.idChat}`;
-            console.log('path: ',path);
+            let path = `/chats/${element.email}`;
             return (
               <Link to={path} key={index}>
                 <ChatListElement

@@ -15,11 +15,11 @@ class Auth {
   }
 
   login(user) {
-    console.log('login!');
+    // console.log('login!');
     const { email, password } = user;
     return this.auth.post('/login', {email, password})
       .then(({ data }) => {
-        console.log('data: ', data);
+        // console.log('data: ', data);
         return data;
       })
   }

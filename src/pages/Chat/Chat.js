@@ -4,32 +4,42 @@ import { Link } from 'react-router-dom';
 import chat from '../../lib/chat-service';
 
 export default class Chat extends Component {
-  // hideModal = () => {
-  //   if(document.querySelector('.modal-backdrop')) 
-  //   {
-  //     document.querySelector('.modal-backdrop').classList.remove('show');
-  //   }
-  // }
   state = {
     message: '',
+    messageList: [],
   }
   componentDidMount = () => {
-    // this.hideModal()
-    console.log('params: ',this.props.match.params);
-    chat.getMessages(this.props.match.params.idChat);
+    chat.getMessages(this.props.match.params.email)
+    .then(( receivedMessages ) => {
+      let messages = receivedMessages.data;
+      console.log('messages: ', messages);
+      let messageList = [];
+      for(let i=0; i<messages.length; i++)
+      {
+        messageList.push(messages[i].text);
+      }
+      // messages.forEach(message => {
+      //   messageList.push(message.text);
+      // });
+      this.setState({ messageList, message: '' });
+    })
   }
   componentDidUpdate = () => {
     // this.hideModal()
   }
   handleNewMessage = (e) => {
     e.preventDefault();
-    let idChat = this.props.match.params.idChat;
+    let email = this.props.match.params.email;
     let message = this.state.message;
-    console.log('newMessage');
-    chat.newMessage( idChat, message)
-    .then((newChat) => {
-      console.log('newChat: ', newChat);
-      this.props.history.push('/chat/',idChat);
+    chat.newMessage( email, message)
+    .then((newMessage) => {
+      // console.log('path: ', '/chats/',email);
+      // this.props.history.push('/chats/',email);
+      console.log('newChat: ', newMessage);
+      var messageList = this.state.messageList;
+      messageList.push(newMessage.data.text);
+      this.setState({ messageList, message: '' });
+
     })
   }
   handleOnChange = (e) => {
@@ -41,7 +51,16 @@ export default class Chat extends Component {
         <div className="chat">
           <div className="name">Pepe</div>
           <div className="messages">
-            <div className="left message">
+            {
+              this.state.messageList.map((message, index) => {
+                return (
+                  <div className="left message" key={index}>
+                    {message}
+                  </div>
+                );
+              })
+            }
+            {/* <div className="left message">
               Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsam
               explicabo atque deserunt tempora dolore, ducimus non numquam et
               ut, eligendi quasi doloremque nostrum. Est accusamus eveniet
@@ -71,7 +90,7 @@ export default class Chat extends Component {
             <div className="right message">
               Lorem, ipsum dolor sit amet consectetur
             </div>
-            <div className="right message">Lorem, ipsum dolor sit</div>
+            <div className="right message">Lorem, ipsum dolor sit</div> */}
           </div>
           <div className="send-form">
             <Link to='/chats' className="back-button">

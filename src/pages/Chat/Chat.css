@@ -28,6 +28,7 @@
 .chat .messages
 {
   padding: 100px 30px;
+  min-height: 100vh;
 }
 /* message */
 .chat .message

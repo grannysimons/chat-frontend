@@ -3,9 +3,7 @@ import './ChatListElement.css';
 
 export default class ChatListElement extends Component {
   render() {
-    console.log('element: ', this.props.element);
     return (
-      // <div className="chat" onClick={()=>this.props.goToChat(this.props.element.email)}>
       <div className="chat">
         <button className="chatElement">
           <div className="col8 div1">

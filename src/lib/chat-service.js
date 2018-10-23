@@ -9,7 +9,7 @@ class Chat {
   }
 
   newChat(email) {
-    console.log('chat-service. mail: ', email);
+    // console.log('chat-service. mail: ', email);
     return this.chat.post('/newChat', { email })
   }
 
@@ -17,13 +17,13 @@ class Chat {
     return this.chat.post('/chatList');
   }
   
-  getMessages(idChat) {
-    console.log('servei ruta: ', '/chat/',idChat);
-    return this.chat.post('/chat/',idChat);
+  getMessages(email) {
+    console.log('getmessages: ', email);
+    return this.chat.post('/' + email);
   }
 
-  newMessage(idChat, message) {
-    let path = '/' + idChat + '/send';
+  newMessage(email, message) {
+    let path = '/' + email + '/send';
     console.log('chat-service: ',path);
     return this.chat.post(path, {message});
   }

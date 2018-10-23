@@ -34,7 +34,7 @@ export default class AuthProvider extends Component {
   }
 
   setUser = (user) => {
-    console.log('setUser!!!');
+    // console.log('setUser!!!');
     this.setState({
       isLogged: true,
       user,
@@ -42,7 +42,7 @@ export default class AuthProvider extends Component {
   }
 
   logoutUser = () =>{
-    console.log('logoutUser!!!');
+    // console.log('logoutUser!!!');
     auth.logout()
       .then(() => {
         this.setState({ 

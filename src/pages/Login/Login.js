@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import auth from "../../lib/auth-service";
 import "./Login.css";
-// import { AuthConsumer } from '../components/AuthProvider';
 
 class Login extends Component {
   state = {
@@ -17,7 +16,6 @@ class Login extends Component {
     auth
       .login({ email, password })
       .then(user => {
-        console.log('LOGIN user: ', user);
         this.props.setUser(user);
       })
       .catch(error => {
@@ -33,14 +31,6 @@ class Login extends Component {
   render() {
     const { email, password } = this.state;
     return (
-      // <form onSubmit={this.handleFormSubmit}>
-      //   <label>Email:</label>
-      //   <input type="text" name="email" value={email} onChange={this.handleChange}/>
-      //   <label>Password:</label>
-      //   <input type="password" name="password" value={password} onChange={this.handleChange} />
-      //   <input type="submit" value="Login" />
-      // </form>
-
       <div className="login">
         <div className="container-inner">
           <h1>Login</h1>
@@ -55,7 +45,6 @@ class Login extends Component {
                 value={email}
                 onChange={this.handleChange}
                 placeholder="mail"
-                // value="mariona.roca@gmail.com"
               />
               <input
                 type="password"
@@ -63,7 +52,6 @@ class Login extends Component {
                 value={password}
                 onChange={this.handleChange}
                 placeholder="password"
-                // value="1234"
               />
 
               <p>
@@ -72,7 +60,6 @@ class Login extends Component {
               <button type="submit">Login</button>
             </form>
             <div className="log">
-            {/* incorrect data */}
               {this.state.errorMessage}
             </div>
           </div>

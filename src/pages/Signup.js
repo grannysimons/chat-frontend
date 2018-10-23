@@ -13,7 +13,7 @@ class Signup extends Component {
     event.preventDefault();
     const email = this.state.email;
     const password = this.state.password;
-    console.log(email, ', ',password);
+    // console.log(email, ', ',password);
     auth.signup({ email, password })
       .then( (user) => {
         // this.setState({
