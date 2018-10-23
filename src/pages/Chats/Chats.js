@@ -25,8 +25,12 @@ class Chats extends Component {
     .then(chats => {
       var chatArray = [];
       chats.data.chats.forEach(chat => {
+        console.log('chat.user1', chat.user1);
+        console.log('this.props.user', this.props.user);
         let email = chat.user1.email === this.props.user.email ? chat.user2.email : chat.user1.email;
-        let name = chat.user1.email === this.props.user.email ? chat.user2.idUser.name : chat.user1.idUser.name;
+        let name = chat.user1.email === this.props.user.email ? chat.user2.idUser.userName : chat.user1.idUser.userName;
+        console.log('name: ', name);
+        console.log('email: ', email);
         let chatObject = {
           name,
           lastDate: '',//helpers.dateChatFormat(),
