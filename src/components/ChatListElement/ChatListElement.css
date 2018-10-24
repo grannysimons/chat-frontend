@@ -1,36 +1,74 @@
-.container
+.chatListElement .chats-container
 {
   background-color: #dddddd;
-  border: 1px solid gray;
+  /* border: 1px solid gray; */
   margin: 0;
   width: 40%;
   display: flex;
   flex-direction: row;
-  padding: 10px 0;
+  /* padding: 10px 0; */
+  margin-top: 20px;
 }
-.container>div
+.chatListElement .chats-container>div
 {
   padding: 3px 0;
   text-align: right;
 }
-.container .div1
+.chatListElement .chats-container .div1
 {
   text-align: left;
   padding-left: 20px;
 }
-.chats-container .date
+.chatListElement .chats-container .date
 {
   font-size: 16px;
 }
-.col8
+.chatListElement .col8
 {
   width: 70%;
-  /* flex: 0 0 70%; */
 }
-.col2
+.chatListElement .col2
 {
   width: 10%;
   /* flex: 0 0 10%; */
   position: relative;
   top: 5px;
+}
+
+
+/* chat element */
+.chatListElement .chatElement
+{
+  width: 100%;
+  background-color: rgba(200,200,200,0.2);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  color: white;
+  font-size: 20px;
+  border-radius: 3px;
+  margin-bottom: 3px;
+  border-color: transparent;
+  border-image: none;
+  padding: 10px;
+  transition: all 0.2s linear;
+}
+.chatListElement .chatElement:hover
+{
+  background-color: rgba(200,200,200,0.8);
+  transition: all 0.2s linear;
+}
+.chatListElement .col8
+{
+  width: 66.6666%;
+  text-align: left;
+}
+.chatListElement .col8 .date
+{
+  text-align: center;
+}
+.chatListElement .col2
+{
+  width: 16.6666%;
 }

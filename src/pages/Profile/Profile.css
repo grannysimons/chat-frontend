@@ -1,0 +1,93 @@
+*
+{
+  margin: 0;
+  padding: 0;
+}
+.container.profile
+{
+  font-family: 'Source Code Pro', monospace;
+  color: white;
+
+  background: #ff670f; /* Old browsers */
+  background: #ff670f; /* Old browsers */
+  background: -moz-linear-gradient(-45deg, #ff670f 0%, #2c617a 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(-45deg, #ff670f 0%,#2c617a 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg, #ff670f 0%,#2c617a 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff670f', endColorstr='#2c617a',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  height: 100vh;
+}
+.container.profile .container-inner
+{
+  height: 100%;
+  text-align: center;
+  padding: 15% 0;
+  width: 60%;
+  margin: auto;
+  box-sizing: border-box;
+}
+.container.profile .container-inner h1
+{
+  font-size: 40px;
+  margin-bottom: 20%;
+}
+
+.container.profile .container-inner input,
+.container.profile .container-inner textarea
+{
+  display: block;
+  padding: 10px 25px;
+  margin: 10px auto;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: rgba(255,255,255,0.2);
+  border-width: 0;
+  color: #dedede;
+}
+.container.profile .container-inner p
+{
+  text-align: right;
+  margin-top: 15px;
+}
+.container.profile .container-inner p.title
+{
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-top: 20px;
+  position: relative;
+  left: 20px;
+  color: #d6d6d6;
+}
+.container.profile .container-inner p.description
+{
+  text-align: left;
+  position: relative;
+  left: -20px;
+}
+.container.profile .container-inner p a,
+.container.profile .container-inner p a:hover
+{
+  color: rgb(200,200,200);
+  text-decoration: none;
+}
+.container.profile .container-inner .form p a:hover
+{
+  color: #aaaaaa;
+}
+.container.profile .container-inner .form p a:focus
+{
+  border-width: 0;
+  outline: -webkit-focus-ring-color auto 0;
+}
+.container.profile .container-inner .log
+{
+  margin-top: 50px;
+}
+.container.profile .container-inner form button
+{
+  padding: 10px 20px;
+  border-radius: 4px;
+  border-width: 0;
+  margin: 30px;
+  color: red;
+}

@@ -27,11 +27,9 @@ class Chats extends Component {
       var chatArray = [];
       chats.data.chats.forEach(chat => {
         let user = chat.user1.email === this.props.user.email ? chat.user2 : chat.user1;
-        console.log('user', user);
-        // let email = chat.user1.email === this.props.user.email ? chat.user2.email : chat.user1.email;
-        // let name = chat.user1.email === this.props.user.email ? chat.user2.idUser.userName : chat.user1.idUser.userName;
+        console.log('user.email', user.email);
         let chatObject = {
-          name: user.idUser.userName,
+          name: (user.idUser.userName ? user.idUser.userName : user.email),
           lastDate: helpers.dateChatFormat(user.lastSeen),
           num: '',
           email: user.email,
@@ -48,18 +46,21 @@ class Chats extends Component {
   handleNewChat = (email) => {
     chat.newChat( email )
     .then((newChat) => {
-      this.props.history.push('/chats/email');
+      this.props.history.push('/chats/' + email);
     })
+  }
+  handlerProfile = () => {
+    this.props.history.push('/profile');
   }
   render() {
     return (
       <div className="chats">
-        <form className="search-form">
+        {/* <form className="search-form">
           <input type="text" />
-          <button>
+          <button className="search-button">
             <i className="fas fa-search" />
           </button>
-        </form>
+        </form> */}
         <div className="chats-container">
           {this.state.chatList.map((element, index) => {
             let path = `/chats/${element.email}`;
@@ -74,7 +75,7 @@ class Chats extends Component {
           {this.state.chatList.length === 0 && <p>Sorry! You have no chats...</p>}
         </div>
         <div className="buttons">
-          <button className="button profile">
+          <button className="button profile" onClick={this.handlerProfile}>
             <i className="fas fa-user" />
           </button>
           <Modal buttonClass='fa-plus-circle' title="new Chat" onSubmitHandler={this.handleNewChat}>

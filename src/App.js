@@ -4,7 +4,8 @@ import PrivateRoute from './components/PrivateRoute';
 import AnonRoute from './components/AnonRoute';
 import Chats from './pages/Chats/Chats';
 import Chat from './pages/Chat/Chat';
-import Signup from './pages/Signup';
+import Profile from './pages/Profile/Profile';
+import Signup from './pages/Signup/Signup';
 import Login from './pages/Login/Login';
 import AuthProvider from './components/AuthProvider';
 import './App.css';
@@ -21,6 +22,7 @@ class App extends Component {
           <PrivateRoute path="/chats/:email" component={Chat} />
           <PrivateRoute path="/chats/:email/send" component={Chat} />
           <PrivateRoute path="/chats" component={Chats} />
+          <PrivateRoute path="/profile" component={Profile} />
           {/* <Route exact path="/" component={Login} /> */}
           {/* <PrivateRoute path="/logout" component={Login} /> */}
         </Switch>

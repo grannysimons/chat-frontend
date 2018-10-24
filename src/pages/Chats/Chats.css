@@ -29,7 +29,7 @@
   border-width: 0;
   flex-grow: 1;
 }
-.chats .search-form button
+.chats .search-form button.search-button
 {
   font-size: 30px;
   color: white;
@@ -41,45 +41,12 @@
 /* chats container */
 .chats .chats-container
 {
+  background-color: transparent;
+  color: white;
   width: 100%;
   padding: 30px 0;
 }
-/* chat element */
-.chats .chat .chatElement
-{
-  width: 100%;
-  /* background-color: rgba(200,200,200,0.2); */
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  /* color: white; */
-  font-size: 20px;
-  border-radius: 3px;
-  margin-bottom: 3px;
-  border-color: transparent;
-  border-image: none;
-  padding: 10px;
-  transition: all 0.2s linear;
-}
-.chats .chat .chatElement:hover
-{
-  background-color: rgba(200,200,200,0.8);
-  transition: all 0.2s linear;
-}
-.chats .chat .col8
-{
-  width: 66.6666%;
-  text-align: left;
-}
-.chats .chat .col8 .date
-{
-  text-align: center;
-}
-.chats .chat .col2
-{
-  width: 16.6666%;
-}
+
 /* buttons */
 .chats .buttons
 {
@@ -95,6 +62,11 @@
   height: 50px;
   border-width: 0;
   border-radius: 50%;
+  margin-right: 5px;
+}
+.phUtm
+{
+  margin-right: 5px;
 }
 .chats .button i
 {

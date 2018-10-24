@@ -4,13 +4,46 @@ import { Link } from 'react-router-dom';
 import chat from '../../lib/chat-service';
 import helper from '../../helpers';
 
+
+
 export default class Chat extends Component {
   state = {
     message: '',
     messageList: [],
     interlocutor: '',
   }
+  // accessMic = () => {
+  //   navigator.getUserMedia = ( navigator.getUserMedia ||
+  //     navigator.webkitGetUserMedia ||
+  //     navigator.mozGetUserMedia ||
+  //     navigator.msGetUserMedia);
+  //     navigator.getUserMedia (
+  //     // constraints
+  //     {
+  //         video: true,
+  //         audio: false
+  //     },
+  //     // successCallback
+  //     function(localMediaStream) {
+  //       const mediaSource = new MediaSource();
+    
+  //         var video = document.querySelector('video');
+  //         // video.src = window.URL.createObjectURL(localMediaStream);
+  //         try {
+  //           video.srcObject = mediaSource;
+  //         } catch (error) {
+  //           video.src = URL.createObjectURL(localMediaStream);
+  //         }
+  //     },
+  //     // errorCallback
+  //     function(err) {
+  //       console.log("Ocurrió el siguiente error: " + err);
+  //     }
+  //   );
+  // }
   componentDidMount = () => {
+    document.addEventListener('load', this.accessMic);
+
     chat.getMessages(this.props.match.params.email)
     .then(( receivedMessages ) => {
       let messages = receivedMessages.data.messages;
@@ -21,7 +54,7 @@ export default class Chat extends Component {
         messageList.push(messages[i]);
       }
       document.querySelector("#name").value="";
-      this.setState({ messageList, message: '' , interlocutor: receivedMessages.data.interlocutor});
+      this.setState({ messageList, message: '' , interlocutor: receivedMessages.data.interlocutor ? receivedMessages.data.interlocutor : this.props.match.params.email});
     })
     document.getElementById('intoView').scrollIntoView();
   }
@@ -47,6 +80,8 @@ export default class Chat extends Component {
     
     return (
       <div>
+            {/* <video></video> */}
+
         <div className="chat">
           <div className="name">{this.state.interlocutor}</div>
           <div className="messages">

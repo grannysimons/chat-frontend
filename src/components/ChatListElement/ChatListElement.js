@@ -4,7 +4,7 @@ import './ChatListElement.css';
 export default class ChatListElement extends Component {
   render() {
     return (
-      <div className="chat">
+      <div className="chatListElement">
         <button className="chatElement">
           <div className="col8 div1">
             <div className="interlocutor">{this.props.element.name}</div>
