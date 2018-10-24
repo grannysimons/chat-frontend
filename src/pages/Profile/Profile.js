@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './Profile.css';
 import auth from "../../lib/auth-service";
+import { Link } from 'react-router-dom';
 
 export default class Profile extends Component {
   state = {
@@ -112,6 +113,9 @@ export default class Profile extends Component {
           <form>
             <button>Delete account</button>
           </form>
+          <Link to='/chats' className="back-button">
+            <i className="fas fa-chevron-left" />
+          </Link>
         </div>
       </div>
     )
