@@ -44,13 +44,13 @@ class Signup extends Component {
 
       // </div>
 
-      <div class="signup container">
-        <div class="container-inner">
+      <div className="signup container">
+        <div className="container-inner">
           <h1>Signup</h1>
-          <div class="logo">
-            <i class="fas fa-cat" />
+          <div className="logo">
+            <i className="fas fa-cat" />
           </div>
-          <div class="form">
+          <div className="form">
             <form onSubmit={this.handleFormSubmit}>
               <input
                 type="text"
@@ -71,7 +71,7 @@ class Signup extends Component {
               </p>
               <button type="submit">Signup</button>
             </form>
-            <div class="log">
+            <div className="log">
             {/* incorrect data */}
             </div>
           </div>

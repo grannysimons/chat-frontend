@@ -47,7 +47,6 @@ export default class Chat extends Component {
     chat.getMessages(this.props.match.params.email)
     .then(( receivedMessages ) => {
       let messages = receivedMessages.data.messages;
-      console.log('messages: ', receivedMessages);
       let messageList = [];
       for(let i=0; i<messages.length; i++)
       {
@@ -83,7 +82,10 @@ export default class Chat extends Component {
             {/* <video></video> */}
 
         <div className="chat">
-          <div className="name">{this.state.interlocutor}</div>
+          <div className="name">
+            <strong>{this.state.interlocutor.userName ? this.state.interlocutor.userName : this.state.interlocutor.email}</strong>
+            <div className="quote"><small>{this.state.interlocutor.quote}</small></div>
+          </div>
           <div className="messages">
             {
               this.state.messageList.map((message, index) => {
