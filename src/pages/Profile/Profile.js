@@ -17,11 +17,11 @@ export default class Profile extends Component {
       password: '1234',
       quote: 'surgiendo de la bla bla bla',
     }
-  }
+  };
   componentDidMount = () => {
     auth.getProfileData()
     .then( userData  => {
-      console.log('didmount: ', userData);
+      console.log('userData: ', userData);
       this.setState({ values: {
         name: userData.name !== '' ? userData.name : '',
         email: userData.email !== '' ? userData.email : '',
@@ -45,6 +45,7 @@ export default class Profile extends Component {
       password: false,
       quote: false,
     }
+    let change = true;
     switch (field)
     {
       case "name":
@@ -64,9 +65,20 @@ export default class Profile extends Component {
         pressedButton.quote = true;
       break;
       default:
+        change = false;
       break;
     }
-    this.setState({ pressedButton });
+    if(change === true)
+    {
+      let selector = 'input.'+field;
+      let value = document.querySelector(selector).value;
+      console.log(selector, ', ', value);
+    }
+    
+    // auth.setProfileData({ pressedButton, value })
+    // .then(data => {
+    //   this.setState({ pressedButton });
+    // })
   }
   printField = (field) => {
     let pressedButton = this.state.pressedButton;
@@ -74,19 +86,19 @@ export default class Profile extends Component {
     {
       case "name":
         if (pressedButton.name === true) return (<input type="text" placeholder="Username" value={this.state.values[field]} onBlur={this.buttonPressed} onChange={this.changeValue} data-field="name" className="name"/>);
-        else  return(<p className="description">{this.state.values[field]} <button className="name" type="button" onClick={this.buttonPressed} data-field="name"><i data-field="name" className="fas fa-pen"></i></button></p>);
+        else  return(<p className="description"><span className="value">{this.state.values[field]}</span><button className="name" type="button" onClick={this.buttonPressed} data-field="name"><i data-field="name" className="fas fa-pen"></i></button></p>);
       // break;
       case "email":
         if (pressedButton.email === true) return (<input type="email" placeholder="email" value={this.state.values[field]} onBlur={this.buttonPressed} onChange={this.changeValue} data-field="email" className="email"/>);
-        else  return(<p className="description">{this.state.values[field]}<button className="email" type="button" onClick={this.buttonPressed} data-field="email"><i data-field="email" className="fas fa-pen"></i></button></p>);
+        else  return(<p className="description"><span className="value">{this.state.values[field]}</span><button className="email" type="button" onClick={this.buttonPressed} data-field="email"><i data-field="email" className="fas fa-pen"></i></button></p>);
       // break;
       case "password":
         if (pressedButton.password === true) return (<input type="password" placeholder="password" value={this.state.values[field]} onBlur={this.buttonPressed} onChange={this.changeValue} data-field="password" className="password"/>);
-        else  return(<p className="description">{this.state.values[field]}<button className="name" password="button" onClick={this.buttonPressed} data-field="password"><i data-field="password" className="fas fa-pen"></i></button></p>);
+        else  return(<p className="description"><span className="value">{this.state.values[field]}</span><button className="name" password="button" onClick={this.buttonPressed} data-field="password"><i data-field="password" className="fas fa-pen"></i></button></p>);
       // break;
       case "quote":
         if (pressedButton.quote === true) return (<input type="textarea" placeholder="quote" value={this.state.values[field]} onBlur={this.buttonPressed} onChange={this.changeValue} data-field="quote" className="quote"/>);
-        else  return(<p className="description">{this.state.values[field]}<button className="quote" type="button" onClick={this.buttonPressed} data-field="quote"><i data-field="quote" className="fas fa-pen"></i></button></p>);
+        else  return(<p className="description"><span className="value">{this.state.values[field]}</span><button className="quote" type="button" onClick={this.buttonPressed} data-field="quote"><i data-field="quote" className="fas fa-pen"></i></button></p>);
       // break;
       default:
       break;
@@ -96,21 +108,22 @@ export default class Profile extends Component {
     return (
       <div className="profile container">
         <div className="container-inner">
-          <h1>Profile</h1>
-          <p className="title">Username</p>
-          {this.printField('name')}
-          <p className="title">Mail</p>
-          {this.printField('email')}
-          <p className="title">Password</p>
-          {this.printField('password')}
-          <p className="title">Quote</p>
-          {this.printField('quote')}
-
+          <div className="user-data">
+            <h1>Profile</h1>
+            <p className="title">Username</p>
+            {this.printField('name')}
+            <p className="title">Mail</p>
+            {this.printField('email')}
+            <p className="title">Password</p>
+            {this.printField('password')}
+            <p className="title">Quote</p>
+            {this.printField('quote')}
+          </div>
           <div className="log">
             {/* incorrect data */}
           </div>
 
-          <form>
+          <form className="delete-form">
             <button>Delete account</button>
           </form>
           <Link to='/chats' className="back-button">

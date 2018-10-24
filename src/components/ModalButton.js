@@ -37,8 +37,6 @@ export default class ModalButton extends React.Component {
     return classes;
   };
   onSubmitHandler = () => {
-    // console.log('onSubmitHandler');
-    // e.preventDefault();
     this.props.onSubmitHandler(this.state.mailValue);
   };
 

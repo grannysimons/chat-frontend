@@ -15,11 +15,9 @@ class Auth {
   }
 
   login(user) {
-    // console.log('login!');
     const { email, password } = user;
     return this.auth.post('/login', {email, password})
       .then(({ data }) => {
-        // console.log('data: ', data);
         return data;
       })
   }
@@ -35,8 +33,13 @@ class Auth {
   }
   
   getProfileData() {
-    console.log('getProfileData');
     return this.auth.post('/profile')
+    .then(response => response.data)
+  }
+
+  setProfileData(fieldData) {
+    const { field, value } = fieldData;
+    return this.auth.post('/profile/edit', {field, value})
     .then(response => response.data)
   }
 }

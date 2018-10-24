@@ -27,7 +27,6 @@ class Chats extends Component {
       var chatArray = [];
       chats.data.chats.forEach(chat => {
         let user = chat.user1.email === this.props.user.email ? chat.user2 : chat.user1;
-        console.log('user.email', user.email);
         let chatObject = {
           name: (user.idUser.userName ? user.idUser.userName : user.email),
           lastDate: helpers.dateChatFormat(user.lastSeen),
@@ -90,6 +89,7 @@ class Chats extends Component {
           <button onClick={this.props.logout} className="button logout">
             <i className="fas fa-sign-out-alt" />
           </button>
+          <div className="greeting">Hi, <strong>{this.props.user.userName ? this.props.user.userName : this.props.user.email}</strong>!</div>
         </div>
       </div>
     );

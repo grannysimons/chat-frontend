@@ -9,7 +9,6 @@ class Chat {
   }
 
   newChat(email) {
-    // console.log('chat-service. mail: ', email);
     return this.chat.post('/newChat', { email })
   }
 
@@ -23,13 +22,11 @@ class Chat {
   }
   
   getMessages(email) {
-    console.log('getmessages: ', email);
     return this.chat.post('/' + email);
   }
 
   newMessage(email, message) {
     let path = '/' + email + '/send';
-    console.log('chat-service: ',path);
     return this.chat.post(path, {message});
   }
   // signup(user) {
@@ -39,7 +36,6 @@ class Chat {
   // }
 
   // login(user) {
-  //   console.log('login!');
   //   const { email, password } = user;
   //   return this.auth.post('/login', {email, password})
   //     .then(({ data }) => data);

@@ -64,13 +64,16 @@ export default class Chat extends Component {
     e.preventDefault();
     let email = this.props.match.params.email;
     let message = this.state.message;
-    chat.newMessage( email, message)
-    .then((newMessage) => {
-      var messageList = this.state.messageList;
-      messageList.push(newMessage.data);
-      document.querySelector("#name").value="";
-      this.setState({ messageList, message: '' });
-    })
+    if(message !== '')
+    {
+      chat.newMessage( email, message)
+      .then((newMessage) => {
+        var messageList = this.state.messageList;
+        messageList.push(newMessage.data);
+        document.querySelector("#name").value="";
+        this.setState({ messageList, message: '' });
+      })
+    }
   }
   handleOnChange = (e) => {
     this.setState({message: e.target.value});

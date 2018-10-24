@@ -63,6 +63,14 @@
   text-align: left;
   position: relative;
   left: -20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.container.profile .container-inner p.description .value,
+.container.profile .container-inner p.description button
+{
+
 }
 .container.profile .container-inner p a,
 .container.profile .container-inner p a:hover
@@ -83,13 +91,18 @@
 {
   margin-top: 50px;
 }
-.container.profile .container-inner form button
+.container.profile .container-inner form.delete-form button
 {
   padding: 10px 20px;
   border-radius: 4px;
   border-width: 0;
   margin: 30px;
   color: red;
+}
+.container.profile .container-inner .user-data button
+{
+  margin-left: 20px;
+  color: white;
 }
 .container.profile .back-button
 {
