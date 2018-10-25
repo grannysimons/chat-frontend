@@ -21,6 +21,7 @@ class Chats extends Component {
     this.hideModal();
   }
   componentDidMount = () => {
+    console.log('chats didmount');
     this.hideModal();
     chat.getList()
     .then(chats => {

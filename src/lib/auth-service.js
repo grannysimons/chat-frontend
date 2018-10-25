@@ -38,6 +38,7 @@ class Auth {
   }
 
   setProfileData(fieldData) {
+    console.log('fieldData ', fieldData);
     const { field, value } = fieldData;
     return this.auth.post('/profile/edit', {field, value})
     .then(response => response.data)

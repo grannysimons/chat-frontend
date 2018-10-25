@@ -21,7 +21,6 @@ export default class Profile extends Component {
   componentDidMount = () => {
     auth.getProfileData()
     .then( userData  => {
-      console.log('userData: ', userData);
       this.setState({ values: {
         name: userData.name !== '' ? userData.name : '',
         email: userData.email !== '' ? userData.email : '',
@@ -37,7 +36,7 @@ export default class Profile extends Component {
     values[field] = document.querySelector(selector).value;
     this.setState({ values });
   }
-  buttonPressed = (e) => {
+  handlerInputPressed = (e) => {
     let field = e.target.getAttribute('data-field');
     let pressedButton = {
       name: false,
@@ -45,7 +44,6 @@ export default class Profile extends Component {
       password: false,
       quote: false,
     }
-    let change = true;
     switch (field)
     {
       case "name":
@@ -65,40 +63,48 @@ export default class Profile extends Component {
         pressedButton.quote = true;
       break;
       default:
-        change = false;
       break;
     }
-    if(change === true)
-    {
-      let selector = 'input.'+field;
-      let value = document.querySelector(selector).value;
-      console.log(selector, ', ', value);
-    }
-    
-    // auth.setProfileData({ pressedButton, value })
-    // .then(data => {
-    //   this.setState({ pressedButton });
-    // })
+    this.setState({ pressedButton });
+  }
+  setChanges = (e) => {
+    let field = e.target.getAttribute('data-field');
+    let selector = 'input.'+field;
+    let value = document.querySelector(selector).value;
+
+    auth.setProfileData({ field: this.state.pressedButton, value })
+    .then(data => {
+      this.props.setUser(data);
+      console.log('data: ', data);
+    })
+
+    // let pressedButton = {
+    //   name: false,
+    //   email: false,
+    //   password: false,
+    //   quote: false,
+    // }
+    // this.setState({ pressedButton });
   }
   printField = (field) => {
     let pressedButton = this.state.pressedButton;
     switch (field)
     {
       case "name":
-        if (pressedButton.name === true) return (<input type="text" placeholder="Username" value={this.state.values[field]} onBlur={this.buttonPressed} onChange={this.changeValue} data-field="name" className="name"/>);
-        else  return(<p className="description"><span className="value">{this.state.values[field]}</span><button className="name" type="button" onClick={this.buttonPressed} data-field="name"><i data-field="name" className="fas fa-pen"></i></button></p>);
+        if (pressedButton.name === true) return (<input type="text" placeholder="Username" value={this.state.values[field]} onBlur={this.setChanges} onChange={this.changeValue} data-field="name" className="name"/>);
+        else  return(<p className="description"><span className="value">{this.state.values[field]}</span><button className="name" type="button" onClick={this.handlerInputPressed} data-field="name"><i data-field="name" className="fas fa-pen"></i></button></p>);
       // break;
       case "email":
-        if (pressedButton.email === true) return (<input type="email" placeholder="email" value={this.state.values[field]} onBlur={this.buttonPressed} onChange={this.changeValue} data-field="email" className="email"/>);
-        else  return(<p className="description"><span className="value">{this.state.values[field]}</span><button className="email" type="button" onClick={this.buttonPressed} data-field="email"><i data-field="email" className="fas fa-pen"></i></button></p>);
+        if (pressedButton.email === true) return (<input type="email" placeholder="email" value={this.state.values[field]} onBlur={this.setChanges} onChange={this.changeValue} data-field="email" className="email"/>);
+        else  return(<p className="description"><span className="value">{this.state.values[field]}</span><button className="email" type="button" onClick={this.handlerInputPressed} data-field="email"><i data-field="email" className="fas fa-pen"></i></button></p>);
       // break;
       case "password":
-        if (pressedButton.password === true) return (<input type="password" placeholder="password" value={this.state.values[field]} onBlur={this.buttonPressed} onChange={this.changeValue} data-field="password" className="password"/>);
-        else  return(<p className="description"><span className="value">{this.state.values[field]}</span><button className="name" password="button" onClick={this.buttonPressed} data-field="password"><i data-field="password" className="fas fa-pen"></i></button></p>);
+        if (pressedButton.password === true) return (<input type="password" placeholder="password" value={this.state.values[field]} onBlur={this.setChanges} onChange={this.changeValue} data-field="password" className="password"/>);
+        else  return(<p className="description"><span className="value">{this.state.values[field]}</span><button className="name" password="button" onClick={this.handlerInputPressed} data-field="password"><i data-field="password" className="fas fa-pen"></i></button></p>);
       // break;
       case "quote":
-        if (pressedButton.quote === true) return (<input type="textarea" placeholder="quote" value={this.state.values[field]} onBlur={this.buttonPressed} onChange={this.changeValue} data-field="quote" className="quote"/>);
-        else  return(<p className="description"><span className="value">{this.state.values[field]}</span><button className="quote" type="button" onClick={this.buttonPressed} data-field="quote"><i data-field="quote" className="fas fa-pen"></i></button></p>);
+        if (pressedButton.quote === true) return (<input type="textarea" placeholder="quote" value={this.state.values[field]} onBlur={this.setChanges} onChange={this.changeValue} data-field="quote" className="quote"/>);
+        else  return(<p className="description"><span className="value">{this.state.values[field]}</span><button className="quote" type="button" onClick={this.handlerInputPressed} data-field="quote"><i data-field="quote" className="fas fa-pen"></i></button></p>);
       // break;
       default:
       break;

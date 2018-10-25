@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Switch} from 'react-router-dom'
+import {Switch, Route} from 'react-router-dom'
 import PrivateRoute from './components/PrivateRoute';
 import AnonRoute from './components/AnonRoute';
 import Chats from './pages/Chats/Chats';
@@ -19,6 +19,7 @@ class App extends Component {
         <Switch>
           <AnonRoute path="/signup" component={Signup} />
           <AnonRoute path="/login" component={Login} />
+          {/* <Route path="/" component={Login} /> */}
           <PrivateRoute path="/chats/:email" component={Chat} />
           <PrivateRoute path="/chats/:email/send" component={Chat} />
           <PrivateRoute path="/chats" component={Chats} />
