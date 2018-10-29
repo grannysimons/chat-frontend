@@ -3,14 +3,15 @@ import './Chat.css';
 import { Link } from 'react-router-dom';
 import chat from '../../lib/chat-service';
 import helper from '../../helpers';
+import io from 'socket.io-client';
 
-
-
+const socketURL = 'http://localhost:3010';
 export default class Chat extends Component {
   state = {
     message: '',
     messageList: [],
     interlocutor: '',
+    socket: null,
   }
   // accessMic = () => {
   //   navigator.getUserMedia = ( navigator.getUserMedia ||
@@ -56,6 +57,18 @@ export default class Chat extends Component {
       this.setState({ messageList, message: '' , interlocutor: receivedMessages.data.interlocutor ? receivedMessages.data.interlocutor : this.props.match.params.email});
     })
     document.getElementById('intoView').scrollIntoView();
+
+    this.initSocket();
+  }
+  initSocket = () => {
+    const socket = io(socketURL);
+    socket.on('connect', ()=>{
+      console.log('chat connected');
+      socket.on('MESSAGE_SENT', (user, chatId)=>{
+        console.log("s'ha rebut un missatge del ", user.userName);
+      });
+    });
+    this.setState({ socket });
   }
   componentDidUpdate = () => {
     document.getElementById('intoView').scrollIntoView();
