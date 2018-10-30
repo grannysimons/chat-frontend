@@ -3,15 +3,18 @@ import './Chat.css';
 import { Link } from 'react-router-dom';
 import chat from '../../lib/chat-service';
 import helper from '../../helpers';
-import io from 'socket.io-client';
+// import io from 'socket.io-client';
+import ReactDOM from 'react-dom';
 
-const socketURL = 'http://localhost:3010';
+// const socketURL = 'http://localhost:3010';
+// const socket = io(socketURL);
+
 export default class Chat extends Component {
   state = {
     message: '',
     messageList: [],
     interlocutor: '',
-    socket: null,
+    // socket: null,
   }
   // accessMic = () => {
   //   navigator.getUserMedia = ( navigator.getUserMedia ||
@@ -42,11 +45,11 @@ export default class Chat extends Component {
   //     }
   //   );
   // }
-  componentDidMount = () => {
-    document.addEventListener('load', this.accessMic);
-
-    chat.getMessages(this.props.match.params.email)
+getMessages = () => {
+  // console.log("getMessages");
+  chat.getMessages(this.props.match.params.email)
     .then(( receivedMessages ) => {
+      // console.log('getMessages: ', receivedMessages);
       let messages = receivedMessages.data.messages;
       let messageList = [];
       for(let i=0; i<messages.length; i++)
@@ -57,33 +60,62 @@ export default class Chat extends Component {
       this.setState({ messageList, message: '' , interlocutor: receivedMessages.data.interlocutor ? receivedMessages.data.interlocutor : this.props.match.params.email});
     })
     document.getElementById('intoView').scrollIntoView();
+}
 
-    this.initSocket();
+  componentDidMount = () => {
+    // console.log('did mount');
+    // document.addEventListener('load', this.accessMic);
+    this.getMessages();
+    // this.initSocket();
   }
-  initSocket = () => {
-    const socket = io(socketURL);
-    socket.on('connect', ()=>{
-      console.log('chat connected');
-      socket.on('MESSAGE_SENT', (user, chatId)=>{
-        console.log("s'ha rebut un missatge del ", user.userName);
-      });
-    });
-    this.setState({ socket });
+
+  componentDidUpdate = (prevProps, prevState) => {
+    // console.log('did update');
+    this.getMessages();
   }
+  
+  // initSocket = () => {
+  //   socket.on('connect', ()=>{
+  //     console.log('chat connected');
+  //   });
+  //   socket.on('MESSAGE_SENT', (message)=>{
+  //     console.log("s'ha rebut aquest missatge: ", message);
+  //     const messageList = this.state.messageList;
+  //     messageList.push(message);
+  //     console.log('this.state.messageList: ',this.state.messageList);
+  //     console.log('messageList: ', messageList);
+  //     this.setState({ messageList });
+  //   });
+  //   console.log('this.props: ', this.props);
+  //   socket.on(this.props.idChat, (message)=>{
+  //     console.log("s'ha rebut aquest missatge: ", message);
+  //     const messageList = this.state.messageList;
+  //     messageList.push(message);
+  //     console.log('this.state.messageList: ',this.state.messageList);
+  //     console.log('messageList: ', messageList);
+  //     this.setState({ messageList });
+  //     // console.log("newMessageReceived = true");
+  //     // this.setState({ newMessageReceived: true });
+  //   });
+  //   this.setState({ socket });
+  // }
   componentDidUpdate = () => {
     document.getElementById('intoView').scrollIntoView();
   }
   handleNewMessage = (e) => {
     e.preventDefault();
+
     let email = this.props.match.params.email;
     let message = this.state.message;
     if(message !== '')
     {
       chat.newMessage( email, message)
       .then((newMessage) => {
+        // console.log("new message!!", newMessage.data.idChat);
         var messageList = this.state.messageList;
         messageList.push(newMessage.data);
         document.querySelector("#name").value="";
+        
         this.setState({ messageList, message: '' });
       })
     }

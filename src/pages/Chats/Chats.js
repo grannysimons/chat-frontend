@@ -21,7 +21,7 @@ class Chats extends Component {
     this.hideModal();
   }
   componentDidMount = () => {
-    console.log('chats didmount');
+    // console.log('chats didmount');
     this.hideModal();
     chat.getList()
     .then(chats => {
@@ -63,6 +63,7 @@ class Chats extends Component {
         </form> */}
         <div className="chats-container">
           {this.state.chatList.map((element, index) => {
+            // console.log('element: ', element);
             let path = `/chats/${element.email}`;
             return (
               <Link to={path} key={index}>

@@ -47,19 +47,19 @@ export default class Profile extends Component {
     switch (field)
     {
       case "name":
-        console.log('name');
+        // console.log('name');
         pressedButton.name = true;
       break;
       case "email":
-        console.log('email');
+        // console.log('email');
         pressedButton.email = true;
       break;
       case "password":
-        console.log('password');
+        // console.log('password');
         pressedButton.password = true;
       break;
       case "quote":
-        console.log('quote');
+        // console.log('quote');
         pressedButton.quote = true;
       break;
       default:
@@ -75,7 +75,7 @@ export default class Profile extends Component {
     auth.setProfileData({ field: this.state.pressedButton, value })
     .then(data => {
       this.props.setUser(data);
-      console.log('data: ', data);
+      // console.log('data: ', data);
     })
 
     // let pressedButton = {

@@ -9,6 +9,7 @@ class Auth {
   }
 
   signup(user) {
+    console.log('auth.signup');
     const { email, password } = user;
     return this.auth.post('/signup', {email, password})
       .then(({ data }) => data);
@@ -38,7 +39,7 @@ class Auth {
   }
 
   setProfileData(fieldData) {
-    console.log('fieldData ', fieldData);
+    // console.log('fieldData ', fieldData);
     const { field, value } = fieldData;
     return this.auth.post('/profile/edit', {field, value})
     .then(response => response.data)
