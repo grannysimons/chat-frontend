@@ -1,5 +1,5 @@
 import io from 'socket.io-client';
-import { NEW_USER, NEW_CHAT } from 'events';
+// import { NEW_USER, NEW_CHAT } from './Events';
 
 const socketURL = 'http://localhost:3010';
 class SocketManagerClient {
@@ -12,27 +12,27 @@ class SocketManagerClient {
       console.log('broadcast connect');
     })
   }
+  getSocket = () => {
+    return this.socket;
+  }
   initSocketUser = (userId) => {
     this.socket = io(socketURL + '/' + userId);
     this.socket.on('connect', () => {
       console.log(userId, ' on connect');
+      this.socket.on('disconnect', (msg)=>{
+        console.log('on disconnect', msg);
+      });
       this.initSocketEventsReception(userId);
-      // this.socket.on(NEW_USER, ()=>{
-      //   console.log('NEW_USER received');
-      // });
-      // this.socket.on(NEW_CHAT, (chat)=>{
-      //   console.log('NEW_CHAT received: ',chat);
-      // });
     });
   }
   initSocketEventsReception = (userId) => {
     this.socket = io(socketURL + '/' + userId);
-    this.socket.on(NEW_USER, (msg)=>{
-      console.log('NEW_USER received', msg);
-    });
-    this.socket.on(NEW_CHAT, (chat)=>{
-      console.log('NEW_CHAT received: ',chat);
-    });
+    // this.socket.on(NEW_USER, (msg)=>{
+    //   console.log('NEW_USER received', msg);
+    // });
+    // this.socket.on(NEW_CHAT, (chat)=>{
+    //   console.log('NEW_CHAT received: ',chat);
+    // });
   }
 }
 

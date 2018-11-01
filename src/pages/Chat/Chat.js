@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import chat from '../../lib/chat-service';
 import helper from '../../helpers';
 // import io from 'socket.io-client';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
 
 // const socketURL = 'http://localhost:3010';
 // const socket = io(socketURL);
@@ -68,11 +68,6 @@ getMessages = () => {
     this.getMessages();
     // this.initSocket();
   }
-
-  componentDidUpdate = (prevProps, prevState) => {
-    // console.log('did update');
-    this.getMessages();
-  }
   
   // initSocket = () => {
   //   socket.on('connect', ()=>{
@@ -100,18 +95,18 @@ getMessages = () => {
   //   this.setState({ socket });
   // }
   componentDidUpdate = () => {
+    // this.getMessages();
     document.getElementById('intoView').scrollIntoView();
   }
   handleNewMessage = (e) => {
     e.preventDefault();
-
-    let email = this.props.match.params.email;
+    let email = this.props.match.params.email;  //destinatari
     let message = this.state.message;
     if(message !== '')
     {
       chat.newMessage( email, message)
       .then((newMessage) => {
-        // console.log("new message!!", newMessage.data.idChat);
+        console.log("new message!!", newMessage.data);
         var messageList = this.state.messageList;
         messageList.push(newMessage.data);
         document.querySelector("#name").value="";

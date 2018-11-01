@@ -7,7 +7,7 @@ import Modal from '../../components/Modal';
 import chat from '../../lib/chat-service';
 import helpers from '../../helpers';
 import socketManagerClient from "../../socketManagerClient";
-
+import { NEW_USER, NEW_CHAT, MESSAGE_RECEIVED } from '../../Events';
 
 class Chats extends Component {
   state = {
@@ -26,22 +26,43 @@ class Chats extends Component {
     // console.log('chats didmount');
     this.hideModal();
     socketManagerClient.initSocketUser(this.props.user._id);
+    let socket = socketManagerClient.getSocket();
+    socket.on(NEW_USER, (msg)=>{
+      console.log('NEW_USER received', msg);
+    });
+    socket.on(NEW_CHAT, ()=>{
+      this.getChatList();
+    });
+    socket.on(MESSAGE_RECEIVED, () => {
+      console.log('MESSAGE_RECEIVED');
+      this.getChatList();
+    })
 
+    this.getChatList();
+  }
+  getChatList = () => {
     chat.getList()
     .then(chats => {
       var chatArray = [];
-      chats.data.chats.forEach(chat => {
-        console.log('chat: ',chat);
-        let user = chat.user1.email === this.props.user.email ? chat.user2 : chat.user1;
-        let chatObject = {
-          name: (user.idUser.userName ? user.idUser.userName : user.email),
-          lastDate: helpers.dateChatFormat(chat.dateLastMessage),
-          num: '',
-          email: user.email,
-          idChat: chat._id,
-        }
-        chatArray.push(chatObject);
-      });
+      console.log('chats: ',chats);
+      if(chats.data.chats)
+      {
+        chats.data.chats.forEach(chat => {
+          let user = chat.user1.email === this.props.user.email ? chat.user2 : chat.user1;
+          let chatObject = {
+            name: (user.idUser.userName ? user.idUser.userName : user.email),
+            lastDate: helpers.dateChatFormat(chat.dateLastMessage),
+            num: '',
+            email: user.email,
+            idChat: chat._id,
+          }
+          chatArray.push(chatObject);
+        });
+      }
+      else
+      {
+        console.log('Chats.js - getChatList - error: ', chats.data.error);
+      }
       this.setState({ chatList: chatArray });
     })
   }
@@ -60,15 +81,8 @@ class Chats extends Component {
   render() {
     return (
       <div className="chats">
-        {/* <form className="search-form">
-          <input type="text" />
-          <button className="search-button">
-            <i className="fas fa-search" />
-          </button>
-        </form> */}
         <div className="chats-container">
           {this.state.chatList.map((element, index) => {
-            console.log('element: ', element);
             let path = `/chats/${element.email}`;
             return (
               <Link to={path} key={index}>
