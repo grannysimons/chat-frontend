@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import Modal from '../../components/Modal';
 import chat from '../../lib/chat-service';
 import helpers from '../../helpers';
+import socketManagerClient from "../../socketManagerClient";
+
 
 class Chats extends Component {
   state = {
@@ -23,6 +25,8 @@ class Chats extends Component {
   componentDidMount = () => {
     // console.log('chats didmount');
     this.hideModal();
+    socketManagerClient.initSocketUser(this.props.user._id);
+
     chat.getList()
     .then(chats => {
       var chatArray = [];
@@ -44,7 +48,7 @@ class Chats extends Component {
     this.props.history.push('/login');
   };
   handleNewChat = (email) => {
-    chat.newChat( email )
+    chat.newChat( email , this.props.user._id)
     .then((newChat) => {
       this.props.history.push('/chats/' + email);
     })
@@ -93,7 +97,7 @@ class Chats extends Component {
           </button>
           <div className="greeting">Hi, <strong>{this.props.user.userName ? this.props.user.userName : this.props.user.email}</strong>!</div>
         </div>
-      </div>
+      </div> 
     );
   }
 }

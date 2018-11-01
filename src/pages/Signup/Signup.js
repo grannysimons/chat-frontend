@@ -6,7 +6,8 @@ import "./Signup.css";
 class Signup extends Component {
   state = {
     email: "",
-    password: ""
+    password: "",
+    socket: null,
   };
 
   handleFormSubmit = event => {

@@ -8,8 +8,8 @@ class Chat {
     })
   }
 
-  newChat(email) {
-    return this.chat.post('/newChat', { email })
+  newChat(email, idUser) {
+    return this.chat.post('/newChat', { email, idUser})
   }
 
   getList() {
