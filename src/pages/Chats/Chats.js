@@ -31,10 +31,11 @@ class Chats extends Component {
     .then(chats => {
       var chatArray = [];
       chats.data.chats.forEach(chat => {
+        console.log('chat: ',chat);
         let user = chat.user1.email === this.props.user.email ? chat.user2 : chat.user1;
         let chatObject = {
           name: (user.idUser.userName ? user.idUser.userName : user.email),
-          lastDate: helpers.dateChatFormat(user.lastSeen),
+          lastDate: helpers.dateChatFormat(chat.dateLastMessage),
           num: '',
           email: user.email,
           idChat: chat._id,
@@ -67,7 +68,7 @@ class Chats extends Component {
         </form> */}
         <div className="chats-container">
           {this.state.chatList.map((element, index) => {
-            // console.log('element: ', element);
+            console.log('element: ', element);
             let path = `/chats/${element.email}`;
             return (
               <Link to={path} key={index}>
