@@ -27,7 +27,7 @@
 /* messages */
 .chat .messages
 {
-  padding: 150px 30px;
+  padding: 160px 30px;
   min-height: 100vh;
 }
 /* message */
@@ -120,10 +120,12 @@
 .chat .searchResult
 {
   border: 2px solid yellow;
+  background-color: rgba(255,255,100,0.6);
 }
 .chat .currentResult
 {
-  border: 2px solid red;
+  border: 2px solid rgba(100,255,200,1);
+  background-color: rgba(100,255,200,0.6);
 }
 .chat .results
 {
