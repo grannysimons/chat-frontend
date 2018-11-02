@@ -3,6 +3,9 @@ import './Chat.css';
 import { Link } from 'react-router-dom';
 import chat from '../../lib/chat-service';
 import helper from '../../helpers';
+import socketManagerClient from "../../socketManagerClient";
+import { MESSAGE_RECEIVED } from '../../Events';
+
 // import io from 'socket.io-client';
 // import ReactDOM from 'react-dom';
 
@@ -67,6 +70,12 @@ getMessages = () => {
     // document.addEventListener('load', this.accessMic);
     this.getMessages();
     // this.initSocket();
+    socketManagerClient.initSocketUser(this.props.user._id);
+    let socket = socketManagerClient.getSocket();
+    socket.on(MESSAGE_RECEIVED, (fromUserId)=>{
+      console.log('MESSAGE_RECEIVED from ', fromUserId);
+      this.getMessages();
+    });
   }
   
   // initSocket = () => {

@@ -33,9 +33,9 @@ class Chats extends Component {
     socket.on(NEW_CHAT, ()=>{
       this.getChatList();
     });
-    socket.on(MESSAGE_RECEIVED, () => {
-      console.log('MESSAGE_RECEIVED');
-      this.getChatList();
+    socket.on(MESSAGE_RECEIVED, (fromUserMail) => {
+      console.log('MESSAGE_RECEIVED from ', {fromUserMail});
+      this.getChatList(fromUserMail);
     })
 
     this.getChatList();
@@ -44,19 +44,33 @@ class Chats extends Component {
     chat.getList()
     .then(chats => {
       var chatArray = [];
-      console.log('chats: ',chats);
+      // console.log('chats: ',chats);
       if(chats.data.chats)
       {
-        chats.data.chats.forEach(chat => {
-          let user = chat.user1.email === this.props.user.email ? chat.user2 : chat.user1;
+        chats.data.chats.forEach(chatElement => {
+          let user = chatElement.user1.email === this.props.user.email ? chatElement.user2 : chatElement.user1;
           let chatObject = {
             name: (user.idUser.userName ? user.idUser.userName : user.email),
-            lastDate: helpers.dateChatFormat(chat.dateLastMessage),
+            lastDate: helpers.dateChatFormat(chatElement.dateLastMessage),
             num: '',
             email: user.email,
-            idChat: chat._id,
+            idChat: chatElement._id,
           }
+
+          //get number of new messages:
+          // chat
+          // .getTotaNewMessages(this.props.user._id, chatElement._id)
+          // .then(( result ) => {
+          //   let totalNewMessages = result.data.totalNewMessages
+          //   console.log('totalNewMessages 1: ', totalNewMessages);
+          //   if(totalNewMessages > 0)
+          //   {
+          //     chatObject.num = totalNewMessages;
+          //   }
+          // })
+
           chatArray.push(chatObject);
+
         });
       }
       else

@@ -20,6 +20,10 @@ class Chat {
     //   num: "1",
     //   email: "Joan@Joan.com"
   }
+
+  getTotaNewMessages(idUser, idChat) {
+    return this.chat.post(`/${idUser}/${idChat}/totalNewMessages`);
+  }
   
   getMessages(email) {
     return this.chat.post('/' + email);
