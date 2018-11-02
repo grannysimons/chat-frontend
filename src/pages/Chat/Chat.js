@@ -132,6 +132,7 @@ getMessages = () => {
     e.preventDefault();
     let messageList = this.state.messageList;
     let searchValue = document.querySelector('.search-form input').value;
+    if(searchValue==='') return;
     messageList.forEach(message => {
       message['searchResult'] = false;
       if(message.text.includes(searchValue))
@@ -156,9 +157,10 @@ getMessages = () => {
         result.classList.remove('currentResult');
       }
     });
-    document.querySelector('.numCoincidence').innerHTML = currentResultIndex;
+    let currentPosition = (parseInt(currentResultIndex) + 1) % totalResults === 0 ? 6 : (parseInt(currentResultIndex) + 1) % totalResults;
+    document.querySelector('.numCoincidence').innerHTML = currentPosition;
     results[currentResultIndex % totalResults].classList.add('currentResult');
-    window.scrollTo(0, document.querySelector('.currentResult').offsetTop - 150);
+    window.scrollTo({top: document.querySelector('.currentResult').offsetTop - 170, behavior: 'smooth'});
   }
   handleSearchUp = (e) => {
     e.preventDefault();
@@ -173,9 +175,11 @@ getMessages = () => {
         result.classList.remove('currentResult');
       }
     });
-    document.querySelector('.numCoincidence').innerHTML = currentResultIndex;
+    let currentPosition = (parseInt(currentResultIndex) + 1) % totalResults === 0 ? 6 : (parseInt(currentResultIndex) + 1) % totalResults;
+    document.querySelector('.numCoincidence').innerHTML = currentPosition;
     results[currentResultIndex % totalResults].classList.add('currentResult');
-    window.scrollTo(0, document.querySelector('.currentResult').offsetTop - 150);
+    window.scrollTo({top: document.querySelector('.currentResult').offsetTop - 170, behavior: 'smooth'});
+
   }
   render() {
     
