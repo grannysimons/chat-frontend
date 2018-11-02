@@ -45,7 +45,7 @@ class Signup extends Component {
 
       // </div>
 
-      <div className="signup container">
+      <div className="signup container-fluid">
         <div className="container-inner">
           <h1>Signup</h1>
           <div className="logo">

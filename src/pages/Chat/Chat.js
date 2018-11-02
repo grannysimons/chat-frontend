@@ -73,7 +73,7 @@ getMessages = () => {
     socketManagerClient.initSocketUser(this.props.user._id);
     let socket = socketManagerClient.getSocket();
     socket.on(MESSAGE_RECEIVED, (fromUserId)=>{
-      console.log('MESSAGE_RECEIVED from ', fromUserId);
+      // console.log('MESSAGE_RECEIVED from ', fromUserId);
       this.getMessages();
     });
   }
@@ -115,7 +115,6 @@ getMessages = () => {
     {
       chat.newMessage( email, message)
       .then((newMessage) => {
-        console.log("new message!!", newMessage.data);
         var messageList = this.state.messageList;
         messageList.push(newMessage.data);
         document.querySelector("#name").value="";
@@ -125,7 +124,20 @@ getMessages = () => {
     }
   }
   handleOnChange = (e) => {
+    // chat.getUser(this.props.match.params.email)
+    // .then(user => {
+    //   socketManagerClient.typing(user.data._id);
+    // })
     this.setState({message: e.target.value});
+    
+    // let socket = socketManagerClient.getSocket();
+    // socket.emit(TYPING, (fromUserId)=>{
+    //   console.log('TYPING from ', fromUserId);
+    // });
+
+  }
+  handleOnBlur = () => {
+
   }
   render() {
     
@@ -159,7 +171,7 @@ getMessages = () => {
               <i className="fas fa-chevron-left" />
             </Link>
             <form onSubmit={this.handleNewMessage} action="">
-              <input type="text" name="message" onChange={this.handleOnChange} id="name"/>
+              <input type="text" name="message" onChange={this.handleOnChange} onBlur={this.onBlur} id="name"/>
               <button className="send-button">
                 <i className="fas fa-chevron-circle-right" />
               </button>

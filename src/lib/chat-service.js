@@ -33,6 +33,12 @@ class Chat {
     let path = '/' + email + '/send';
     return this.chat.post(path, {message});
   }
+  deleteUser (idUser) {
+    return this.chat.post(`/delete/${idUser}`);
+  }
+  // getUser(email) {
+  //   return this.chat.post('/getUser/' + email)
+  // }
   // signup(user) {
   //   const { email, password } = user;
   //   return this.auth.post('/signup', {email, password})

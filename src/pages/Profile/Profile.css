@@ -3,7 +3,7 @@
   margin: 0;
   padding: 0;
 }
-.container.profile
+.profile
 {
   font-family: 'Source Code Pro', monospace;
   color: white;
@@ -16,7 +16,7 @@
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff670f', endColorstr='#2c617a',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
   height: 100vh;
 }
-.container.profile .container-inner
+.profile .container-inner
 {
   height: 100%;
   text-align: center;
@@ -25,14 +25,14 @@
   margin: auto;
   box-sizing: border-box;
 }
-.container.profile .container-inner h1
+.profile .container-inner h1
 {
   font-size: 40px;
   margin-bottom: 20%;
 }
 
-.container.profile .container-inner input,
-.container.profile .container-inner textarea
+.profile .container-inner input,
+.profile .container-inner textarea
 {
   display: block;
   padding: 10px 25px;
@@ -43,12 +43,12 @@
   border-width: 0;
   color: #dedede;
 }
-.container.profile .container-inner p
+.profile .container-inner p
 {
   text-align: right;
   margin-top: 15px;
 }
-.container.profile .container-inner p.title
+.profile .container-inner p.title
 {
   font-size: 10px;
   text-transform: uppercase;
@@ -58,7 +58,7 @@
   left: 20px;
   color: #d6d6d6;
 }
-.container.profile .container-inner p.description
+.profile .container-inner p.description
 {
   text-align: left;
   position: relative;
@@ -67,31 +67,31 @@
   flex-direction: row;
   justify-content: space-between;
 }
-.container.profile .container-inner p.description .value,
-.container.profile .container-inner p.description button
+.profile .container-inner p.description .value,
+.profile .container-inner p.description button
 {
 
 }
-.container.profile .container-inner p a,
-.container.profile .container-inner p a:hover
+.profile .container-inner p a,
+.profile .container-inner p a:hover
 {
   color: rgb(200,200,200);
   text-decoration: none;
 }
-.container.profile .container-inner .form p a:hover
+.profile .container-inner .form p a:hover
 {
   color: #aaaaaa;
 }
-.container.profile .container-inner .form p a:focus
+.profile .container-inner .form p a:focus
 {
   border-width: 0;
   outline: -webkit-focus-ring-color auto 0;
 }
-.container.profile .container-inner .log
+.profile .container-inner .log
 {
   margin-top: 50px;
 }
-.container.profile .container-inner form.delete-form button
+.profile .container-inner form.delete-form button
 {
   padding: 10px 20px;
   border-radius: 4px;
@@ -99,12 +99,15 @@
   margin: 30px;
   color: red;
 }
-.container.profile .container-inner .user-data button
+.profile .container-inner .user-data button
 {
   margin-left: 20px;
   color: white;
+  background-color: transparent;
+  border-width: 0px;
 }
-.container.profile .back-button
+
+.profile .back-button
 {
   width: 50px;
   height: 50px;
@@ -116,7 +119,7 @@
   bottom: 20px;
   left: 20px;
 }
-.container.profile .back-button i
+.profile .back-button i
 {
   font-size: 50px;
   color: white;

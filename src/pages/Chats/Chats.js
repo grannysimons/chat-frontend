@@ -109,7 +109,7 @@ class Chats extends Component {
           {this.state.chatList.length === 0 && <p>Sorry! You have no chats...</p>}
         </div>
         <div className="buttons">
-          <button className="button profile" onClick={this.handlerProfile}>
+          <button className="button profile-button" onClick={this.handlerProfile}>
             <i className="fas fa-user" />
           </button>
           <Modal buttonClass='fa-plus-circle' title="new Chat" onSubmitHandler={this.handleNewChat}>

@@ -15,16 +15,19 @@ export default class Profile extends Component {
       name: 'Mariona Roca',
       email: 'mariona.roca@gmail.com',
       password: '1234',
+      uncryptedPassword : '1234',
       quote: 'surgiendo de la bla bla bla',
     }
   };
   componentDidMount = () => {
     auth.getProfileData()
     .then( userData  => {
+      console.log('userData ', userData);
       this.setState({ values: {
         name: userData.name !== '' ? userData.name : '',
         email: userData.email !== '' ? userData.email : '',
         password: userData.password !== '' ? userData.password : '',
+        uncryptedPassword: userData.password !== '' ? userData.password : '',
         quote: userData.quote !== '' ? userData.quote : '',
       }});
     });
@@ -34,6 +37,10 @@ export default class Profile extends Component {
     let values = this.state.values;
     let selector = 'input.'+field;
     values[field] = document.querySelector(selector).value;
+    if(field==='password')
+    {
+      values['uncryptedPassword'] = document.querySelector(selector).value;
+    }
     this.setState({ values });
   }
   handlerInputPressed = (e) => {
@@ -71,11 +78,22 @@ export default class Profile extends Component {
     let field = e.target.getAttribute('data-field');
     let selector = 'input.'+field;
     let value = document.querySelector(selector).value;
-
+    console.log('value ', value);
+    if(field==='password')
+    {
+      let values = this.state.values;
+      values['uncryptedPassword'] = document.querySelector(selector).value;
+      let passwordShown = '';
+      for(let i=0; i<values['uncryptedPassword'].length; i++)
+      {
+        passwordShown += '* ';
+      }
+      values[field] = passwordShown;
+      document.querySelector(selector).value = values['uncryptedPassword'];
+    }
     auth.setProfileData({ field: this.state.pressedButton, value })
     .then(data => {
       this.props.setUser(data);
-      // console.log('data: ', data);
     })
 
     // let pressedButton = {
@@ -93,26 +111,25 @@ export default class Profile extends Component {
       case "name":
         if (pressedButton.name === true) return (<input type="text" placeholder="Username" value={this.state.values[field]} onBlur={this.setChanges} onChange={this.changeValue} data-field="name" className="name"/>);
         else  return(<p className="description"><span className="value">{this.state.values[field]}</span><button className="name" type="button" onClick={this.handlerInputPressed} data-field="name"><i data-field="name" className="fas fa-pen"></i></button></p>);
-      // break;
       case "email":
         if (pressedButton.email === true) return (<input type="email" placeholder="email" value={this.state.values[field]} onBlur={this.setChanges} onChange={this.changeValue} data-field="email" className="email"/>);
         else  return(<p className="description"><span className="value">{this.state.values[field]}</span><button className="email" type="button" onClick={this.handlerInputPressed} data-field="email"><i data-field="email" className="fas fa-pen"></i></button></p>);
-      // break;
       case "password":
-        if (pressedButton.password === true) return (<input type="password" placeholder="password" value={this.state.values[field]} onBlur={this.setChanges} onChange={this.changeValue} data-field="password" className="password"/>);
+        if (pressedButton.password === true) return (<input type="password" placeholder="password" value={this.state.values['uncryptedPassword']} onBlur={this.setChanges} onChange={this.changeValue} data-field="password" className="password"/>);
         else  return(<p className="description"><span className="value">{this.state.values[field]}</span><button className="name" password="button" onClick={this.handlerInputPressed} data-field="password"><i data-field="password" className="fas fa-pen"></i></button></p>);
-      // break;
       case "quote":
         if (pressedButton.quote === true) return (<input type="textarea" placeholder="quote" value={this.state.values[field]} onBlur={this.setChanges} onChange={this.changeValue} data-field="quote" className="quote"/>);
         else  return(<p className="description"><span className="value">{this.state.values[field]}</span><button className="quote" type="button" onClick={this.handlerInputPressed} data-field="quote"><i data-field="quote" className="fas fa-pen"></i></button></p>);
-      // break;
       default:
       break;
     }
   }
+  handleSubmit = () => {
+    this.props.history.push('/sureDelete');
+  }
   render() {
     return (
-      <div className="profile container">
+      <div className="profile container-fluid">
         <div className="container-inner">
           <div className="user-data">
             <h1>Profile</h1>
@@ -129,8 +146,8 @@ export default class Profile extends Component {
             {/* incorrect data */}
           </div>
 
-          <form className="delete-form">
-            <button>Delete account</button>
+          <form className="delete-form" onSubmit={this.handleSubmit}>
+            <button type="submit">Delete account</button>
           </form>
           <Link to='/chats' className="back-button">
             <i className="fas fa-chevron-left" />

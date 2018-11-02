@@ -8,6 +8,8 @@ import Profile from './pages/Profile/Profile';
 import Signup from './pages/Signup/Signup';
 import Login from './pages/Login/Login';
 import AuthProvider from './components/AuthProvider';
+import SureDelete from "./pages/SureDelete/SureDelete";
+
 import './App.css';
 // import Home from './pages/Home/Home';
 
@@ -29,6 +31,7 @@ class App extends Component {
           <PrivateRoute path="/chats/:email/send" component={Chat} />
           <PrivateRoute path="/chats" component={Chats} />
           <PrivateRoute path="/profile" component={Profile} />
+          <PrivateRoute path="/sureDelete" component={SureDelete} />
           {/* <Route exact path="/" component={Login} /> */}
           {/* <PrivateRoute path="/logout" component={Login} /> */}
         </Switch>
