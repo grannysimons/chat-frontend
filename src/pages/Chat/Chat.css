@@ -143,3 +143,10 @@
   position: relative;
   bottom: 0;
 }
+.chat .search-form .close-button
+{
+  margin-right: 10px;
+  margin-left: 0;
+  position: relative;
+  top: 2px;
+}

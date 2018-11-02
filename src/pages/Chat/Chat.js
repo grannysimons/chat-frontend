@@ -105,6 +105,8 @@ getMessages = () => {
 
     let total = document.querySelectorAll('.searchResult').length;
     document.querySelector('.numberOfCoincidences').innerHTML = total;
+    // this.handleSearchDown();
+
   }
   handleNewMessage = (e) => {
     e.preventDefault();
@@ -128,8 +130,26 @@ getMessages = () => {
   handleOnBlur = () => {
 
   }
+
+  deleteResultClasses = () => {
+    let results = document.querySelectorAll('.searchResult');
+      results.forEach(result => {
+        if(result.getAttribute('class').indexOf('searchResult') !== -1) 
+        {
+          result.classList.remove('searchResult');
+        }
+        if(result.getAttribute('class').indexOf('currentResult') !== -1) 
+        {
+          result.classList.remove('currentResult');
+        }
+      });
+  }
+
   handleSearchForm = (e) => {
     e.preventDefault();
+
+    this.deleteResultClasses();
+
     let messageList = this.state.messageList;
     let searchValue = document.querySelector('.search-form input').value;
     if(searchValue==='') return;
@@ -138,6 +158,7 @@ getMessages = () => {
       if(message.text.includes(searchValue))
       {
         message['searchResult'] = true;
+        document.querySelector('.numCoincidence').innerHTML = 1;
       }
     });
     document.querySelector('.results').style.display = 'block';
@@ -146,10 +167,10 @@ getMessages = () => {
 
   
   handleSearchDown = (e) => {
-    e.preventDefault();
+    if(e) e.preventDefault();
     let results = document.querySelectorAll('.searchResult');
-    var currentResultIndex = 0;
     let totalResults = results.length;
+    var currentResultIndex = 0;
     results.forEach((result, index) => {
       if(result.getAttribute('class').indexOf('currentResult') !== -1)
       {
@@ -157,16 +178,19 @@ getMessages = () => {
         result.classList.remove('currentResult');
       }
     });
-    let currentPosition = (parseInt(currentResultIndex) + 1) % totalResults === 0 ? 6 : (parseInt(currentResultIndex) + 1) % totalResults;
+    let currentPosition = (parseInt(currentResultIndex) + 1) % totalResults === 0 ? totalResults : (parseInt(currentResultIndex) + 1) % totalResults;
     document.querySelector('.numCoincidence').innerHTML = currentPosition;
-    results[currentResultIndex % totalResults].classList.add('currentResult');
-    window.scrollTo({top: document.querySelector('.currentResult').offsetTop - 170, behavior: 'smooth'});
+    // if(results > 0 ) 
+    // {
+      results[currentResultIndex % totalResults].classList.add('currentResult');
+      window.scrollTo({top: document.querySelector('.currentResult').offsetTop - 170, behavior: 'smooth'});
+    // }
   }
   handleSearchUp = (e) => {
-    e.preventDefault();
+    if(e) e.preventDefault();
     let results = document.querySelectorAll('.searchResult');
-    var currentResultIndex = 0;
     let totalResults = results.length;
+    var currentResultIndex = 0;
     results.forEach((result, index) => {
       if(result.getAttribute('class').indexOf('currentResult') !== -1)
       {
@@ -175,10 +199,19 @@ getMessages = () => {
         result.classList.remove('currentResult');
       }
     });
-    let currentPosition = (parseInt(currentResultIndex) + 1) % totalResults === 0 ? 6 : (parseInt(currentResultIndex) + 1) % totalResults;
+    let currentPosition = (parseInt(currentResultIndex) + 1) % totalResults === 0 ? totalResults : (parseInt(currentResultIndex) + 1) % totalResults;
     document.querySelector('.numCoincidence').innerHTML = currentPosition;
-    results[currentResultIndex % totalResults].classList.add('currentResult');
-    window.scrollTo({top: document.querySelector('.currentResult').offsetTop - 170, behavior: 'smooth'});
+    // if(results > 0 ) 
+    // {
+      results[currentResultIndex % totalResults].classList.add('currentResult');
+      window.scrollTo({top: document.querySelector('.currentResult').offsetTop - 170, behavior: 'smooth'});
+    // }
+  }
+  handleCloseButton = () => {
+    this.deleteResultClasses();
+    document.querySelector('.search-form .results').style.display = 'none';
+    document.querySelector('.search-form input').value = '';
+    document.getElementById('intoView').scrollIntoView({behavior: 'smooth'});
 
   }
   render() {
@@ -195,6 +228,7 @@ getMessages = () => {
               <input type="text" />
               <button type="submit"><i className="fas fa-search"></i></button>
               <div className="results">
+                <button type="button" className="close-button" onClick={this.handleCloseButton}><i className="far fa-window-close"></i></button>
                 <span className="numCoincidence"></span>
                 <span className="textCoincidence"> of </span>
                 <span className="numberOfCoincidences"></span>
