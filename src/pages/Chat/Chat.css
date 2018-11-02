@@ -27,7 +27,7 @@
 /* messages */
 .chat .messages
 {
-  padding: 100px 30px;
+  padding: 150px 30px;
   min-height: 100vh;
 }
 /* message */
@@ -91,4 +91,33 @@
 {
   margin: 0;
   font-size: 16px;
+}
+.chat .search-form input
+{
+  padding: 4px 10px;
+  font-size: 12px;
+  background-color: rgba(200,200,200,0.5);
+  border-width: 0px;
+  color: gray;
+  border-radius: 4px;
+  -webkit-appearance: none;
+}
+.chat .search-form button
+{
+  background-color: transparent;
+  border-width: 0;
+  margin-left: 10px;
+}
+.chat .search-form button i
+{
+  font-size: 14px;
+  color: gray;
+}
+.chat .coincidence
+{
+  background-color: yellow;
+}
+.chat .searchResult
+{
+  border: 2px solid yellow;
 }

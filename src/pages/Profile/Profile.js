@@ -22,7 +22,7 @@ export default class Profile extends Component {
   componentDidMount = () => {
     auth.getProfileData()
     .then( userData  => {
-      console.log('userData ', userData);
+      // console.log('userData ', userData);
       this.setState({ values: {
         name: userData.name !== '' ? userData.name : '',
         email: userData.email !== '' ? userData.email : '',
@@ -78,7 +78,7 @@ export default class Profile extends Component {
     let field = e.target.getAttribute('data-field');
     let selector = 'input.'+field;
     let value = document.querySelector(selector).value;
-    console.log('value ', value);
+    // console.log('value ', value);
     if(field==='password')
     {
       let values = this.state.values;
