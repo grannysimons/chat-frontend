@@ -49,10 +49,8 @@ export default class Chat extends Component {
   //   );
   // }
 getMessages = () => {
-  // console.log("getMessages");
   chat.getMessages(this.props.match.params.email)
     .then(( receivedMessages ) => {
-      // console.log('getMessages: ', receivedMessages);
       let messages = receivedMessages.data.messages;
       let messageList = [];
       for(let i=0; i<messages.length; i++)
@@ -66,14 +64,12 @@ getMessages = () => {
 }
 
   componentDidMount = () => {
-    // console.log('did mount');
     // document.addEventListener('load', this.accessMic);
     this.getMessages();
     // this.initSocket();
     socketManagerClient.initSocketUser(this.props.user._id);
     let socket = socketManagerClient.getSocket();
     socket.on(MESSAGE_RECEIVED, (fromUserId)=>{
-      // console.log('MESSAGE_RECEIVED from ', fromUserId);
       this.getMessages();
     });
   }
@@ -136,47 +132,50 @@ getMessages = () => {
     e.preventDefault();
     let messageList = this.state.messageList;
     let searchValue = document.querySelector('.search-form input').value;
-    console.log('messageList: ', messageList);
     messageList.forEach(message => {
-        message['searchResult'] = false;
-        if(message.text.includes(searchValue))
+      message['searchResult'] = false;
+      if(message.text.includes(searchValue))
       {
-        // let newMessage = message.text.replace(searchValue, '<span class="coincidence">' + searchValue + '</span>');
-        // message.text = newMessage;
         message['searchResult'] = true;
-        console.log('com a mínim una coincidència: ', message);
       }
     });
-    console.log('messageList: ', messageList);
-
+    document.querySelector('.results').style.display = 'block';
     this.setState({ messageList });
   }
 
   
-  handleSearchUp = (e) => {
-    console.log('handleSearchUp!');
+  handleSearchDown = (e) => {
     e.preventDefault();
     let results = document.querySelectorAll('.searchResult');
     var currentResultIndex = 0;
+    let totalResults = results.length;
     results.forEach((result, index) => {
       if(result.getAttribute('class').indexOf('currentResult') !== -1)
       {
         currentResultIndex = index + 1;
-        console.log('currentResultIndex: ', currentResultIndex);
         result.classList.remove('currentResult');
       }
     });
-    let totalResults = results.length;
+    document.querySelector('.numCoincidence').innerHTML = currentResultIndex;
     results[currentResultIndex % totalResults].classList.add('currentResult');
-    document.querySelector('.currentResult').scrollIntoView();
-
-    // let currentSearchResult = (this.numSearchResult++)%(document.querySelector('.searchResult').length);
-    // document.querySelector('.searchResult')[currentSearchResult].scrollIntoView();
+    window.scrollTo(0, document.querySelector('.currentResult').offsetTop - 150);
   }
-  handleSearchDown = (e) => {
+  handleSearchUp = (e) => {
     e.preventDefault();
-    // let currentSearchResult = (this.numSearchResult--)%(document.querySelector('.searchResult').length);
-    // document.querySelector('.searchResult')[currentSearchResult].scrollIntoView();
+    let results = document.querySelectorAll('.searchResult');
+    var currentResultIndex = 0;
+    let totalResults = results.length;
+    results.forEach((result, index) => {
+      if(result.getAttribute('class').indexOf('currentResult') !== -1)
+      {
+        currentResultIndex = (index - 1);
+        if(currentResultIndex < 0) currentResultIndex += totalResults;
+        result.classList.remove('currentResult');
+      }
+    });
+    document.querySelector('.numCoincidence').innerHTML = currentResultIndex;
+    results[currentResultIndex % totalResults].classList.add('currentResult');
+    window.scrollTo(0, document.querySelector('.currentResult').offsetTop - 150);
   }
   render() {
     
@@ -191,11 +190,15 @@ getMessages = () => {
             <form className="search-form" onSubmit={this.handleSearchForm}>
               <input type="text" />
               <button type="submit"><i className="fas fa-search"></i></button>
-              <span className="numberOfCoincidences">12</span>
-              <span className="controller">
-                <button type="button" onClick={this.handleSearchUp}><i className="fas fa-sort-up"></i></button>
-                <button type="button" onClick={this.handleSearchDown}><i className="fas fa-sort-down"></i></button>
-              </span>
+              <div className="results">
+                <span className="numCoincidence"></span>
+                <span className="textCoincidence"> of </span>
+                <span className="numberOfCoincidences"></span>
+                <span className="controller">
+                  <button type="button" onClick={this.handleSearchUp}><i className="fas fa-sort-up"></i></button>
+                  <button type="button" onClick={this.handleSearchDown}><i className="fas fa-sort-down"></i></button>
+                </span>
+              </div>
             </form>
           </div>
           <div className="messages">

@@ -121,3 +121,23 @@
 {
   border: 2px solid yellow;
 }
+.chat .currentResult
+{
+  border: 2px solid red;
+}
+.chat .results
+{
+  display: none;
+  font-size: 12px;
+  color: gray;
+}
+.chat .results .fa-sort-up
+{
+  position: relative;
+  top: 4px;
+}
+.chat .results .fa-sort-down
+{
+  position: relative;
+  bottom: 0;
+}
