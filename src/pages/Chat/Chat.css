@@ -53,8 +53,6 @@
   position: fixed;
   bottom: 0;
   width: 95%;
-  display: flex;
-  flex-direction: row;
   padding: 20px;
 }
 .chat .send-form .back-button,
@@ -86,6 +84,51 @@
   border-radius: 4px;
   border-width: 0;
   flex-grow: 1;
+}
+.chat .send-form .record
+{
+  position: absolute;
+  right: 107px;
+  top: 23px;
+  font-size: 30px;
+  color: gray;
+  background-color: transparent;
+  border-color: transparent;
+}
+.chat .send-form .recording
+{
+  height: 3px;
+  background-color: gray;
+  width: 55%;
+  position: absolute;
+  left: 110px;
+  top: 45px;
+  z-index: 5;
+  overflow: hidden;
+  display: none;
+}
+.chat .send-form .recording .bar-moving
+{
+  width: 50px;
+  height: 5px;
+  background-color: blue;
+  z-index: 10;
+  position: absolute;
+  top:-1px;
+  left:-80px;
+  -webkit-animation-name: recording; 
+  animation-name: recording;
+  -webkit-animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-duration: 2s;
+}
+@keyframes recording {
+  0%   {left:-80px;}
+  /* 50%  {left:calc(100% - 50px);} */
+  /* 50%  {left:100%;} */
+  100% {left:110%;}
+  /* 100%  {left:calc(100% - 50px); top:0px;} */
+
 }
 .chat .quote
 {
@@ -149,4 +192,15 @@
   margin-left: 0;
   position: relative;
   top: 2px;
+}
+.chat .audio ,
+.chat .controllers
+{
+  display: block;
+  width: 100%;
+}
+.chat .controllers
+{
+  display: flex;
+  flex-direction: row;
 }
