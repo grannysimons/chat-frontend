@@ -64,7 +64,8 @@ export default class Chat extends Component {
     let email = this.props.match.params.email; //destinatari
     let message = this.state.message;
     if (message !== "") {
-      chat.newMessage(email, message).then(newMessage => {
+      chat.newMessage(email, message, false)
+      .then(newMessage => {
         var messageList = this.state.messageList;
         messageList.push(newMessage.data);
         document.querySelector("#name").value = "";
@@ -190,7 +191,19 @@ export default class Chat extends Component {
 
   _onRecordingComplete = (blob) => {
     console.log('recording', blob)
-    Microphone.sendData(blob, 'aaaaaudio');
+    
+    let email = this.props.match.params.email; //destinatari
+    let message = '';
+    chat.newMessage(email, message, true)
+    .then(newMessage => {
+      console.log('newMessage: ', newMessage.data._id);
+      var messageList = this.state.messageList;
+      messageList.push(newMessage.data);
+      document.querySelector("#name").value = "";
+      
+      Microphone.sendData(blob, newMessage.data._id);
+        this.setState({ messageList, message: "" });
+      });
   }
  
   _onRecordingError = (err) => {
@@ -200,8 +213,6 @@ export default class Chat extends Component {
   render() {
     return (
       <div>
-        {/* <video></video> */}
-
         <div className="chat">
           <div className="name">
             <strong>
@@ -241,13 +252,14 @@ export default class Chat extends Component {
           </div>
           <div className="messages">
             {this.state.messageList.map((message, index) => {
-              let side =
-                message.user === this.props.user._id ? "right" : "left";
-              let searchResult =
-                message.searchResult === true ? " searchResult" : "";
+              let side = message.user === this.props.user._id ? "right" : "left";
+              let searchResult = message.searchResult === true ? " searchResult" : "";
               side += " message" + searchResult;
               return (
                 <div className={side} key={index}>
+                  {/* {
+                    message.
+                  } */}
                   {message.text}
                   <div>
                     <small>{helper.dateChatFormat(message.time)}</small>
@@ -266,10 +278,6 @@ export default class Chat extends Component {
             {/* <div className="audio">
               <audio id="recordedAudio" />
             </div> */}
-            {/* <Recorder
-              onRecordingComplete={this._onRecordingComplete}
-              onRecordingError={this._onRecordingError}
-            /> */}
             <div className="controllers">
               <Link to="/chats" className="back-button">
                 <i className="fas fa-chevron-left" />

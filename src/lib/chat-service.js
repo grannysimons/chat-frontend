@@ -29,9 +29,9 @@ class Chat {
     return this.chat.post('/' + email);
   }
 
-  newMessage(email, message) {
+  newMessage(email, message, isAudio) {
     let path = '/' + email + '/send';
-    return this.chat.post(path, {message});
+    return this.chat.post(path, {message, isAudio});
   }
   deleteUser (idUser) {
     return this.chat.post(`/delete/${idUser}`);
