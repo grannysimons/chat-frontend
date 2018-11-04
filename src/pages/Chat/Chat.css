@@ -23,6 +23,7 @@
   position: fixed;
   top: 0;
   width: 100%;
+  z-index:10;
 }
 /* messages */
 .chat .messages
@@ -202,12 +203,13 @@
 .chat .audio
 {
   text-align: center;
-  position: absolute;
-  bottom: 13px;
+  /* position: absolute;
+  bottom: 13px; */
+  height: 100px;
 }
 .chat .audio #recordedAudio
 {
-  background-color: transparent;
+  background-color: red;
 }
 .chat .controllers
 {

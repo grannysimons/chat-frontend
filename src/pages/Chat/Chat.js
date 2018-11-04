@@ -22,7 +22,6 @@ export default class Chat extends Component {
       for (let i = 0; i < messages.length; i++) {
         messageList.push(messages[i]);
       }
-      // document.querySelector("#name").value = "";
       this.setState({
         messageList,
         message: "",
@@ -35,11 +34,8 @@ export default class Chat extends Component {
   };
 
   componentDidMount = () => {
-    // document.addEventListener('load', this.accessMic);
     this.getMessages();
-    // this.initSocket();
     socketManagerClient.initSocketUser(this.props.user._id);
-    // socketManagerClient.initSocketFile();
     let socket = socketManagerClient.getSocket();
     socket.on(MESSAGE_RECEIVED, fromUserId => {
       this.getMessages();
@@ -257,10 +253,15 @@ export default class Chat extends Component {
               side += " message" + searchResult;
               return (
                 <div className={side} key={index}>
-                  {/* {
-                    message.
-                  } */}
-                  {message.text}
+                  {
+                    message.isAudio ? 
+                    // <audio src="http://developer.mozilla.org/@api/deki/files/2926/=AudioTest_(1).ogg" controls>
+                    <audio src={'http://localhost:3010/audios/' + message._id + '.wav'} controls>
+                       Your browser does not support the <code>audio</code> element.
+                    </audio>
+                    : message.text
+                  }
+                  {/* {message.text} */}
                   <div>
                     <small>{helper.dateChatFormat(message.time)}</small>
                   </div>
