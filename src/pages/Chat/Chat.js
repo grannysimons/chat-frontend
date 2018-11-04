@@ -4,21 +4,16 @@ import { Link } from "react-router-dom";
 import chat from "../../lib/chat-service";
 import helper from "../../helpers";
 import socketManagerClient from "../../socketManagerClient";
-import { MESSAGE_RECEIVED } from "../../Events";
+import { MESSAGE_RECEIVED, TYPING, STOPPED_TYPING } from "../../Events";
 import Microphone from "../../Microphone";
-
-// import io from 'socket.io-client';
-// import ReactDOM from 'react-dom';
-
-// const socketURL = 'http://localhost:3010';
-// const socket = io(socketURL);
+import Recorder from 'react-mp3-recorder';
 
 export default class Chat extends Component {
   state = {
     message: "",
     messageList: [],
-    interlocutor: ""
-    // socket: null,
+    interlocutor: "",
+    typing: false,
   };
   getMessages = () => {
     chat.getMessages(this.props.match.params.email).then(receivedMessages => {
@@ -27,7 +22,7 @@ export default class Chat extends Component {
       for (let i = 0; i < messages.length; i++) {
         messageList.push(messages[i]);
       }
-      document.querySelector("#name").value = "";
+      // document.querySelector("#name").value = "";
       this.setState({
         messageList,
         message: "",
@@ -44,9 +39,18 @@ export default class Chat extends Component {
     this.getMessages();
     // this.initSocket();
     socketManagerClient.initSocketUser(this.props.user._id);
+    // socketManagerClient.initSocketFile();
     let socket = socketManagerClient.getSocket();
     socket.on(MESSAGE_RECEIVED, fromUserId => {
       this.getMessages();
+    });
+    socket.on(TYPING, fromUserId => {
+      console.log('typing!!!');
+      this.setState({ typing: true });
+    });
+    socket.on(STOPPED_TYPING, fromUserId => {
+      console.log('stopped typing!!!');
+      this.setState({ typing: false });
     });
   };
 
@@ -72,7 +76,14 @@ export default class Chat extends Component {
   handleOnChange = e => {
     this.setState({ message: e.target.value });
   };
-  handleOnBlur = () => {};
+  handleOnFocus = e => {
+    let email = this.props.match.params.email;  //destinatari
+    chat.typing(email);
+  };
+  handleOnBlur = () => {
+    let email = this.props.match.params.email;  //destinatari
+    chat.stoppedTyping(email);
+  };
 
   deleteResultClasses = () => {
     let results = document.querySelectorAll(".searchResult");
@@ -163,22 +174,29 @@ export default class Chat extends Component {
     document.getElementById("intoView").scrollIntoView({ behavior: "smooth" });
   };
   handleRecording = () => {
-    if (
-      document.querySelector(".chat .send-form .recording").style.display !==
-      "block"
-    ) {
-      document.querySelector(".chat .send-form .recording").style.display =
-        "block";
+    if (document.querySelector(".chat .send-form .recording").style.display !== "block") 
+    {
+      document.querySelector(".chat .send-form .recording").style.display = "block";
       Microphone.getAudio();
     }
     console.log("handleRecording");
   };
   handleStopRecording = () => {
-    document.querySelector(".chat .send-form .recording").style.display =
-      "none";
+    document.querySelector(".chat .send-form .recording").style.display = "none";
     Microphone.stop();
+    Microphone.getRecordedAudio();
     console.log("handleStopRecording");
   };
+
+  _onRecordingComplete = (blob) => {
+    console.log('recording', blob)
+    Microphone.sendData(blob, 'aaaaaudio');
+  }
+ 
+  _onRecordingError = (err) => {
+    console.log('recording error', err)
+  }
+
   render() {
     return (
       <div>
@@ -240,35 +258,54 @@ export default class Chat extends Component {
           </div>
           <div id="intoView" />
           <div className="send-form">
-            <div className="audio">
+          <div className="typing">
+          {
+            this.state.typing ? <div className="typingAnimation"><div className="ball ball1"></div><div className="ball ball2"></div><div className="ball ball3"></div></div> : ''
+          }
+          </div>
+            {/* <div className="audio">
               <audio id="recordedAudio" />
-            </div>
+            </div> */}
+            {/* <Recorder
+              onRecordingComplete={this._onRecordingComplete}
+              onRecordingError={this._onRecordingError}
+            /> */}
             <div className="controllers">
               <Link to="/chats" className="back-button">
                 <i className="fas fa-chevron-left" />
               </Link>
-              <form onSubmit={this.handleNewMessage} action="">
+              <form onSubmit={this.handleNewMessage} action="" id="sendingMessages" encType="multipart/form-data">
                 <input
                   type="text"
                   name="message"
                   onChange={this.handleOnChange}
-                  onBlur={this.onBlur}
+                  onFocus={this.handleOnFocus}
+                  onBlur={this.handleOnBlur}
                   id="name"
                 />
-                <button
+                {/* <input type="file" class="form-control-file form-control-sm" id="audioMessage" accept="" name="audioMessage" hidden='true'></input> */}
+                {/* <button
                   className="record"
                   onMouseDown={this.handleRecording}
                   onMouseUp={this.handleStopRecording}
                 >
                   <i className="fas fa-microphone-alt" />
-                </button>
-                <div className="recording">
+                </button> */}
+                <Recorder
+              onRecordingComplete={this._onRecordingComplete}
+              onRecordingError={this._onRecordingError}
+            />
+                {/* <div className="recording">
                   <div className="bar-moving" />
-                </div>
+                </div> */}
                 <button className="send-button">
                   <i className="fas fa-chevron-circle-right" />
                 </button>
               </form>
+              {/* <form encType="multipart/form-data" method="post" name="fileinfo">
+                <input type="file" name="file" required />
+                <input type="submit" value="Stash the file!" />
+              </form> */}
             </div>
           </div>
         </div>

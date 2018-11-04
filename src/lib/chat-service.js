@@ -36,6 +36,35 @@ class Chat {
   deleteUser (idUser) {
     return this.chat.post(`/delete/${idUser}`);
   }
+  typing (mail) {
+    return this.chat.post(`/typing/${mail}`);
+  }
+  stoppedTyping (mail) {
+    return this.chat.post(`/stoppedTyping/${mail}`);
+  }
+  sendAudio(data, fileName) {
+    // return this.chat.post(`/sendAudio`, { data, headers: 'Content-Type: multipart/form-data' });
+    return axios({
+      method: 'POST',
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      },
+      url: 'http://localhost:3010/chat/sendAudio',
+      params: {
+        audioFile: data,
+      }
+    })
+
+
+
+    // return this.chat.post({
+    //   url:'http://localhost:3010/chat/sendAudio', 
+    //   data: { data },  
+    //   headers: {
+    //     'Content-Type': 'multipart/form-data'
+    //   }
+    // });
+  }
   // getUser(email) {
   //   return this.chat.post('/getUser/' + email)
   // }
