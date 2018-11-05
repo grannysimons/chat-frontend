@@ -1,4 +1,4 @@
-import chat from "./lib/chat-service";
+// import chat from "./lib/chat-service";
 const apiURL = 'http://localhost:3010/chat';
 
 class Microphone {

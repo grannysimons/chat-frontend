@@ -12,8 +12,11 @@
     "react-mp3-recorder": "^1.1.2",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.0.4",
+    "simple-speech-recognition": "^1.0.3",
     "socket.io-client": "^2.1.1",
-    "styled-components": "^4.0.2"
+    "speech-to-text": "^0.7.4",
+    "styled-components": "^4.0.2",
+    "voice-speech-recognition": "^1.1.1"
   },
   "scripts": {
     "start": "react-scripts start",

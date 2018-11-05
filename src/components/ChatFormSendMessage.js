@@ -14,8 +14,8 @@ export default class ChatFormSendMessage extends Component {
           id="name"
         />
         <Recorder
-          onRecordingComplete={this.props._onRecordingComplete}
-          onRecordingError={this.props._onRecordingError}
+          onRecordingComplete={this.props.onRecordingComplete}
+          onRecordingError={this.props.onRecordingError}
         />
         <button className="send-button">
           <i className="fas fa-chevron-circle-right" />

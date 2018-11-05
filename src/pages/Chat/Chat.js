@@ -9,6 +9,8 @@ import ChatHeader from "../../components/ChatHeader";
 import ChatContent from "../../components/ChatContent";
 import Typing from "../../components/Typing";
 import ChatFormSendMessage from "../../components/ChatFormSendMessage";
+// import AudioTranscriptor from "../../components/AudioTranscriptor";
+import AudioMessages from '../../components/AudioMessages';
 
 export default class Chat extends Component {
   state = {
@@ -165,7 +167,7 @@ export default class Chat extends Component {
     Microphone.getRecordedAudio();
   };
 
-  _onRecordingComplete = (blob) => {
+  onRecordingComplete = (blob) => {
     let email = this.props.match.params.email; //destinatari
     let message = '';
     chat.newMessage(email, message, true)
@@ -179,7 +181,7 @@ export default class Chat extends Component {
       });
   }
  
-  _onRecordingError = (err) => {
+  onRecordingError = (err) => {
   }
 
   render() {
@@ -189,7 +191,10 @@ export default class Chat extends Component {
           <ChatHeader handleSearchForm={this.handleSearchForm} handleSearchUp={this.handleSearchUp} handleSearchDown={this.handleSearchDown} interlocutor = {this.state.interlocutor} messageList = {this.state.messageList}/>
           <ChatContent messageList={this.state.messageList} user={this.props.user}/>
           <div id="intoView" />
-
+          {/* <AudioTranscriptor /> */}
+          {/* <AudioMessages 
+            onRecordingComplete={this.onRecordingComplete}
+            onRecordingError={this.onRecordingError}/> */}
           <div className="send-form">
             <Typing typing={this.state.typing} user={this.props.user}/>
             <div className="controllers">
@@ -201,8 +206,8 @@ export default class Chat extends Component {
                 handleOnChange={this.handleOnChange}
                 handleOnFocus={this.handleOnFocus}
                 handleOnBlur={this.handleOnBlur}
-                _onRecordingComplete={this._onRecordingComplete}
-                _onRecordingError={this._onRecordingError}
+                onRecordingComplete={this.onRecordingComplete}
+                onRecordingError={this.onRecordingError}
               />
             </div>
           </div>
