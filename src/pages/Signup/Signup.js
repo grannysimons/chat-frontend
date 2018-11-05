@@ -2,6 +2,7 @@ import React, { Component } from "react";
 // import { Link } from "react-router-dom";
 import auth from "../../lib/auth-service";
 import "./Signup.css";
+import logo from '../../images/logo-light.png';
 
 class Signup extends Component {
   state = {
@@ -30,27 +31,12 @@ class Signup extends Component {
   render() {
     const { email, password } = this.state;
     return (
-      // <div>
-      //   <form onSubmit={this.handleFormSubmit}>
-      //     <label>Email:</label>
-      //     <input type="text" name="email" value={email} onChange={this.handleChange}/>
-      //     <label>Password:</label>
-      //     <input type="password" name="password" value={password} onChange={this.handleChange} />
-      //     <input type="submit" value="Signup" />
-      //   </form>
-
-      //   <p>Already have account?
-      //     <Link to={"/login"}> Login</Link>
-      //   </p>
-
-      // </div>
-
       <div className="signup container-fluid">
         <div className="container-inner">
-          <h1>Signup</h1>
           <div className="logo">
-            <i className="fas fa-cat" />
+            <img src={logo} alt="txat app" />
           </div>
+          <h1>Signup</h1>
           <div className="form">
             <form onSubmit={this.handleFormSubmit}>
               <input

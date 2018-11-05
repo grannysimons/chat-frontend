@@ -7,6 +7,7 @@ import socketManagerClient from "../../socketManagerClient";
 import { MESSAGE_RECEIVED, TYPING, STOPPED_TYPING } from "../../Events";
 import Microphone from "../../Microphone";
 import Recorder from 'react-mp3-recorder';
+import ChatHeader from "../../components/ChatHeader";
 
 export default class Chat extends Component {
   state = {
@@ -41,11 +42,9 @@ export default class Chat extends Component {
       this.getMessages();
     });
     socket.on(TYPING, fromUserId => {
-      console.log('typing!!!');
       this.setState({ typing: true });
     });
     socket.on(STOPPED_TYPING, fromUserId => {
-      console.log('stopped typing!!!');
       this.setState({ typing: false });
     });
   };
@@ -129,14 +128,11 @@ export default class Chat extends Component {
         ? totalResults
         : (parseInt(currentResultIndex) + 1) % totalResults;
     document.querySelector(".numCoincidence").innerHTML = currentPosition;
-    // if(results > 0 )
-    // {
     results[currentResultIndex % totalResults].classList.add("currentResult");
     window.scrollTo({
       top: document.querySelector(".currentResult").offsetTop - 170,
       behavior: "smooth"
     });
-    // }
   };
   handleSearchUp = e => {
     if (e) e.preventDefault();
@@ -155,20 +151,11 @@ export default class Chat extends Component {
         ? totalResults
         : (parseInt(currentResultIndex) + 1) % totalResults;
     document.querySelector(".numCoincidence").innerHTML = currentPosition;
-    // if(results > 0 )
-    // {
     results[currentResultIndex % totalResults].classList.add("currentResult");
     window.scrollTo({
       top: document.querySelector(".currentResult").offsetTop - 170,
       behavior: "smooth"
     });
-    // }
-  };
-  handleCloseButton = () => {
-    this.deleteResultClasses();
-    document.querySelector(".search-form .results").style.display = "none";
-    document.querySelector(".search-form input").value = "";
-    document.getElementById("intoView").scrollIntoView({ behavior: "smooth" });
   };
   handleRecording = () => {
     if (document.querySelector(".chat .send-form .recording").style.display !== "block") 
@@ -176,23 +163,18 @@ export default class Chat extends Component {
       document.querySelector(".chat .send-form .recording").style.display = "block";
       Microphone.getAudio();
     }
-    console.log("handleRecording");
   };
   handleStopRecording = () => {
     document.querySelector(".chat .send-form .recording").style.display = "none";
     Microphone.stop();
     Microphone.getRecordedAudio();
-    console.log("handleStopRecording");
   };
 
   _onRecordingComplete = (blob) => {
-    console.log('recording', blob)
-    
     let email = this.props.match.params.email; //destinatari
     let message = '';
     chat.newMessage(email, message, true)
     .then(newMessage => {
-      console.log('newMessage: ', newMessage.data._id);
       var messageList = this.state.messageList;
       messageList.push(newMessage.data);
       document.querySelector("#name").value = "";
@@ -203,49 +185,13 @@ export default class Chat extends Component {
   }
  
   _onRecordingError = (err) => {
-    console.log('recording error', err)
   }
 
   render() {
     return (
       <div>
         <div className="chat">
-          <div className="name">
-            <strong>
-              {this.state.interlocutor.userName
-                ? this.state.interlocutor.userName
-                : this.state.interlocutor.email}
-            </strong>
-            <div className="quote">
-              <small>{this.state.interlocutor.quote}</small>
-            </div>
-            <form className="search-form" onSubmit={this.handleSearchForm}>
-              <input type="text" />
-              <button type="submit">
-                <i className="fas fa-search" />
-              </button>
-              <div className="results">
-                <button
-                  type="button"
-                  className="close-button"
-                  onClick={this.handleCloseButton}
-                >
-                  <i className="far fa-window-close" />
-                </button>
-                <span className="numCoincidence" />
-                <span className="textCoincidence"> of </span>
-                <span className="numberOfCoincidences" />
-                <span className="controller">
-                  <button type="button" onClick={this.handleSearchUp}>
-                    <i className="fas fa-sort-up" />
-                  </button>
-                  <button type="button" onClick={this.handleSearchDown}>
-                    <i className="fas fa-sort-down" />
-                  </button>
-                </span>
-              </div>
-            </form>
-          </div>
+          <ChatHeader handleSearchForm={this.handleSearchForm} handleSearchUp={this.handleSearchUp} handleSearchDown={this.handleSearchDown} interlocutor = {this.state.interlocutor} messageList = {this.state.messageList}/>
           <div className="messages">
             {this.state.messageList.map((message, index) => {
               let side = message.user === this.props.user._id ? "right" : "left";
@@ -255,13 +201,11 @@ export default class Chat extends Component {
                 <div className={side} key={index}>
                   {
                     message.isAudio ? 
-                    // <audio src="http://developer.mozilla.org/@api/deki/files/2926/=AudioTest_(1).ogg" controls>
                     <audio src={'http://localhost:3010/audios/' + message._id + '.wav'} controls>
                        Your browser does not support the <code>audio</code> element.
                     </audio>
                     : message.text
                   }
-                  {/* {message.text} */}
                   <div>
                     <small>{helper.dateChatFormat(message.time)}</small>
                   </div>
@@ -271,14 +215,11 @@ export default class Chat extends Component {
           </div>
           <div id="intoView" />
           <div className="send-form">
-          <div className="typing">
-          {
-            this.state.typing ? <div className="typingAnimation"><div className="ball ball1"></div><div className="ball ball2"></div><div className="ball ball3"></div></div> : ''
-          }
-          </div>
-            {/* <div className="audio">
-              <audio id="recordedAudio" />
-            </div> */}
+            <div className="typing">
+            {
+              this.state.typing ? <div className="typingAnimation"><div className="ball ball1"></div><div className="ball ball2"></div><div className="ball ball3"></div></div> : ''
+            }
+            </div>
             <div className="controllers">
               <Link to="/chats" className="back-button">
                 <i className="fas fa-chevron-left" />
@@ -292,29 +233,14 @@ export default class Chat extends Component {
                   onBlur={this.handleOnBlur}
                   id="name"
                 />
-                {/* <input type="file" class="form-control-file form-control-sm" id="audioMessage" accept="" name="audioMessage" hidden='true'></input> */}
-                {/* <button
-                  className="record"
-                  onMouseDown={this.handleRecording}
-                  onMouseUp={this.handleStopRecording}
-                >
-                  <i className="fas fa-microphone-alt" />
-                </button> */}
                 <Recorder
               onRecordingComplete={this._onRecordingComplete}
               onRecordingError={this._onRecordingError}
             />
-                {/* <div className="recording">
-                  <div className="bar-moving" />
-                </div> */}
                 <button className="send-button">
                   <i className="fas fa-chevron-circle-right" />
                 </button>
               </form>
-              {/* <form encType="multipart/form-data" method="post" name="fileinfo">
-                <input type="file" name="file" required />
-                <input type="submit" value="Stash the file!" />
-              </form> */}
             </div>
           </div>
         </div>

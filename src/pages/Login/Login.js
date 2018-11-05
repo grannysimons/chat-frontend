@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import auth from "../../lib/auth-service";
 import "./Login.css";
+import logo from '../../images/logo-light.png';
 
 class Login extends Component {
   state = {
@@ -33,10 +34,11 @@ class Login extends Component {
     return (
       <div className="login">
         <div className="container-inner">
-          <h1>Login</h1>
           <div className="logo">
-            <i className="fas fa-cat" />
+            {/* <i className="fas fa-cat" /> */}
+            <img src={logo} alt="txat app" />
           </div>
+          <h1>Login</h1>
           <div className="form">
             <form onSubmit={this.handleFormSubmit}>
               <input
