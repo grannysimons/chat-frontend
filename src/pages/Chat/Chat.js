@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import "./Chat.css";
 import { Link } from "react-router-dom";
 import chat from "../../lib/chat-service";
-import helper from "../../helpers";
 import socketManagerClient from "../../socketManagerClient";
-import { MESSAGE_RECEIVED, TYPING, STOPPED_TYPING } from "../../Events";
+import { MESSAGE_RECEIVED } from "../../Events";
 import Microphone from "../../Microphone";
-import Recorder from 'react-mp3-recorder';
 import ChatHeader from "../../components/ChatHeader";
+import ChatContent from "../../components/ChatContent";
+import Typing from "../../components/Typing";
+import ChatFormSendMessage from "../../components/ChatFormSendMessage";
 
 export default class Chat extends Component {
   state = {
@@ -40,12 +41,6 @@ export default class Chat extends Component {
     let socket = socketManagerClient.getSocket();
     socket.on(MESSAGE_RECEIVED, fromUserId => {
       this.getMessages();
-    });
-    socket.on(TYPING, fromUserId => {
-      this.setState({ typing: true });
-    });
-    socket.on(STOPPED_TYPING, fromUserId => {
-      this.setState({ typing: false });
     });
   };
 
@@ -192,55 +187,23 @@ export default class Chat extends Component {
       <div>
         <div className="chat">
           <ChatHeader handleSearchForm={this.handleSearchForm} handleSearchUp={this.handleSearchUp} handleSearchDown={this.handleSearchDown} interlocutor = {this.state.interlocutor} messageList = {this.state.messageList}/>
-          <div className="messages">
-            {this.state.messageList.map((message, index) => {
-              let side = message.user === this.props.user._id ? "right" : "left";
-              let searchResult = message.searchResult === true ? " searchResult" : "";
-              side += " message" + searchResult;
-              return (
-                <div className={side} key={index}>
-                  {
-                    message.isAudio ? 
-                    <audio src={'http://localhost:3010/audios/' + message._id + '.wav'} controls>
-                       Your browser does not support the <code>audio</code> element.
-                    </audio>
-                    : message.text
-                  }
-                  <div>
-                    <small>{helper.dateChatFormat(message.time)}</small>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+          <ChatContent messageList={this.state.messageList} user={this.props.user}/>
           <div id="intoView" />
+
           <div className="send-form">
-            <div className="typing">
-            {
-              this.state.typing ? <div className="typingAnimation"><div className="ball ball1"></div><div className="ball ball2"></div><div className="ball ball3"></div></div> : ''
-            }
-            </div>
+            <Typing typing={this.state.typing} user={this.props.user}/>
             <div className="controllers">
               <Link to="/chats" className="back-button">
                 <i className="fas fa-chevron-left" />
               </Link>
-              <form onSubmit={this.handleNewMessage} action="" id="sendingMessages" encType="multipart/form-data">
-                <input
-                  type="text"
-                  name="message"
-                  onChange={this.handleOnChange}
-                  onFocus={this.handleOnFocus}
-                  onBlur={this.handleOnBlur}
-                  id="name"
-                />
-                <Recorder
-              onRecordingComplete={this._onRecordingComplete}
-              onRecordingError={this._onRecordingError}
-            />
-                <button className="send-button">
-                  <i className="fas fa-chevron-circle-right" />
-                </button>
-              </form>
+              <ChatFormSendMessage 
+                handleNewMessage={this.handleNewMessage}
+                handleOnChange={this.handleOnChange}
+                handleOnFocus={this.handleOnFocus}
+                handleOnBlur={this.handleOnBlur}
+                _onRecordingComplete={this._onRecordingComplete}
+                _onRecordingError={this._onRecordingError}
+              />
             </div>
           </div>
         </div>

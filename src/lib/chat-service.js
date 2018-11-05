@@ -43,7 +43,6 @@ class Chat {
     return this.chat.post(`/stoppedTyping/${mail}`);
   }
   sendAudio(data, fileName) {
-    // return this.chat.post(`/sendAudio`, { data, headers: 'Content-Type: multipart/form-data' });
     return axios({
       method: 'POST',
       headers: {
@@ -54,41 +53,7 @@ class Chat {
         audioFile: data,
       }
     })
-
-
-
-    // return this.chat.post({
-    //   url:'http://localhost:3010/chat/sendAudio', 
-    //   data: { data },  
-    //   headers: {
-    //     'Content-Type': 'multipart/form-data'
-    //   }
-    // });
   }
-  // getUser(email) {
-  //   return this.chat.post('/getUser/' + email)
-  // }
-  // signup(user) {
-  //   const { email, password } = user;
-  //   return this.auth.post('/signup', {email, password})
-  //     .then(({ data }) => data);
-  // }
-
-  // login(user) {
-  //   const { email, password } = user;
-  //   return this.auth.post('/login', {email, password})
-  //     .then(({ data }) => data);
-  // }
-
-  // logout() {
-  //   return this.auth.post('/logout', {})
-  //     .then(response => response.data)
-  // }
-
-  // me(user) {
-  //   return this.auth.get('/me')
-  //   .then(response => response.data)
-  // }
 }
 
 const chat = new Chat();
