@@ -10,8 +10,8 @@ import ChatContent from "../../components/ChatContent";
 import Typing from "../../components/Typing";
 import ChatFormSendMessage from "../../components/ChatFormSendMessage";
 // import AudioTranscriptor from "../../components/AudioTranscriptor";
-import AudioMessages from '../../components/AudioMessages';
-import AudioPlayer from "../../components/AudioPlayer";
+// import AudioMessages from '../../components/AudioMessages';
+// import AudioPlayer from "../../components/AudioPlayer";
 
 export default class Chat extends Component {
   state = {
@@ -207,14 +207,13 @@ export default class Chat extends Component {
           <ChatHeader handleSearchForm={this.handleSearchForm} handleSearchUp={this.handleSearchUp} handleSearchDown={this.handleSearchDown} interlocutor = {this.state.interlocutor} messageList = {this.state.messageList}/>
           <ChatContent messageList={this.state.messageList} user={this.props.user}/>
           <div id="intoView" />
-          {/* <AudioTranscriptor /> */}
-          <AudioMessages 
+          {/* <AudioMessages 
             onRecordingComplete={this.onRecordingComplete}
             onRecordingError={this.onRecordingError}
             onTranscriptionResultCallback={this.resultCallback}
             onTranscriptionResetCallback={this.resetCallback}
             sendMessage={this.sendMessage}
-            />
+            /> */}
           <div className="send-form">
             <Typing typing={this.state.typing} user={this.props.user}/>
             <div className="controllers">
@@ -228,6 +227,9 @@ export default class Chat extends Component {
                 handleOnBlur={this.handleOnBlur}
                 onRecordingComplete={this.onRecordingComplete}
                 onRecordingError={this.onRecordingError}
+                onTranscriptionResultCallback={this.resultCallback}
+                onTranscriptionResetCallback={this.resetCallback}
+                sendMessage={this.sendMessage}
               />
             </div>
           </div>

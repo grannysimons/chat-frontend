@@ -5,8 +5,8 @@ import Recorder from 'react-mp3-recorder';
 import SpeechRecognizer from 'simple-speech-recognition';
 
 const style={
-  position: 'fixed',
-  top: '300px',
+  // position: 'fixed',
+  // top: '300px',
 }
 
 export default class AudioMessages extends Component {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Recorder from 'react-mp3-recorder';
+// import Recorder from 'react-mp3-recorder';
+import AudioMessages from './AudioMessages';
 
 export default class ChatFormSendMessage extends Component {
   render() {
@@ -13,10 +14,17 @@ export default class ChatFormSendMessage extends Component {
           onBlur={this.props.handleOnBlur}
           id="name"
         />
-        <Recorder
+        {/* <Recorder
           onRecordingComplete={this.props.onRecordingComplete}
           onRecordingError={this.props.onRecordingError}
-        />
+        /> */}
+        <AudioMessages 
+            onRecordingComplete={this.props.onRecordingComplete}
+            onRecordingError={this.props.onRecordingError}
+            onTranscriptionResultCallback={this.props.resultCallback}
+            onTranscriptionResetCallback={this.props.resetCallback}
+            sendMessage={this.props.sendMessage}
+            />
         <button className="send-button">
           <i className="fas fa-chevron-circle-right" />
         </button>
