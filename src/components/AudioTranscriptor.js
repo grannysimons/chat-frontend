@@ -20,17 +20,22 @@ export default class AudioTranscriptor extends Component {
     }
     this.speechRecognizer = new SpeechRecognizer(options)
   }
-  resetCallback = () => {}
-  resultCallback = ({ transcript, finished }) => console.log(transcript);
+  resetCallback = () => {
+    this.props.resetCallback();
+  }
+  resultCallback = ({ transcript, finished }) => {
+    console.log(transcript)
+    this.props.resultCallback({ transcript, finished });
+  };
   start = () => {
-    console.log('start');
+    // console.log('start');
     this.speechRecognizer.start()
   }
   render() {
     return (
       <div className="transcriptorButtons" style={style}>
         <button type="button" onClick={this.start}>Start</button>
-        <button type="button" onClick={this.stop}>Stop</button>
+        {/* <button type="button" onClick={this.stop}>Stop</button> */}
         {/* <button type="button" onClick={this.abort}>Abort</button>
         <button type="button" onClick={this.reset}>Reset</button> */}
       </div>

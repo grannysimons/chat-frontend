@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import helper from "../helpers";
+import AudioPlayer from './AudioPlayer';
 
 export default class ChatContent extends Component {
   render() {
@@ -13,9 +14,10 @@ export default class ChatContent extends Component {
             <div className={side} key={index}>
               {
                 message.isAudio ? 
-                <audio src={'http://localhost:3010/audios/' + message._id + '.wav'} controls>
-                    Your browser does not support the <code>audio</code> element.
-                </audio>
+                // <audio src={'http://localhost:3010/audios/' + message._id + '.wav'} controls>
+                //     Your browser does not support the <code>audio</code> element.
+                // </audio>
+                <AudioPlayer uniqueNumber={index} src={'http://localhost:3010/audios/' + message._id + '.wav'}/>
                 : message.text
               }
               <div>

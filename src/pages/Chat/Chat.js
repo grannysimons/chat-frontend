@@ -11,6 +11,7 @@ import Typing from "../../components/Typing";
 import ChatFormSendMessage from "../../components/ChatFormSendMessage";
 // import AudioTranscriptor from "../../components/AudioTranscriptor";
 import AudioMessages from '../../components/AudioMessages';
+import AudioPlayer from "../../components/AudioPlayer";
 
 export default class Chat extends Component {
   state = {
@@ -167,9 +168,27 @@ export default class Chat extends Component {
     Microphone.getRecordedAudio();
   };
 
-  onRecordingComplete = (blob) => {
+  // onRecordingComplete = (blob) => {
+  //   let email = this.props.match.params.email; //destinatari
+  //   let message = '';
+  //   chat.newMessage(email, message, true)
+  //   .then(newMessage => {
+  //     var messageList = this.state.messageList;
+  //     messageList.push(newMessage.data);
+  //     document.querySelector("#name").value = "";
+      
+  //     Microphone.sendData(blob, newMessage.data._id);
+  //       this.setState({ messageList, message: "" });
+  //     });
+  // }
+ 
+  // onRecordingError = (err) => {
+  // }
+
+  sendMessage = (blob, message) => {
+    console.log('sendMessage blob: ', blob);
+    console.log('sendMessage message: ', message);
     let email = this.props.match.params.email; //destinatari
-    let message = '';
     chat.newMessage(email, message, true)
     .then(newMessage => {
       var messageList = this.state.messageList;
@@ -177,11 +196,8 @@ export default class Chat extends Component {
       document.querySelector("#name").value = "";
       
       Microphone.sendData(blob, newMessage.data._id);
-        this.setState({ messageList, message: "" });
-      });
-  }
- 
-  onRecordingError = (err) => {
+      this.setState({ messageList, message: "" });
+    });
   }
 
   render() {
@@ -192,9 +208,13 @@ export default class Chat extends Component {
           <ChatContent messageList={this.state.messageList} user={this.props.user}/>
           <div id="intoView" />
           {/* <AudioTranscriptor /> */}
-          {/* <AudioMessages 
+          <AudioMessages 
             onRecordingComplete={this.onRecordingComplete}
-            onRecordingError={this.onRecordingError}/> */}
+            onRecordingError={this.onRecordingError}
+            onTranscriptionResultCallback={this.resultCallback}
+            onTranscriptionResetCallback={this.resetCallback}
+            sendMessage={this.sendMessage}
+            />
           <div className="send-form">
             <Typing typing={this.state.typing} user={this.props.user}/>
             <div className="controllers">
