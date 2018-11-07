@@ -1,16 +1,17 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import Recorder from 'react-mp3-recorder';
 // import chat from "../lib/chat-service";
 // import Microphone from "../Microphone";
 import SpeechRecognizer from 'simple-speech-recognition';
 
 const style={
-  // position: 'fixed',
-  // top: '300px',
+  marginLeft: '10px',
 }
 
 export default class AudioMessages extends Component {
   componentDidMount = () => {
+    this.isChrome = !!window.chrome && !!window.chrome.webstore;
+    if(!this.isChrome) return;
     const options = {
       SpeechRecognition: window.SpeechRecognition || window.webkitSpeechRecognition,
       timeout: 1000, // The timeout until a speech recognition is completed (after the user has spoken their last word)
@@ -29,22 +30,21 @@ export default class AudioMessages extends Component {
     console.log('resetCallback');
   }
   resultCallback = ({ transcript, finished }) => {
-    console.log('resultCallback: ', transcript);
-    console.log('finished: ', finished);
+    console.log('text transcrit: ', transcript);
     this.message = transcript;
     this.props.sendMessage(this.blob, this.message);
   };
 
   clickRecorder = () => {
-    console.log('inici');
+    if(!this.isChrome) return;
     this.speechRecognizer.start();
   }
   onRecordingComplete = (blob) => {
-    console.log('onRecordingComplete');
     this.blob = blob;
     this.props.sendMessage(this.blob, this.message);
   }
   checkProcessFinished = () => {
+    console.log('checkProcessFinished');
     if(!this.blob || !this.message) return;
     this.props.sendMessage(this.blob, this.message);
     this.blob = '';
@@ -55,9 +55,9 @@ export default class AudioMessages extends Component {
   }
   render() {
     return (
-      <Fragment>
+      <div className="recorder" style={style}>
         <Recorder onClick={this.clickRecorder} style={style} onRecordingComplete={this.onRecordingComplete} onRecordingError={this.props.onRecordingError}/>
-      </Fragment>
+      </div>
     )
   }
 }

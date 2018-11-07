@@ -14,10 +14,6 @@ export default class ChatFormSendMessage extends Component {
           onBlur={this.props.handleOnBlur}
           id="name"
         />
-        {/* <Recorder
-          onRecordingComplete={this.props.onRecordingComplete}
-          onRecordingError={this.props.onRecordingError}
-        /> */}
         <AudioMessages 
             onRecordingComplete={this.props.onRecordingComplete}
             onRecordingError={this.props.onRecordingError}

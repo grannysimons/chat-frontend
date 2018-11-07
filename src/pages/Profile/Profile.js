@@ -95,14 +95,6 @@ export default class Profile extends Component {
     .then(data => {
       this.props.setUser(data);
     })
-
-    // let pressedButton = {
-    //   name: false,
-    //   email: false,
-    //   password: false,
-    //   quote: false,
-    // }
-    // this.setState({ pressedButton });
   }
   printField = (field) => {
     let pressedButton = this.state.pressedButton;

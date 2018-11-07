@@ -14,10 +14,7 @@ export default class ChatContent extends Component {
             <div className={side} key={index}>
               {
                 message.isAudio ? 
-                // <audio src={'http://localhost:3010/audios/' + message._id + '.wav'} controls>
-                //     Your browser does not support the <code>audio</code> element.
-                // </audio>
-                <AudioPlayer uniqueNumber={index} src={'http://localhost:3010/audios/' + message._id + '.wav'}/>
+                <AudioPlayer uniqueNumber={index} src={'http://localhost:3010/audios/' + message._id + '.wav'} transcriptionText={message.text}/>
                 : message.text
               }
               <div>

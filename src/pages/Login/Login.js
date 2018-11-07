@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import auth from "../../lib/auth-service";
 import "./Login.css";
-import logo from '../../images/logo-light.png';
+import logo from '../../images/logo.png';
 
 class Login extends Component {
   state = {

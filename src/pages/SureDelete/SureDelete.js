@@ -11,14 +11,61 @@ export default class SureDelete extends Component {
     e.preventDefault();
     document.querySelector(".byebyecontainer").style.display = "block";
     setTimeout(()=>{
-      chat.deleteUser(this.props.user._id)
+      chat.deleteMessages(this.props.user._id)
       .then(result => {
-        if(result.data.delete === 'ok')
+        if(result.data.deleteMessages=== 'ok')
         {
-          this.props.logout();
-          this.props.history.push('/login');
+          chat.deleteChats(this.props.user._id)
+          .then(result => {
+            if(result.data.deleteChats=== 'ok')
+            {
+              chat.deleteUser(this.props.user._id)
+              .then(result => {
+                if(result.data.deleteUser=== 'ok')
+                {
+                  this.props.logout();
+                  this.props.history.push('/login');
+                }
+                else
+                {
+                  console.log('error deleting user');
+                }
+              })
+            }
+            else
+            {
+              console.log('error deleting chats');
+            }
+          })
+        }
+        else
+        {
+          console.log('error deleting messages');
         }
       })
+      .catch(error => {
+        console.log('there was an error deleting user ', error);
+        this.props.history.push("/profile");
+      });
+
+
+      // chat.deleteUser(this.props.user._id)
+      // .then(result => {
+      //   if(result.data.deleteUser === 'ok')
+      //   {
+      //     chat.deleteChats(this.props.user._id)
+      //     .then(result => {
+      //       chat.deleteMessages(this.props.user._id)
+      //       .then(result => {
+      //         this.props.logout();
+      //         this.props.history.push('/login');
+      //       })
+      //       .catch(error => {
+      //         console.log('error deleting user: ', error);
+      //       })
+      //     })
+      //   }
+      // })
     }, 2000);
   };
   render() {

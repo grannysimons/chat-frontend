@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 
 const style={
-  AudioPlayer: {
+  AudioPlayerInner: {
     padding: '10px',
     display: 'flex',
     flexDirection: 'row',
-    color: 'gray',
+    // color: 'gray',
     minWidth: '200px',
-    backgroundColor: 'rgba(30,30,30, 0.4)',
-    borderRadius: '3px',
+    // backgroundColor: 'rgba(30,30,30, 0.4)',
+    borderRadius: '0px',
+    color: '#333333',
+    border: '3px solid #333333',
+    backgroundColor: 'rgba(254, 210, 43, 0.5)',
   },
   control: {
     width: '20px',
@@ -30,13 +33,13 @@ const style={
     height: '2px',
     position: 'relative',
     top: '6px',
-    backgroundColor: 'gray',
+    backgroundColor: '#dddddd',
     zIndex: '0',
   },
   spot: {
     width: '10px',
     height: '10px',
-    backgroundColor: 'black',
+    backgroundColor: '#333333',
     borderRadius: '50%',
     position: 'relative',
     left: '0',
@@ -50,6 +53,15 @@ const style={
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  transcription: {
+    fontSize: '12px',
+    backgroundColor: '#dedede',
+    color: '#999999',
+    border: '2px solid #999999',
+    marginTop: '5px',
+    marginBottom: '10px',
+    padding: '15px 30px',
   },
 }
 
@@ -66,7 +78,6 @@ export default class AudioPlayer extends Component {
     this.currentStep = 0;
 
     setTimeout(()=>{
-      console.log('Audiotag ', document.querySelector('#' + this.customId + ' .AudioTag').duration);
       let durationSeconds = new Date(document.querySelector('#' + this.customId + ' .AudioTag').duration);
       document.querySelector('#' + this.customId + ' .progress .timers .totalTime').innerHTML = this.getTimeFormat(durationSeconds);
       
@@ -76,15 +87,12 @@ export default class AudioPlayer extends Component {
     let hours = ('00' + Math.floor(timeInSeconds/2400)).toString().slice(-2);
     let minutes = ('00' + Math.floor((timeInSeconds - hours*2400)/60)).toString().slice(-2);
     let seconds = ('00' + (timeInSeconds - minutes*60)).toString().slice(-2);
-    console.log(hours,':',minutes,':',seconds);
     return hours==='00' ? (minutes+':'+seconds) : (hours+':'+minutes+':'+seconds);
   }
   startProgres = () => {
-      // this.currentTime += this.intervalTime;
       document.querySelector('#' + this.customId + ' .progress .timers .currentTime').innerHTML = this.getTimeFormat(Math.ceil(this.timeStep * this.currentStep/1000));
       this.currentStep ++;
       this.currentPosition += this.distanceStep; 
-      console.log('this.currentStep ', this.timeStep * this.currentStep/1000);
       
       if(this.currentStep >= this.numSteps)
       {
@@ -96,22 +104,6 @@ export default class AudioPlayer extends Component {
         this.currentStep = 0;
       }
       document.querySelector(`#${this.customId} .progress .spot`).style.left = this.currentPosition+'px';
-
-
-      // var spot = document.querySelector(`#${this.customId} .progress .spot`);
-      // this.currentTime = this.currentTime + this.intervalTime;
-      // if(this.currentTime >= this.audioTag.duration * 1000){
-      //   clearInterval(this.interval);
-      //   delete this.interval;
-      //   this.currentTime = 0;
-      //   this.currentPosition = 0;
-      //   spot.style.left = this.currentPosition+'px';
-      //   return;
-      // } 
-      // console.log('stepWidth ', this.stepWidth);
-      // console.log('offsetWidth ', document.querySelector('#' + this.customId + ' .line').offsetWidth);
-      // this.currentPosition += this.stepWidth; 
-      // spot.style.left = this.currentPosition+'px';
   }
   play = () => {
     this.audioTag = document.querySelector('#' + this.customId + ' .AudioTag');
@@ -136,21 +128,26 @@ export default class AudioPlayer extends Component {
   }
   render() {
     return (
-      <div className="AudioPlayer" id={'AudioPlayer'+this.props.uniqueNumber} style={style.AudioPlayer}>
-        <audio src={this.props.src} className="AudioTag" preload='metadata'>
-            Your browser does not support the <code>audio</code> element.
-        </audio>
-        <div className="control" style={style.control}>
-          <i className="fas fa-play play"></i>
-          <i className="fas fa-pause pause"></i>
-        </div>
-        <div className="progress" style={style.progress}>
-          <div className="line" style={style.line}></div>
-          <div className="spot" style={style.spot}></div>
-          <div className="timers" style={style.timers}>
-            <div className="currentTime" style={style.currentTime}>00:00</div>
-            <div className="totalTime" style={style.totalTime}>00:00</div>
+      <div className="AudioPlayer" id={'AudioPlayer'+this.props.uniqueNumber} >
+        <div className="AudioPlayer-inner" style={style.AudioPlayerInner}>
+          <audio src={this.props.src} className="AudioTag" preload='metadata'>
+              Your browser does not support the <code>audio</code> element.
+          </audio>
+          <div className="control" style={style.control}>
+            <i className="fas fa-play play"></i>
+            <i className="fas fa-pause pause"></i>
           </div>
+          <div className="progress" style={style.progress}>
+            <div className="line" style={style.line}></div>
+            <div className="spot" style={style.spot}></div>
+            <div className="timers" style={style.timers}>
+              <div className="currentTime" style={style.currentTime}>00:00</div>
+              <div className="totalTime" style={style.totalTime}>00:00</div>
+            </div>
+          </div>
+        </div>
+        <div className="Transcription" style={style.transcription}>
+          {this.props.transcriptionText}
         </div>
       </div>
     )

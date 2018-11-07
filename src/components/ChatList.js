@@ -24,7 +24,7 @@ class ChatList extends Component {
       var chatArray = [];
       if(chats.data.chats)
       {
-        chats.data.chats.forEach(chatElement => {
+        chats.data.chats.forEach((chatElement) => {
           let user = chatElement.user1.email === this.props.user.email ? chatElement.user2 : chatElement.user1;
           let chatObject = {
             name: (user.idUser.userName ? user.idUser.userName : user.email),
@@ -33,7 +33,6 @@ class ChatList extends Component {
             email: user.email,
             idChat: chatElement._id,
           }
-
           chatArray.push(chatObject);
         });
       }

@@ -5,30 +5,34 @@
 }
 .profile
 {
-  font-family: 'Source Code Pro', monospace;
-  color: white;
+  /* font-family: 'IM Fell French Canon SC', monospace; */
+  font-family: 'Raleway', serif;
+  color: #333333;
 
-  background: #ff670f; /* Old browsers */
-  background: #ff670f; /* Old browsers */
-  background: -moz-linear-gradient(-45deg, #ff670f 0%, #2c617a 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(-45deg, #ff670f 0%,#2c617a 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(135deg, #ff670f 0%,#2c617a 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff670f', endColorstr='#2c617a',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  background: #ffffff; /* Old browsers */
+  background: -moz-linear-gradient(-45deg, #ffffff 0%, #ffffff 69%, #fed22b 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(-45deg, #ffffff 0%,#ffffff 69%,#fed22b 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg, #ffffff 0%,#ffffff 69%,#fed22b 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#fed22b',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
   height: 100vh;
+  width: 100%;
 }
 .profile .container-inner
 {
-  height: 100%;
   text-align: center;
-  padding: 15% 0;
-  width: 60%;
+  padding: 70px 0;
+  padding-top: 30px;
+  min-width: 300px;
+  max-width: 700px;
+  width: 70%;
   margin: auto;
   box-sizing: border-box;
 }
 .profile .container-inner h1
 {
-  font-size: 40px;
-  margin-bottom: 20%;
+  font-size: 50px;
+  margin: 80px 0 30px 0;
 }
 
 .profile .container-inner input,
@@ -39,9 +43,9 @@
   margin: 10px auto;
   width: 100%;
   box-sizing: border-box;
-  background-color: rgba(255,255,255,0.2);
+  background-color: rgba(100,100,100,0.1);
   border-width: 0;
-  color: #dedede;
+  color: #888888;
 }
 .profile .container-inner p
 {
@@ -56,7 +60,7 @@
   margin-top: 20px;
   position: relative;
   left: 20px;
-  color: #d6d6d6;
+  color: #333333;
 }
 .profile .container-inner p.description
 {
@@ -66,11 +70,6 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-}
-.profile .container-inner p.description .value,
-.profile .container-inner p.description button
-{
-
 }
 .profile .container-inner p a,
 .profile .container-inner p a:hover
@@ -98,11 +97,12 @@
   border-width: 0;
   margin: 30px;
   color: red;
+  border: 1px solid #333333;
 }
 .profile .container-inner .user-data button
 {
   margin-left: 20px;
-  color: white;
+  color: #333333;
   background-color: transparent;
   border-width: 0px;
 }
@@ -112,8 +112,6 @@
   width: 50px;
   height: 50px;
   border-width: 0;
-  /* border-radius: 50%; */
-  /* margin: 0 10px; */
   background-color: transparent;
   position: absolute;
   bottom: 20px;
@@ -122,5 +120,5 @@
 .profile .back-button i
 {
   font-size: 50px;
-  color: white;
+  color: #333333;
 }

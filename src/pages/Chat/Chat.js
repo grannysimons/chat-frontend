@@ -167,27 +167,9 @@ export default class Chat extends Component {
     Microphone.stop();
     Microphone.getRecordedAudio();
   };
-
-  // onRecordingComplete = (blob) => {
-  //   let email = this.props.match.params.email; //destinatari
-  //   let message = '';
-  //   chat.newMessage(email, message, true)
-  //   .then(newMessage => {
-  //     var messageList = this.state.messageList;
-  //     messageList.push(newMessage.data);
-  //     document.querySelector("#name").value = "";
-      
-  //     Microphone.sendData(blob, newMessage.data._id);
-  //       this.setState({ messageList, message: "" });
-  //     });
-  // }
- 
-  // onRecordingError = (err) => {
-  // }
-
   sendMessage = (blob, message) => {
-    console.log('sendMessage blob: ', blob);
-    console.log('sendMessage message: ', message);
+    // console.log('sendMessage blob: ', blob);
+    // console.log('sendMessage message: ', message);
     let email = this.props.match.params.email; //destinatari
     chat.newMessage(email, message, true)
     .then(newMessage => {
@@ -207,13 +189,6 @@ export default class Chat extends Component {
           <ChatHeader handleSearchForm={this.handleSearchForm} handleSearchUp={this.handleSearchUp} handleSearchDown={this.handleSearchDown} interlocutor = {this.state.interlocutor} messageList = {this.state.messageList}/>
           <ChatContent messageList={this.state.messageList} user={this.props.user}/>
           <div id="intoView" />
-          {/* <AudioMessages 
-            onRecordingComplete={this.onRecordingComplete}
-            onRecordingError={this.onRecordingError}
-            onTranscriptionResultCallback={this.resultCallback}
-            onTranscriptionResetCallback={this.resetCallback}
-            sendMessage={this.sendMessage}
-            /> */}
           <div className="send-form">
             <Typing typing={this.state.typing} user={this.props.user}/>
             <div className="controllers">

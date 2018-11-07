@@ -5,13 +5,12 @@
 }
 .chats
 {
-  background: #ff670f; /* Old browsers */
-  background: #ff670f; /* Old browsers */
-  background: -moz-linear-gradient(-45deg, #ff670f 0%, #2c617a 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(-45deg, #ff670f 0%,#2c617a 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(135deg, #ff670f 0%,#2c617a 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff670f', endColorstr='#2c617a',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-  padding: 20px;
+  background: #ffffff; /* Old browsers */
+  background: -moz-linear-gradient(-45deg, #ffffff 0%, #ffffff 69%, #fed22b 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(-45deg, #ffffff 0%,#ffffff 69%,#fed22b 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg, #ffffff 0%,#ffffff 69%,#fed22b 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#fed22b',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+ padding: 20px;
   min-height: 100vh;
   font-family: 'Raleway', serif;
   color: #fcf4cd;

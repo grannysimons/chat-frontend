@@ -6,29 +6,29 @@
 .sureDelete
 {
   font-family: 'Source Code Pro', monospace;
-  color: white;
+  color: #333333;
 
-  background: #ff670f; /* Old browsers */
-  background: #ff670f; /* Old browsers */
-  background: -moz-linear-gradient(-45deg, #ff670f 0%, #2c617a 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(-45deg, #ff670f 0%,#2c617a 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(135deg, #ff670f 0%,#2c617a 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff670f', endColorstr='#2c617a',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  background: #ffffff; /* Old browsers */
+  background: -moz-linear-gradient(-45deg, #ffffff 0%, #ffffff 69%, #fed22b 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(-45deg, #ffffff 0%,#ffffff 69%,#fed22b 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg, #ffffff 0%,#ffffff 69%,#fed22b 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#fed22b',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
   height: 100vh;
+  width: 100%;
 }
 .sureDelete .container-inner
 {
-  height: 100%;
   text-align: center;
-  padding: 40% 0;
-  width: 80%;
+  padding: 70px 0;
+  width: 200px;
   margin: auto;
   box-sizing: border-box;
 }
 .sureDelete .container-inner h1
 {
   font-size: 80px;
-  margin-bottom: 20%;
+  margin: 80px 0 30px 0;
 }
 .sureDelete .container-inner p
 {
@@ -47,6 +47,8 @@
   padding: 10px 20px;
   border-radius: 4px;
   border-width: 0;
+  border: 1px solid #333333;
+  background-color: white;
   margin: 30px 2px;
   display: inline-block;
 }
