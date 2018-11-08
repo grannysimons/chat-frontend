@@ -1,5 +1,5 @@
 import io from 'socket.io-client';
-import env from './env_local';
+import env from './env';
 // import SocketIOFileClient from 'socket.io-file-client';
 
 // const socketURL = 'http://localhost:3010';

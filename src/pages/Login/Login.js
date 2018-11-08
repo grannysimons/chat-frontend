@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import auth from "../../lib/auth-service";
 import "./Login.css";
 import logo from '../../images/logo.png';
-import env from '../../env_local';
+import env from '../../env';
 
 class Login extends Component {
   state = {

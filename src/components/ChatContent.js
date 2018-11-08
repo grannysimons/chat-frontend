@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import helper from "../helpers";
 import AudioPlayer from './AudioPlayer';
-import env from '../env_local';
+import env from '../env';
 
 export default class ChatContent extends Component {
   render() {

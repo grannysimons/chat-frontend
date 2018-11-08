@@ -1,4 +1,4 @@
-import env from './env_local';
+import env from './env';
 
 // import chat from "./lib/chat-service";
 // const apiURL = 'http://localhost:3010/chat';

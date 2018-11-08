@@ -1,5 +1,5 @@
 import axios from 'axios';
-import env from '../env_local';
+import env from '../env';
 
 class Auth {
   constructor() {
