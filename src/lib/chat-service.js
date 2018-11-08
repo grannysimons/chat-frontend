@@ -1,9 +1,13 @@
 import axios from 'axios';
+import env from '../env_local';
 
 class Chat {
   constructor() {
+    console.log('REACT_APP_apiURL: ', env.REACT_APP_apiURL);
     this.chat = axios.create({
-      baseURL: 'http://localhost:3010/chat',
+      // baseURL: 'http://localhost:3010/chat',
+      // baseURL: process.env.REACT_APP_apiURL + '/chat',
+      baseURL: env.REACT_APP_apiURL + '/chat',
       withCredentials: true
     })
   }
@@ -65,7 +69,9 @@ class Chat {
       headers: {
         'Content-Type': 'multipart/form-data'
       },
-      url: 'http://localhost:3010/chat/sendAudio',
+      // url: 'http://localhost:3010/chat/sendAudio',
+      // url: process.env.REACT_APP_apiURL + '/chat/sendAudio',
+      url: env.REACT_APP_apiURL + '/chat/sendAudio',
       params: {
         audioFile: data,
       }

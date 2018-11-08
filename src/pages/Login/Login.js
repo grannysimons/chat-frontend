@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import auth from "../../lib/auth-service";
 import "./Login.css";
 import logo from '../../images/logo.png';
+import env from '../../env_local';
 
 class Login extends Component {
   state = {
@@ -57,7 +58,9 @@ class Login extends Component {
               />
 
               <p>
-                <a href="http://localhost:3000/signup">sign up</a>
+                {/* <a href="http://localhost:3000/signup">sign up</a> */}
+                {/* <a href={process.env.REACT_APP_PUBLIC_URL + '/signup'}>sign up</a> */}
+                <a href={env.REACT_APP_PUBLIC_URL + '/signup'}>sign up</a>
               </p>
               <button type="submit">Login</button>
             </form>

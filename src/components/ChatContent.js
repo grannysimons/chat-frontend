@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import helper from "../helpers";
 import AudioPlayer from './AudioPlayer';
+import env from '../env_local';
 
 export default class ChatContent extends Component {
   render() {
@@ -14,7 +15,8 @@ export default class ChatContent extends Component {
             <div className={side} key={index}>
               {
                 message.isAudio ? 
-                <AudioPlayer uniqueNumber={index} src={'http://localhost:3010/audios/' + message._id + '.wav'} transcriptionText={message.text}/>
+                // <AudioPlayer uniqueNumber={index} src={'http://localhost:3010/audios/' + message._id + '.wav'} transcriptionText={message.text}/>
+                <AudioPlayer uniqueNumber={index} src={ env.REACT_APP_apiURL +'/audios/' + message._id + '.wav'} transcriptionText={message.text}/>
                 : message.text
               }
               <div>

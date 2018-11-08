@@ -1,5 +1,9 @@
+import env from './env_local';
+
 // import chat from "./lib/chat-service";
-const apiURL = 'http://localhost:3010/chat';
+// const apiURL = 'http://localhost:3010/chat';
+// const apiURL = process.env.REACT_APP_apiURL + '/chat';
+const apiURL = env.REACT_APP_apiURL + '/chat';
 
 class Microphone {
   constructor(){

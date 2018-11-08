@@ -1,7 +1,10 @@
 import io from 'socket.io-client';
+import env from './env_local';
 // import SocketIOFileClient from 'socket.io-file-client';
 
-const socketURL = 'http://localhost:3010';
+// const socketURL = 'http://localhost:3010';
+const socketURL = env.REACT_APP_apiURL;
+// const socketURL = process.env.REACT_APP_apiURL;
 class SocketManagerClient {
   constructor(){
     this.socket='';
