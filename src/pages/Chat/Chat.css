@@ -3,6 +3,10 @@
   margin: 0;
   padding: 0;
 }
+*:focus
+{
+  outline-width: 0px;
+}
 .chat
 {
   background: #ffffff; /* Old browsers */
@@ -319,4 +323,15 @@
 71.5%   {width: 5px; height: 5px;}
 85.8%   {width: 5px; height: 5px;}
 100%   {width: 5px; height: 5px;}
+}
+
+.arrow
+{
+  background-color: transparent;
+  border: 0px solid transparent;
+}
+.arrow:focus
+{
+  border: 0px solid transparent;
+  outline-width: 0px;
 }

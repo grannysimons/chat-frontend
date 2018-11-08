@@ -62,6 +62,7 @@ const style={
     marginTop: '5px',
     marginBottom: '10px',
     padding: '15px 30px',
+    display: 'none',
   },
 }
 
@@ -146,7 +147,7 @@ export default class AudioPlayer extends Component {
             </div>
           </div>
         </div>
-        <div className="Transcription" style={style.transcription}>
+        <div className="transcription" style={style.transcription}>
           {this.props.transcriptionText}
         </div>
       </div>

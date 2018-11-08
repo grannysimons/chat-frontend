@@ -3,6 +3,10 @@
   margin: 0;
   padding: 0;
 }
+*:focus
+{
+  outline-width: 0px;
+}
 .profile
 {
   /* font-family: 'IM Fell French Canon SC', monospace; */

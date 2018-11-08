@@ -21,7 +21,7 @@ class Login extends Component {
         this.props.setUser(user);
       })
       .catch(error => {
-        this.setState({ errorMessage: 'Authentication error'});
+        this.setState({ errorMessage: 'Ooops! An error happened: ' + error });
       });
   };
 

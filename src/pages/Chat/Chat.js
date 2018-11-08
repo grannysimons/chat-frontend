@@ -9,9 +9,7 @@ import ChatHeader from "../../components/ChatHeader";
 import ChatContent from "../../components/ChatContent";
 import Typing from "../../components/Typing";
 import ChatFormSendMessage from "../../components/ChatFormSendMessage";
-// import AudioTranscriptor from "../../components/AudioTranscriptor";
-// import AudioMessages from '../../components/AudioMessages';
-// import AudioPlayer from "../../components/AudioPlayer";
+
 
 export default class Chat extends Component {
   state = {
@@ -68,11 +66,16 @@ export default class Chat extends Component {
     }
   };
   handleOnChange = e => {
+    if(e.target.value !== '')
+    {
+      let email = this.props.match.params.email;  //destinatari
+      chat.typing(email);
+    }
     this.setState({ message: e.target.value });
   };
   handleOnFocus = e => {
-    let email = this.props.match.params.email;  //destinatari
-    chat.typing(email);
+    // let email = this.props.match.params.email;  //destinatari
+    // chat.typing(email);
   };
   handleOnBlur = () => {
     let email = this.props.match.params.email;  //destinatari

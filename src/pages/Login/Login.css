@@ -3,6 +3,10 @@
   margin: 0;
   padding: 0;
 }
+*:focus
+{
+  outline-width: 0px;
+}
 .login
 {
   font-family: 'Raleway', serif;

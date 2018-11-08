@@ -6,7 +6,7 @@ const style = {
   marginLeft: '10px',
   position: 'relative',
   bottom: '5px',
-  color: '#fcf4cd',  
+  color: '#333333',  
 }
 class Greeting extends Component {
   render() {
