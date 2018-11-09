@@ -6,12 +6,12 @@ const style={
     display: 'flex',
     flexDirection: 'row',
     // color: 'gray',
-    minWidth: '200px',
+    // minWidth: '200px',
     // backgroundColor: 'rgba(30,30,30, 0.4)',
     borderRadius: '0px',
     color: '#333333',
     border: '3px solid #333333',
-    backgroundColor: 'rgba(254, 210, 43, 0.5)',
+    backgroundColor: 'white',
   },
   control: {
     width: '20px',
@@ -20,7 +20,7 @@ const style={
     marginRight: '20px',
   },
   progress: {
-    minWidth: '120px',
+    // minWidth: '120px',
     position: 'relative',
     top:'14px',
     backgroundColor: 'transparent',
@@ -33,7 +33,7 @@ const style={
     height: '2px',
     position: 'relative',
     top: '6px',
-    backgroundColor: '#dddddd',
+    backgroundColor: '#bbbbbb',
     zIndex: '0',
   },
   spot: {

@@ -10,7 +10,6 @@ import ChatContent from "../../components/ChatContent";
 import Typing from "../../components/Typing";
 import ChatFormSendMessage from "../../components/ChatFormSendMessage";
 
-
 export default class Chat extends Component {
   state = {
     message: "",
@@ -171,8 +170,6 @@ export default class Chat extends Component {
     Microphone.getRecordedAudio();
   };
   sendMessage = (blob, message) => {
-    // console.log('sendMessage blob: ', blob);
-    // console.log('sendMessage message: ', message);
     let email = this.props.match.params.email; //destinatari
     chat.newMessage(email, message, true)
     .then(newMessage => {

@@ -45,7 +45,7 @@ export default class ChatContent extends Component {
               {
                 message.isAudio ? 
                 <AudioPlayer uniqueNumber={index} src={ env.REACT_APP_apiURL +'/audios/' + message._id + '.wav'} transcriptionText={message.text}/>
-                : message.text
+                : <p className="message-text">{message.text}</p>
               }
               <div className="messageMetaData" style={style.metaData}>
                 <small>{helper.dateChatFormat(message.time)}</small>

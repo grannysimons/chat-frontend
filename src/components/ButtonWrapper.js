@@ -7,8 +7,10 @@ import { withAuth } from './AuthProvider';
 const style = {
   buttons: {
     position: 'fixed',
-    bottom: '20px',
+    bottom: '0px',
     width: '100%',
+    padding: '20px 20px',
+    backgroundColor: 'white',
   },
   button: {
     width: '50px',
@@ -17,14 +19,15 @@ const style = {
     borderRadius: '50%',
     marginRight: '5px',
     color: '#333333',
-    border: '3px solid #333333',
-    backgroundColor: '#fed22b',
+    border: '2px solid #333333',
+    // backgroundColor: '#fed22b',
+    lineHeight: '0',
   },
   phUtm: {
     marginRight: '5px',
   },
   i: {
-    fontSize: '30px',
+    fontSize: '20px',
   },
   modalBackdrop: {
     zIndex: '-10',

@@ -13,6 +13,7 @@ const style = {
     color: '#fcf4cd',
     width: '100%',
     padding: '30px 0',
+    paddingBottom: '90px',
   },
   noChats:
   {

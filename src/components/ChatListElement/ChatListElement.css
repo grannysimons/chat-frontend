@@ -19,9 +19,15 @@
   text-align: left;
   padding-left: 20px;
 }
-.chatListElement .chats-container .date
+.chatListElement .div1 .interlocutor
 {
-  font-size: 16px;
+  font-weight: bold;
+  font-size: 25px;
+}
+.chatListElement .div1 .date
+{
+  font-size: 18px;
+  text-align: left;
 }
 .chatListElement .col8
 {
@@ -29,10 +35,10 @@
 }
 .chatListElement .col2
 {
-  width: 10%;
+  /* width: 10%; */
   /* flex: 0 0 10%; */
-  position: relative;
-  top: 5px;
+  /* position: relative;
+  top: 5px; */
 }
 
 
@@ -40,7 +46,6 @@
 .chatListElement .chatElement
 {
   width: 100%;
-  /* background-color: rgba(200,200,200,0.2); */
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -48,13 +53,12 @@
   color: white;
   font-size: 20px;
   border-radius: 3px;
-  margin-bottom: 3px;
-  /* border-color: transparent; */
+  margin-bottom: 15px;
   border-image: none;
   padding: 10px 30px;
   transition: all 0.2s linear;
   color: #333333;
-  border: 3px solid #333333;
+  border: 2px solid #333333;
   background-color: #fed22b;
 }
 .chatListElement .chatElement:hover
@@ -66,10 +70,6 @@
 {
   width: 66.6666%;
   text-align: left;
-}
-.chatListElement .col8 .date
-{
-  text-align: center;
 }
 .chatListElement .col2
 {

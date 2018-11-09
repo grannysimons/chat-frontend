@@ -10,47 +10,57 @@
 .chat
 {
   background: #ffffff; /* Old browsers */
-  font-family: 'Source Code Pro', monospace;
+  font-family: 'Raleway', serif;
 }
 /* header */
 .chat .name
 {
   text-align: center;
-  background-color: #ffe9a0;
-  border-bottom: 4px solid #ffe9a0;
+  background-color: #fed22b;
+  /* border-bottom: 4px solid #ffe9a0; */
   padding: 10px 0;
   font-size: 30px;
   position: fixed;
   top: 0;
   width: 100%;
   z-index:10;
+  -webkit-box-shadow: 0px 14px 29px -9px rgba(102,87,13,1);
+-moz-box-shadow: 0px 14px 29px -9px rgba(102,87,13,1);
+box-shadow: 0px 14px 29px -9px rgba(102,87,13,1);
 }
 /* messages */
 .chat .messages
 {
-  padding: 160px 30px;
+  padding: 180px 30px;
   min-height: 100vh;
 }
 /* message */
 .chat .message
 {
   background-color: rgba(255,255,255,1);
-  border: 1px solid black;
-  -webkit-box-shadow: 0 0 10px 3px #F2F2F2;
-  box-shadow: 0 0 10px 3px #F2F2F2;
+  border: 2px solid #333333;
+  /* -webkit-box-shadow: 0 0 10px 3px #F2F2F2;
+  box-shadow: 0 0 10px 3px #F2F2F2; */
   width: 60%;
-  min-width: 350px;
+  /* min-width: 350px; */
   padding: 20px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   border-radius: 3px;
+}
+.chat .message .message-text
+{
+  font-size: 25px;
+  margin-bottom: 2px;
 }
 .chat .left
 {
   margin-right: auto;
+  background-color: #dddddd;
 }
 .chat .right
 {
   margin-left: auto;
+  background-color: #fed22b;
 }
 /* send form */
 .chat .send-form
@@ -144,13 +154,14 @@
 }
 .chat .search-form input
 {
-  padding: 4px 10px;
-  font-size: 12px;
-  background-color: rgba(200,200,200,0.5);
+  padding: 5px 20px;
+  font-size: 16px;
+  background-color: white;
   border-width: 0px;
   color: gray;
   border-radius: 4px;
   -webkit-appearance: none;
+  margin-bottom: 15px;
 }
 .chat .search-form button
 {
@@ -280,7 +291,7 @@
   position: relative;
   top: 2px !important;
   color: #333333 !important;
-  border: 3px solid #333333 !important;
+  border: 2px solid #333333 !important;
   background-color: #fed22b !important;
 }
 .styles_button__3Vugn img
@@ -330,4 +341,19 @@
 {
   border: 0px solid transparent;
   outline-width: 0px;
+}
+
+.buttons button
+{
+  transition: all 0.2s linear;
+  background-color: #fed22b;
+}
+.buttons button:hover
+{
+  background-color: rgba(200,200,200,0.8);
+  transition: all 0.2s linear;
+}
+.messageMetaData small
+{
+  font-size: 10px;
 }

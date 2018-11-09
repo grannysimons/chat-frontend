@@ -5,7 +5,7 @@ const style = {
   display: 'inline-block',
   marginLeft: '10px',
   position: 'relative',
-  bottom: '5px',
+  bottom: '0px',
   color: '#333333',  
 }
 class Greeting extends Component {

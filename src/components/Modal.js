@@ -4,10 +4,10 @@ import Button from "../components/Button";
 const style = {
   button: {
     color: '#333333',
-    border: '3px solid #333333',
-    backgroundColor: '#fed22b',
+    border: '2px solid #333333',
+    // backgroundColor: '#fed22b',
     position: 'relative',
-    top: '1px',
+    top: '3px',
   },
   input:{
     width: '100%',
@@ -25,6 +25,11 @@ const style = {
     color: 'red',
     paddingTop: '20px',
     textAlign: 'right'
+  },
+  i: {
+    fontSize: '20px',
+    position: 'relative',
+    bottom: '2px',
   }
 }
 
@@ -61,7 +66,7 @@ export default class Modal extends Component {
           data-target={this.getRandomId("#")}
           style={style.button}
         >
-          <i className={this.getClass()} />
+          <i className={this.getClass()} style={style.i}/>
         </Button>
         <div
           className="modal fade"
