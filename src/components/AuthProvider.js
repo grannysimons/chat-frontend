@@ -54,11 +54,22 @@ export default class AuthProvider extends Component {
   componentDidMount() {
     auth.me()
       .then((user) => {
-        this.setState({
-          isLogged: true,
-          user,
-          status: 'loaded'
-        })
+        if(user.error)
+        {
+          this.setState({ 
+            isLogged: false,
+            user: {},
+            status: 'loaded'
+          });
+        }
+        else
+        {
+          this.setState({
+            isLogged: true,
+            user,
+            status: 'loaded'
+          });
+        }
       })
       .catch((error) => {
         this.setState({ 

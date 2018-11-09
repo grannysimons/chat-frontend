@@ -14,14 +14,37 @@ class Login extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     const { email, password } = this.state;
+    document.querySelector('.login input#email').style.border = 'solid 2px transparent';
+    document.querySelector('.login input#password').style.border = 'solid 2px transparent';
+
+    if(email === '' || password === '')
+    {
+      if(email === '')
+      {
+        document.querySelector('.login input#email').style.border = 'solid 2px red';
+      } 
+      if(password === '')
+      {
+        document.querySelector('.login input#password').style.border = 'solid 2px red';
+      }
+      this.setState({ errorMessage: 'Ooops! fields should not be empty...'});  
+      return;
+    }
 
     auth
       .login({ email, password })
       .then(user => {
-        this.props.setUser(user);
+        if(user.error)
+        {
+          this.setState({ errorMessage: 'Ooops! ' + user.error });
+        }
+        else
+        {
+          this.props.setUser(user);
+        }
       })
       .catch(error => {
-        this.setState({ errorMessage: 'Ooops! An error happened: ' + error });
+        this.setState({ errorMessage: 'Ooops! ' + error.message });
       });
   };
 
@@ -36,18 +59,18 @@ class Login extends Component {
       <div className="login">
         <div className="container-inner">
           <div className="logo">
-            {/* <i className="fas fa-cat" /> */}
             <img src={logo} alt="txat app" />
           </div>
           <h1>Login</h1>
           <div className="form">
             <form onSubmit={this.handleFormSubmit}>
               <input
-                type="text"
+                type="email"
                 name="email"
                 value={email}
                 onChange={this.handleChange}
                 placeholder="mail"
+                id="email"
               />
               <input
                 type="password"
@@ -55,11 +78,10 @@ class Login extends Component {
                 value={password}
                 onChange={this.handleChange}
                 placeholder="password"
+                id="password"
               />
 
               <p>
-                {/* <a href="http://localhost:3000/signup">sign up</a> */}
-                {/* <a href={process.env.REACT_APP_PUBLIC_URL + '/signup'}>sign up</a> */}
                 <a href={env.REACT_APP_PUBLIC_URL + '/signup'}>sign up</a>
               </p>
               <button type="submit">Login</button>

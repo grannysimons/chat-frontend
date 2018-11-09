@@ -9,18 +9,46 @@ class Signup extends Component {
     email: "",
     password: "",
     socket: null,
+    errorMessage: "",
   };
 
   handleFormSubmit = event => {
     event.preventDefault();
-    const email = this.state.email;
-    const password = this.state.password;
+
+    const { email, password } = this.state;
+    document.querySelector('.signup input#email').style.border = 'solid 2px transparent';
+    document.querySelector('.signup input#password').style.border = 'solid 2px transparent';
+
+    if(email === '' || password === '')
+    {
+      if(email === '')
+      {
+        document.querySelector('.signup input#email').style.border = 'solid 2px red';
+      } 
+      if(password === '')
+      {
+        document.querySelector('.signup input#password').style.border = 'solid 2px red';
+      }
+      this.setState({ errorMessage: 'Ooops! fields should not be empty...'});  
+      return;
+    }
+
+
     auth
       .signup({ email, password })
       .then(user => {
-        this.props.setUser(user);
+        if(user.error)
+        {
+          this.setState({ errorMessage: 'Ooops! ' + user.error });
+        }
+        else
+        {
+          this.props.setUser(user);
+        }
       })
-      .catch(error => console.log(error));
+      .catch((error) => {
+        this.setState({ errorMessage: 'Ooops! ' + error.message });
+      });
   };
 
   handleChange = event => {
@@ -40,11 +68,12 @@ class Signup extends Component {
           <div className="form">
             <form onSubmit={this.handleFormSubmit}>
               <input
-                type="text"
+                type="email"
                 name="email"
                 value={email}
                 onChange={this.handleChange}
                 placeholder="mail"
+                id="email"
               />
               <input
                 type="password"
@@ -52,6 +81,7 @@ class Signup extends Component {
                 value={password}
                 onChange={this.handleChange}
                 placeholder="password"
+                id="password"
               />
               <p>
                 {/* <a href="http://localhost:3000/login">login</a> */}
@@ -60,7 +90,7 @@ class Signup extends Component {
               <button type="submit">Signup</button>
             </form>
             <div className="log">
-            {/* incorrect data */}
+              {this.state.errorMessage}
             </div>
           </div>
         </div>

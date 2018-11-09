@@ -3,10 +3,7 @@ import env from '../env';
 
 class Chat {
   constructor() {
-    console.log('REACT_APP_apiURL: ', env.REACT_APP_apiURL);
     this.chat = axios.create({
-      // baseURL: 'http://localhost:3010/chat',
-      // baseURL: process.env.REACT_APP_apiURL + '/chat',
       baseURL: env.REACT_APP_apiURL + '/chat',
       withCredentials: true
     })

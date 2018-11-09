@@ -13,15 +13,24 @@ class Auth {
     console.log('signup');
     const { email, password } = user;
     return this.auth.post('/signup', {email, password})
-      .then(({ data }) => data);
+      .then(({ data }) =>{ 
+        console.log('auth service - signup: ', data);        
+        return data;
+      })
+      .catch(error => {
+        console.log('auth service - signup error: ', error);
+        return error;
+      })
   }
 
   login(user) {
-    console.log('login');
     const { email, password } = user;
     return this.auth.post('/login', {email, password})
       .then(({ data }) => {
         return data;
+      })
+      .catch((error) => {
+        return {errorMessage: 'there was an error accessing to the database. Please try again or check the provider: '+error};
       })
   }
 
@@ -32,9 +41,13 @@ class Auth {
   }
 
   me() {
-    console.log('me');
     return this.auth.get('/me')
-    .then(response => response.data)
+    .then(response => {
+      return response.data;
+    })
+    .catch(error => {
+      return error;
+    })
   }
   
   getProfileData() {
