@@ -11,7 +11,6 @@ const style = {
     width: '100%',
   },
   button: {
-    // backgroundColor: 'white',
     width: '50px',
     height: '50px',
     borderWidth: '0',
@@ -33,13 +32,27 @@ const style = {
 }
 
 class ButtonWrapper extends Component {
+  state={
+    errorMessage: '',
+  }
   handlerProfile = () => {
     this.props.history.push('/profile');
   }
   handleNewChat = (email) => {
     chat.newChat( email , this.props.user._id)
-    .then(() => {
-      this.props.history.push('/chats/' + email);
+    .then((newChat) => {
+      console.log('new chat: ', newChat);
+      if(newChat.error)
+      {
+        this.setState({errorMessage: 'Oops! ' + newChat.error});
+      }
+      else
+      {
+        this.props.history.push('/chats/' + email);
+      }
+    })
+    .catch(error => {
+      console.log('error: ', error);
     })
   }
   render() {
@@ -48,14 +61,14 @@ class ButtonWrapper extends Component {
           <button className="button profile-button" onClick={this.handlerProfile} style={style.button}>
             <i className="fas fa-user" style={style.i}/>
           </button>
-          <Modal buttonClass='fa-plus-circle' title="new Chat" onSubmitHandler={this.handleNewChat}>
-          <form>
+          <Modal buttonClass='fa-plus-circle' title="new Chat" onSubmitHandler={this.handleNewChat} errorMessage={this.state.errorMessage}>
+          {/* <form>
             <div className="form-group">
               <label>Email address</label>
-              <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
+              <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"/>
             </div>
             <button type="submit" className="btn btn-primary" style={style.button}>Submit</button>
-          </form>
+          </form> */}
           </Modal>
           <button onClick={this.props.logout} className="button logout" style={style.button}>
             <i className="fas fa-sign-out-alt" style={style.i}/>

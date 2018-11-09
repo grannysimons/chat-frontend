@@ -12,16 +12,19 @@ class Chat {
   newChat(email, idUser) {
     console.log('newChat');
     return this.chat.post('/newChat', { email, idUser})
+    .then(({ data }) =>{ 
+      console.log('data: ',data);
+      return data;
+    })
+    .catch(error => {
+      console.log('error:',error);
+      return error;
+    })
   }
 
   getList() {
     console.log('getList');
     return this.chat.post('/chatList');
-    // retorna un array d'objectes:
-    //   name: "Joan",
-    //   lastDate: "8/10/18 22:41",
-    //   num: "1",
-    //   email: "Joan@Joan.com"
   }
 
   getTotaNewMessages(idUser, idChat) {
@@ -37,7 +40,7 @@ class Chat {
   newMessage(email, message, isAudio) {
     console.log('newMessage');
     let path = '/' + email + '/send';
-    return this.chat.post(path, {message, isAudio});
+    return this.chat.post(path, {message, isAudio})
   }
   deleteUser (idUser) {
     console.log('deleteUser');
@@ -66,8 +69,6 @@ class Chat {
       headers: {
         'Content-Type': 'multipart/form-data'
       },
-      // url: 'http://localhost:3010/chat/sendAudio',
-      // url: process.env.REACT_APP_apiURL + '/chat/sendAudio',
       url: env.REACT_APP_apiURL + '/chat/sendAudio',
       params: {
         audioFile: data,

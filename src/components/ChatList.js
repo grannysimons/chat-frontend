@@ -8,10 +8,18 @@ import socketManagerClient from "../socketManagerClient";
 import { NEW_CHAT, MESSAGE_RECEIVED } from '../Events';
 
 const style = {
-  backgroundColor: 'transparent',
-  color: '#fcf4cd',
-  width: '100%',
-  padding: '30px 0',
+  container: {
+    backgroundColor: 'transparent',
+    color: '#fcf4cd',
+    width: '100%',
+    padding: '30px 0',
+  },
+  noChats:
+  {
+    color: '#333333',
+    textAlign: 'center',
+    marginTop: '150px',
+  }
 }
 
 class ChatList extends Component {
@@ -60,7 +68,7 @@ class ChatList extends Component {
     }
     else
     {
-      return(<p>Sorry! You have no chats...</p>);
+      return(<p style={style.noChats}>Sorry! You have no chats...</p>);
     }
   }
   componentDidMount = () => {
@@ -76,7 +84,7 @@ class ChatList extends Component {
   }
   render() {
     return (
-      <div className="chats-container" style={style}>
+      <div className="chats-container" style={style.container}>
         {this.printList()}
       </div>
     )

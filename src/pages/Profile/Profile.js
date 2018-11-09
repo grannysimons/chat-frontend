@@ -12,11 +12,11 @@ export default class Profile extends Component {
       quote: false,
     },
     values: {
-      name: 'Mariona Roca',
-      email: 'mariona.roca@gmail.com',
-      password: '1234',
-      uncryptedPassword : '1234',
-      quote: 'surgiendo de la bla bla bla',
+      name: '',
+      email: '',
+      password: '',
+      uncryptedPassword : '',
+      quote: '',
     }
   };
   componentDidMount = () => {
@@ -54,19 +54,15 @@ export default class Profile extends Component {
     switch (field)
     {
       case "name":
-        // console.log('name');
         pressedButton.name = true;
       break;
       case "email":
-        // console.log('email');
         pressedButton.email = true;
       break;
       case "password":
-        // console.log('password');
         pressedButton.password = true;
       break;
       case "quote":
-        // console.log('quote');
         pressedButton.quote = true;
       break;
       default:
@@ -78,7 +74,6 @@ export default class Profile extends Component {
     let field = e.target.getAttribute('data-field');
     let selector = 'input.'+field;
     let value = document.querySelector(selector).value;
-    // console.log('value ', value);
     if(field==='password')
     {
       let values = this.state.values;

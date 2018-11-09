@@ -10,15 +10,12 @@ class Auth {
   }
 
   signup(user) {
-    console.log('signup');
     const { email, password } = user;
     return this.auth.post('/signup', {email, password})
       .then(({ data }) =>{ 
-        console.log('auth service - signup: ', data);        
         return data;
       })
       .catch(error => {
-        console.log('auth service - signup error: ', error);
         return error;
       })
   }

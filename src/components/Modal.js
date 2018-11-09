@@ -2,16 +2,35 @@ import React, { Component, Fragment } from "react";
 import Button from "../components/Button";
 
 const style = {
-  color: '#333333',
-  border: '3px solid #333333',
-  backgroundColor: '#fed22b',
-  position: 'relative',
-  top: '1px',
+  button: {
+    color: '#333333',
+    border: '3px solid #333333',
+    backgroundColor: '#fed22b',
+    position: 'relative',
+    top: '1px',
+  },
+  input:{
+    width: '100%',
+    padding: '5px 10px',
+  },
+  buttonNewMessage:{
+    backgroundColor: '#fcf4cd',
+    color: '#333333',
+    borderColor: 'transparent',
+  },
+  title: {
+    color: '#333333',
+  },
+  error: {
+    color: 'red',
+    paddingTop: '20px',
+    textAlign: 'right'
+  }
 }
 
 export default class Modal extends Component {
   state = {
-    mailValue: ""
+    mailValue: "",
   };
   updateValue = e => {
     e.preventDefault();
@@ -40,7 +59,7 @@ export default class Modal extends Component {
           type="button"
           data-toggle="modal"
           data-target={this.getRandomId("#")}
-          style={style}
+          style={style.button}
         >
           <i className={this.getClass()} />
         </Button>
@@ -55,7 +74,7 @@ export default class Modal extends Component {
           <div className="modal-dialog modal-dialog-centered" role="document">
             <div className="modal-content">
               <div className="modal-header">
-                <h5 className="modal-title" id="exampleModalCenterTitle">
+                <h5 className="modal-title" id="exampleModalCenterTitle" style={style.title}>
                   {this.props.title}
                 </h5>
                 <button
@@ -76,7 +95,11 @@ export default class Modal extends Component {
                     placeholder="user email"
                     onChange={this.updateValue}
                     value={this.state.mailValue}
+                    style={style.input}
                   />
+                  <div className="log" style={style.error}>
+                    {this.props.errorMessage}
+                  </div>
                 </div>
                 <div className="modal-footer">
                   <button
@@ -86,7 +109,7 @@ export default class Modal extends Component {
                   >
                     Close
                   </button>
-                  <button type="submit" className="btn btn-primary" onClick={this.onSubmitHandler}>
+                  <button type="submit" className="btn btn-primary" onClick={this.onSubmitHandler} style={style.buttonNewMessage}>
                     {this.props.title}
                   </button>
                 </div>

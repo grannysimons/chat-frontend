@@ -100,11 +100,11 @@ export default class Chat extends Component {
     this.deleteResultClasses();
 
     let messageList = this.state.messageList;
-    let searchValue = document.querySelector(".search-form input").value;
+    let searchValue = document.querySelector(".search-form input").value.toLowerCase();
     if (searchValue === "") return;
     messageList.forEach(message => {
       message["searchResult"] = false;
-      if (message.text.includes(searchValue)) {
+      if (message.text.toLowerCase().includes(searchValue)) {
         message["searchResult"] = true;
         document.querySelector(".numCoincidence").innerHTML = 1;
       }
