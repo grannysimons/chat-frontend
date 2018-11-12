@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import './ChatListElement.css';
 
-const style = {
-
-}
 export default class ChatListElement extends Component {
   render() {
     return (

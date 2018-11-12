@@ -5,7 +5,7 @@ import chat from '../lib/chat-service';
 import helpers from '../helpers';
 import { withAuth } from './AuthProvider';
 import socketManagerClient from "../socketManagerClient";
-import { NEW_CHAT, MESSAGE_RECEIVED } from '../Events';
+import { NEW_CHAT, MESSAGE_RECEIVED, NEW_MESSAGES } from '../Events';
 
 const style = {
   container: {
@@ -81,6 +81,9 @@ class ChatList extends Component {
     });
     socket.on(MESSAGE_RECEIVED, (fromUserMail) => {
       this.getChatList(fromUserMail);
+    })
+    socket.on(NEW_MESSAGES, (idChat)=>{
+      console.log('new messages in chat: ', idChat);
     })
   }
   render() {

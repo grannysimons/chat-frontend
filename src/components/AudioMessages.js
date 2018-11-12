@@ -17,7 +17,7 @@ export default class AudioMessages extends Component {
       timeout: 1000, // The timeout until a speech recognition is completed (after the user has spoken their last word)
       resetCallback: this.resetCallback, // Callback used whenever an error happens
       resultCallback: this.resultCallback, // Callback used for results
-      lang: 'ca', // Language set on the Speech Recognition object
+      lang: 'es', // Language set on the Speech Recognition object
       interimResults: false // Whether you want to receive interim results or not
     }
     this.speechRecognizer = new SpeechRecognizer(options);
