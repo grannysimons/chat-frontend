@@ -5,9 +5,6 @@ const style={
     padding: '10px',
     display: 'flex',
     flexDirection: 'row',
-    // color: 'gray',
-    // minWidth: '200px',
-    // backgroundColor: 'rgba(30,30,30, 0.4)',
     borderRadius: '0px',
     color: '#333333',
     border: '3px solid #333333',
@@ -20,7 +17,6 @@ const style={
     marginRight: '20px',
   },
   progress: {
-    // minWidth: '120px',
     position: 'relative',
     top:'14px',
     backgroundColor: 'transparent',
@@ -124,8 +120,6 @@ export default class AudioPlayer extends Component {
     document.querySelector('#' + this.customId + ' .control .pause').style.display='none';
 
     clearInterval(this.interval);
-    // document.querySelector(`#${this.customId} .progress .spot`).style.left='0';
-
   }
   render() {
     return (

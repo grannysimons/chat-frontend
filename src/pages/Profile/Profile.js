@@ -22,7 +22,6 @@ export default class Profile extends Component {
   componentDidMount = () => {
     auth.getProfileData()
     .then( userData  => {
-      // console.log('userData ', userData);
       this.setState({ values: {
         name: userData.name !== '' ? userData.name : '',
         email: userData.email !== '' ? userData.email : '',

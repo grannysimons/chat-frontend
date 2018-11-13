@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 import chat from "../../lib/chat-service";
 import socketManagerClient from "../../socketManagerClient";
 import { MESSAGE_RECEIVED } from "../../Events";
-import Microphone from "../../Microphone";
 import ChatHeader from "../../components/ChatHeader";
 import ChatContent from "../../components/ChatContent";
 import Typing from "../../components/Typing";
 import ChatFormSendMessage from "../../components/ChatFormSendMessage";
+import env from "../../env";
 
 export default class Chat extends Component {
   state = {
@@ -157,18 +157,41 @@ export default class Chat extends Component {
       behavior: "smooth"
     });
   };
-  handleRecording = () => {
-    if (document.querySelector(".chat .send-form .recording").style.display !== "block") 
-    {
-      document.querySelector(".chat .send-form .recording").style.display = "block";
-      Microphone.getAudio();
-    }
-  };
-  handleStopRecording = () => {
-    document.querySelector(".chat .send-form .recording").style.display = "none";
-    Microphone.stop();
-    Microphone.getRecordedAudio();
-  };
+  // handleRecording = () => {
+  //   if (document.querySelector(".chat .send-form .recording").style.display !== "block") 
+  //   {
+  //     document.querySelector(".chat .send-form .recording").style.display = "block";
+  //     Microphone.getAudio();
+  //   }
+  // };
+  // handleStopRecording = () => {
+  //   document.querySelector(".chat .send-form .recording").style.display = "none";
+  //   Microphone.stop();
+  //   Microphone.getRecordedAudio();
+  // };
+  sendData = (data, fileName) => {
+    const apiURL = env.REACT_APP_apiURL + '/chat';
+    var xhr=new XMLHttpRequest();
+    var fd=new FormData();
+    fd.append("audioFile", data, fileName);
+    xhr.open("POST", apiURL + '/sendAudio');
+    xhr.send(fd);
+
+    xhr.onreadystatechange = function() {
+      if (this.readyState === xhr.DONE && this.status === 200) {
+          // Request finished. Do processing here.
+          if (xhr.status === 200) {
+            // console.log('fitxer: ',env.REACT_APP_apiURL+'/audios/'+fileName+'.wav');
+            // setTimeout(() => {
+            //   transcription.transcript(env.REACT_APP_apiURL+'/audios/'+fileName+'.wav');              
+            // }, 2000);
+          } else {
+            console.log('error in microphone');
+          }
+      }
+  }
+}
+
   sendMessage = (blob, message) => {
     let email = this.props.match.params.email; //destinatari
     chat.newMessage(email, message, true)
@@ -177,7 +200,7 @@ export default class Chat extends Component {
       messageList.push(newMessage.data);
       document.querySelector("#name").value = "";
       
-      Microphone.sendData(blob, newMessage.data._id);
+      this.sendData(blob, newMessage.data._id);
       this.setState({ messageList, message: "" });
     });
   }
@@ -190,6 +213,7 @@ export default class Chat extends Component {
           <ChatContent messageList={this.state.messageList} user={this.props.user}/>
           <div id="intoView" />
           <div className="send-form">
+          {/* <Transcriptor /> */}
             <Typing typing={this.state.typing} user={this.props.user}/>
             <div className="controllers">
               <Link to="/chats" className="back-button">

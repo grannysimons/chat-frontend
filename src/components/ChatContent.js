@@ -18,17 +18,13 @@ const style={
 export default class ChatContent extends Component {
   showTranscriptionHandler = (uniqueNumber) => {
     let selector='.messages #AudioPlayer' + uniqueNumber + ' .transcription';
-    console.log('selector: ', selector);
     if(document.querySelector('.messages .messageMetaData .arrow i').classList.contains('fa-chevron-down'))
     {
-      console.log('amunt');
       document.querySelector('.messages .messageMetaData .arrow i').setAttribute('class', 'fas fa-chevron-up');
       document.querySelector(selector).style.display = 'block';
     }
     else if(document.querySelector('.messages .messageMetaData .arrow i').classList.contains('fa-chevron-up'))
     {
-      console.log('avall');
-
       document.querySelector('.messages .messageMetaData .arrow i').setAttribute('class', 'fas fa-chevron-down');
       document.querySelector(selector).style.display = 'none';
     }

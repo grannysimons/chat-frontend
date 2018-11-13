@@ -47,25 +47,6 @@ export default class SureDelete extends Component {
         console.log('there was an error deleting user ', error);
         this.props.history.push("/profile");
       });
-
-
-      // chat.deleteUser(this.props.user._id)
-      // .then(result => {
-      //   if(result.data.deleteUser === 'ok')
-      //   {
-      //     chat.deleteChats(this.props.user._id)
-      //     .then(result => {
-      //       chat.deleteMessages(this.props.user._id)
-      //       .then(result => {
-      //         this.props.logout();
-      //         this.props.history.push('/login');
-      //       })
-      //       .catch(error => {
-      //         console.log('error deleting user: ', error);
-      //       })
-      //     })
-      //   }
-      // })
     }, 2000);
   };
   render() {

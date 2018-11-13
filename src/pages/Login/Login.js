@@ -31,24 +31,19 @@ class Login extends Component {
       return;
     }
 
-    console.log('login: ');
     auth
       .login({ email, password })
       .then(user => {
         if(user.error)
         {
-    console.log('login error');
           this.setState({ errorMessage: 'Ooops! ' + user.error });
         }
         else
         {
-          console.log('login ok');
           this.props.setUser(user);
         }
       })
       .catch(error => {
-    console.log('login catch');
-
         this.setState({ errorMessage: 'Ooops! ' + error.message });
       });
   };
