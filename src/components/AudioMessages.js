@@ -32,12 +32,6 @@ export default class AudioMessages extends Component {
   onRecordingComplete = (blob) => {
     this.blob = blob;
   }
-  checkProcessFinished = () => {
-    if(!this.blob || !this.message) return;
-    this.props.sendMessage(this.blob, this.message);
-    this.blob = '';
-    this.message = '';
-  }
   onRecordingError = (err) => {
   }
   render() {
