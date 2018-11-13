@@ -76,6 +76,8 @@ export default class Profile extends Component {
     if(field==='password')
     {
       let values = this.state.values;
+      console.log('is password!! ', values);
+      console.log("values['uncryptedPassword'] ", values['uncryptedPassword']);
       values['uncryptedPassword'] = document.querySelector(selector).value;
       let passwordShown = '';
       for(let i=0; i<values['uncryptedPassword'].length; i++)
@@ -83,10 +85,14 @@ export default class Profile extends Component {
         passwordShown += '* ';
       }
       values[field] = passwordShown;
+      console.log("values['field'] ", values[field]);
       document.querySelector(selector).value = values['uncryptedPassword'];
     }
+    console.log('this.state.pressedButton ', this.state.pressedButton);
+    console.log('value ', value);
     auth.setProfileData({ field: this.state.pressedButton, value })
     .then(data => {
+      console.log(data);
       this.props.setUser(data);
     })
   }

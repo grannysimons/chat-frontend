@@ -213,7 +213,6 @@ export default class Chat extends Component {
           <ChatContent messageList={this.state.messageList} user={this.props.user}/>
           <div id="intoView" />
           <div className="send-form">
-          {/* <Transcriptor /> */}
             <Typing typing={this.state.typing} user={this.props.user}/>
             <div className="controllers">
               <Link to="/chats" className="back-button">

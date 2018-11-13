@@ -15,18 +15,31 @@ export default class AudioMessages extends Component {
     this.message='';
     this.destEmail = this.props.email;
   }
-  clickRecorder = () => {
-  }
   startTranscription = () => {
+    console.log('startTranscription');
     this.speechToText.start();
+    if (/Mobi/.test(navigator.userAgent)) {
+      setTimeout(() => {
+        console.log('settimeout: stop!');
+        this.speechToText.stop();
+      }, 5000);
+    }
     this.speechToText.onresult = (event) => {
       let text = event.results[0][0].transcript;
       this.message = text;
+      console.log('message: ', this.message);
       this.props.sendMessage(this.blob, this.message);
       this.message = '';
     };
   }
   stopTranscription = () => {
+    console.log('stopTranscription');
+    if (/Mobi/.test(navigator.userAgent))
+    {
+      console.log('mòbil!');
+      return;
+    }
+    console.log('no mòbil');
     this.speechToText.stop();
   }
   onRecordingComplete = (blob) => {
@@ -37,7 +50,7 @@ export default class AudioMessages extends Component {
   render() {
     return (
       <div className="recorder" style={style}>
-        <Recorder onClick={this.clickRecorder} onMouseDown={this.startTranscription} onMouseUp={this.stopTranscription} style={style} onRecordingComplete={this.onRecordingComplete} onRecordingError={this.props.onRecordingError}/>
+        <Recorder onMouseDown={this.startTranscription} onMouseUp={this.stopTranscription} style={style} onRecordingComplete={this.onRecordingComplete} onRecordingError={this.props.onRecordingError}/>
       </div>
     )
   }
