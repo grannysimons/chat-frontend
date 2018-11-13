@@ -198,10 +198,10 @@ The url to your repository and to your deployed project
 https://github.com/grannysimons/chat-frontend
 https://github.com/grannysimons/chat-backend
 
-[Deploy Link](http://heroku.com)
+[Deploy Link](https://txatapp.firebaseapp.com)
 
 ### Slides
 
 The url to your presentation slides
 
-[Slides Link](http://slides.com)
+[Slides Link](https://slides.com/marionaroca/deck-7#/)
