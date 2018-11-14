@@ -196,12 +196,13 @@ export default class Chat extends Component {
     let email = this.props.match.params.email; //destinatari
     chat.newMessage(email, message, true)
     .then(newMessage => {
+      this.sendData(blob, newMessage.data._id);
       var messageList = this.state.messageList;
       messageList.push(newMessage.data);
       document.querySelector("#name").value = "";
-      
-      this.sendData(blob, newMessage.data._id);
-      this.setState({ messageList, message: "" });
+      setTimeout(()=>{
+        this.setState({ messageList, message: "" });
+      }, 1000);
     });
   }
 

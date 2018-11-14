@@ -28,8 +28,12 @@ export default class AudioMessages extends Component {
       let text = event.results[0][0].transcript;
       this.message = text;
       console.log('message: ', this.message);
-      this.props.sendMessage(this.blob, this.message);
-      this.message = '';
+      if (this.blob && this.message)
+      {
+        console.log('startTranscription sendmessage');
+        this.props.sendMessage(this.blob, this.message);
+        this.message = '';
+      }
     };
   }
   stopTranscription = () => {
@@ -43,7 +47,19 @@ export default class AudioMessages extends Component {
     this.speechToText.stop();
   }
   onRecordingComplete = (blob) => {
+    console.log('onRecordingComplete');
+    if (/Mobi/.test(navigator.userAgent))
+    {
+      console.log('mòbil!');
+      return;
+    }
+    console.log('no mòbil');
     this.blob = blob;
+    if (this.blob && this.message){
+      console.log('onrecordingcomplete sendmessage');
+      this.props.sendMessage(this.blob, this.message);
+      this.blob = '';
+    }
   }
   onRecordingError = (err) => {
   }
