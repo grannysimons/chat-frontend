@@ -32,7 +32,7 @@ export default class Chat extends Component {
           : this.props.match.params.email
       });
     });
-    document.getElementById("intoView").scrollIntoView();
+    if(document.getElementById("intoView")) document.getElementById("intoView").scrollIntoView();
   };
 
   componentDidMount = () => {

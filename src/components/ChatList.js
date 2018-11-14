@@ -26,6 +26,7 @@ const style = {
 class ChatList extends Component {
   state = {
     chatList: [],
+    newChats: [],
   }
   getChatList = () => {
     chat.getList()
@@ -33,15 +34,24 @@ class ChatList extends Component {
       var chatArray = [];
       if(chats.data.chats)
       {
+        console.log('chats: ',chats);
         chats.data.chats.forEach((chatElement) => {
+          console.log('chatElem: ', chatElement);
+          console.log('chatElement.user1.email: ', chatElement.user1.email);
+          console.log('this.props.user.email: ', this.props.user.email);
           let user = chatElement.user1.email === this.props.user.email ? chatElement.user2 : chatElement.user1;
+          console.log('user: ', user);
           let chatObject = {
             name: (user.idUser.userName ? user.idUser.userName : user.email),
             lastDate: helpers.dateChatFormat(chatElement.dateLastMessage),
             num: '',
             email: user.email,
             idChat: chatElement._id,
+            // notSeen: chatElement.dateLastMessage > user.lastSeen ? true : false,
           }
+          console.log('chatObject ', chatObject);
+          console.log('dateLastMessage ', chatElement.dateLastMessage);
+          console.log('lastSeen ', user.lastSeen);
           chatArray.push(chatObject);
         });
       }
@@ -49,7 +59,7 @@ class ChatList extends Component {
       {
         console.log('Chats.js - getChatList - error: ', chats.data.error);
       }
-      this.setState({ chatList: chatArray });
+      this.setState({ chatList: chatArray});
     })
   }
   printList = () => {
@@ -57,6 +67,7 @@ class ChatList extends Component {
     {
       var listArray = [];
       this.state.chatList.map((element, index) => {
+        console.log('element: ', element);
         let path = `/chats/${element.email}`;
         listArray.push(<Link to={path} key={index}>
           <ChatListElement
@@ -79,8 +90,8 @@ class ChatList extends Component {
     socket.on(NEW_CHAT, ()=>{
       this.getChatList();
     });
-    socket.on(MESSAGE_RECEIVED, (fromUserMail) => {
-      this.getChatList(fromUserMail);
+    socket.on(MESSAGE_RECEIVED, () => {
+      this.getChatList();
     })
     socket.on(NEW_MESSAGES, (idChat)=>{
       console.log('new messages in chat: ', idChat);

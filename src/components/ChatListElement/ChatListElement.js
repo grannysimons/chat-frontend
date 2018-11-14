@@ -13,7 +13,10 @@ export default class ChatListElement extends Component {
           <div className="col2 div2">
           {this.props.element.num}
           </div>
-          <div className="col2 div3">
+          {
+            this.props.element.notSeen && <div className="col1 div3"><i className="fas fa-certificate"></i></div>
+          }
+          <div className="col1 div3">
             <i className="fas fa-chevron-right"></i>
           </div>
         </button>
