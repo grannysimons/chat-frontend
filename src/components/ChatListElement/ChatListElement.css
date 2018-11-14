@@ -1,12 +1,10 @@
 .chatListElement .chats-container
 {
   background-color: #dddddd;
-  /* border: 1px solid gray; */
   margin: 0;
   width: 40%;
   display: flex;
   flex-direction: row;
-  /* padding: 10px 0; */
   margin-top: 20px;
 }
 .chatListElement .chats-container>div
@@ -36,10 +34,6 @@
 .chatListElement .col1
 {
   width: 10%;
-  /* width: 10%; */
-  /* flex: 0 0 10%; */
-  /* position: relative;
-  top: 5px; */
 }
 .chatListElement .col1 .spotNewMessage
 {

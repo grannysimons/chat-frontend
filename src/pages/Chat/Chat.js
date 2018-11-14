@@ -73,8 +73,6 @@ export default class Chat extends Component {
     this.setState({ message: e.target.value });
   };
   handleOnFocus = e => {
-    // let email = this.props.match.params.email;  //destinatari
-    // chat.typing(email);
   };
   handleOnBlur = () => {
     let email = this.props.match.params.email;  //destinatari
@@ -157,18 +155,6 @@ export default class Chat extends Component {
       behavior: "smooth"
     });
   };
-  // handleRecording = () => {
-  //   if (document.querySelector(".chat .send-form .recording").style.display !== "block") 
-  //   {
-  //     document.querySelector(".chat .send-form .recording").style.display = "block";
-  //     Microphone.getAudio();
-  //   }
-  // };
-  // handleStopRecording = () => {
-  //   document.querySelector(".chat .send-form .recording").style.display = "none";
-  //   Microphone.stop();
-  //   Microphone.getRecordedAudio();
-  // };
   sendData = (data, fileName) => {
     const apiURL = env.REACT_APP_apiURL + '/chat';
     var xhr=new XMLHttpRequest();
@@ -179,14 +165,9 @@ export default class Chat extends Component {
 
     xhr.onreadystatechange = function() {
       if (this.readyState === xhr.DONE && this.status === 200) {
-          // Request finished. Do processing here.
           if (xhr.status === 200) {
-            // console.log('fitxer: ',env.REACT_APP_apiURL+'/audios/'+fileName+'.wav');
-            // setTimeout(() => {
-            //   transcription.transcript(env.REACT_APP_apiURL+'/audios/'+fileName+'.wav');              
-            // }, 2000);
           } else {
-            console.log('error in microphone');
+            // console.log('error in microphone');
           }
       }
   }

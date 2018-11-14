@@ -5,7 +5,6 @@ const style = {
   button: {
     color: '#333333',
     border: '2px solid #333333',
-    // backgroundColor: '#fed22b',
     position: 'relative',
     top: '3px',
   },

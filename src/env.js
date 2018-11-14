@@ -1,4 +1,4 @@
-let isLocal = false;
+let isLocal = true;
 
 let local = {
   REACT_APP_apiURL: 'http://localhost:3010',

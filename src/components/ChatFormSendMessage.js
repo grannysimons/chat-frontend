@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import Recorder from 'react-mp3-recorder';
 import AudioMessages from './AudioMessages';
 
 export default class ChatFormSendMessage extends Component {

@@ -28,23 +28,23 @@ export default class SureDelete extends Component {
                 }
                 else
                 {
-                  console.log('error deleting user');
+                  // console.log('error deleting user');
                 }
               })
             }
             else
             {
-              console.log('error deleting chats');
+              // console.log('error deleting chats');
             }
           })
         }
         else
         {
-          console.log('error deleting messages');
+          // console.log('error deleting messages');
         }
       })
       .catch(error => {
-        console.log('there was an error deleting user ', error);
+        // console.log('there was an error deleting user ', error);
         this.props.history.push("/profile");
       });
     }, 2000);

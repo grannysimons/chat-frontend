@@ -57,7 +57,10 @@ export default class AuthProvider extends Component {
           user: {},
         });
       })
-      .catch( error => console.log(error))
+      .catch( 
+        error => {
+          // console.log(error)
+      });
   }
 
   componentDidMount() {

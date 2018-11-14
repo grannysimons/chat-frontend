@@ -18,7 +18,6 @@ class SocketManagerClient {
     this.socket.on('connect', (sk) => {
       this.socket.emit('hola!!!!');
       this.socket.on('disconnect', (msg)=>{
-        console.log('on disconnect', msg);
       });
 
       this.initSocketEventsReception(userId);
