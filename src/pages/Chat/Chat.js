@@ -156,21 +156,71 @@ export default class Chat extends Component {
     });
   };
   sendData = (data, fileName) => {
+
+    // this.getSignedRequest(data, fileName);
+
     const apiURL = env.REACT_APP_apiURL + '/chat';
     var xhr=new XMLHttpRequest();
     var fd=new FormData();
     fd.append("audioFile", data, fileName);
+    console.log('sendData 1');
     xhr.open("POST", apiURL + '/sendAudio');
+    console.log('sendData 2');
     xhr.send(fd);
+    console.log('sendData 3');
 
     xhr.onreadystatechange = function() {
       if (this.readyState === xhr.DONE && this.status === 200) {
           if (xhr.status === 200) {
+    console.log('sendData ok');
+
           } else {
-            // console.log('error in microphone');
+            console.log('error in microphone');
           }
       }
   }
+}
+
+getSignedRequest = (file, fileName) => {
+  //FD
+  var fd=new FormData();
+  fd.append("audioFile", file, fileName);
+
+  const xhr = new XMLHttpRequest();
+  const apiURL = env.REACT_APP_apiURL + '/chat';
+  xhr.open('GET', `${apiURL}/sign-s3?file-name=${fileName}&file-type=${file.type}`);
+  xhr.onreadystatechange = () => {
+    if(xhr.readyState === 4){
+      if(xhr.status === 200){
+        const response = JSON.parse(xhr.responseText);
+        console.log('signedRequest: ',response.signedRequest);
+        console.log('url: ',response.url);
+        this.uploadFile(fd, response.signedRequest, response.url);
+      }
+      else{
+        console.log('Could not get signed URL.');
+      }
+    }
+  };
+  xhr.send();
+}
+
+uploadFile = (file, signedRequest, url) => {
+  const xhr = new XMLHttpRequest();
+  xhr.open('PUT', signedRequest);
+  xhr.onreadystatechange = () => {
+    if(xhr.readyState === 4){
+      if(xhr.status === 200){
+        console.log('audio carregat correctament');
+        // document.getElementById('preview').src = url;
+        // document.getElementById('avatar-url').value = url;
+      }
+      else{
+        console.log('Could not upload file.');
+      }
+    }
+  };
+  xhr.send(file);
 }
 
   sendMessage = (blob, message) => {

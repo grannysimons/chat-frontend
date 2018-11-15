@@ -77,8 +77,7 @@ export default class AudioPlayer extends Component {
     setTimeout(()=>{
       if(!document.querySelector('#' + this.customId + ' .AudioTag').duration)
       {
-        console.log('#' + this.customId + ' .progress .timers .totalTime');
-        document.querySelector('#' + this.customId + ' .progress .timers .totalTime').innerHTML = 'error reading file';
+        document.querySelector('#' + this.customId + ' .progress .timers .totalTime').innerHTML = 'error in file';
       }
       else
       {

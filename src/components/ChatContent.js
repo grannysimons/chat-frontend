@@ -40,7 +40,7 @@ export default class ChatContent extends Component {
             <div className={side} key={index}>
               {
                 message.isAudio ? 
-                <AudioPlayer uniqueNumber={index} src={ env.REACT_APP_apiURL +'/audios/' + message._id + '.wav'} transcriptionText={message.text}/>
+                <AudioPlayer uniqueNumber={index} src={ env.PUBLICBUCKET_BASEURL + message._id + '.wav'} transcriptionText={message.text}/>
                 : <p className="message-text">{message.text}</p>
               }
               <div className="messageMetaData" style={style.metaData}>
