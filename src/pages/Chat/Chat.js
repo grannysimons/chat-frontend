@@ -36,6 +36,7 @@ export default class Chat extends Component {
   };
 
   componentDidMount = () => {
+    document.querySelector('.styles_button__3Vugn').innerHTML = '<i class="fas fa-microphone-alt"></i>';
     this.getMessages();
     socketManagerClient.initSocketUser(this.props.user._id);
     let socket = socketManagerClient.getSocket();

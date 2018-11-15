@@ -290,6 +290,10 @@ box-shadow: 0px 14px 29px -9px rgba(102,87,13,1);
    width: 30px;
    height: 30px;
  }
+ .styles_button__3Vugn .fa-microphone-alt
+ {
+   font-size: 22px;
+ }
  .styles_button__3Vugn:active
  {
   background-color: gray !important;
