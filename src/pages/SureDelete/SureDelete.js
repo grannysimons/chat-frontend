@@ -59,10 +59,10 @@ export default class SureDelete extends Component {
           <p className="text1">So, you leave us...</p>
           <p className="text2">Are you sure?</p>
           <form>
-            <button onClick={this.handleClickYes} className="yes">
+            <button type="button" onClick={this.handleClickYes} className="yes">
               Yes
             </button>
-            <button onClick={this.handleClickNo} className="no">
+            <button type="button" onClick={this.handleClickNo} className="no">
               No
             </button>
           </form>

@@ -183,7 +183,7 @@ export default class Chat extends Component {
       document.querySelector("#name").value = "";
       setTimeout(()=>{
         this.setState({ messageList, message: "" });
-      }, 1000);
+      }, 1500);
     });
   }
 

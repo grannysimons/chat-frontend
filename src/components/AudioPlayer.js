@@ -75,8 +75,16 @@ export default class AudioPlayer extends Component {
     this.currentStep = 0;
 
     setTimeout(()=>{
-      let durationSeconds = new Date(document.querySelector('#' + this.customId + ' .AudioTag').duration);
-      document.querySelector('#' + this.customId + ' .progress .timers .totalTime').innerHTML = this.getTimeFormat(durationSeconds);
+      if(!document.querySelector('#' + this.customId + ' .AudioTag').duration)
+      {
+        console.log('#' + this.customId + ' .progress .timers .totalTime');
+        document.querySelector('#' + this.customId + ' .progress .timers .totalTime').innerHTML = 'error reading file';
+      }
+      else
+      {
+        let durationSeconds = new Date(document.querySelector('#' + this.customId + ' .AudioTag').duration);
+        document.querySelector('#' + this.customId + ' .progress .timers .totalTime').innerHTML = this.getTimeFormat(durationSeconds);
+      }
       
     }, 1000);
   }

@@ -110,7 +110,8 @@ export default class Profile extends Component {
       break;
     }
   }
-  handleSubmit = () => {
+  handleSubmit = (e) => {
+    e.preventDefault();
     this.props.history.push('/sureDelete');
   }
   render() {
