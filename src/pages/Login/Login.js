@@ -12,6 +12,7 @@ class Login extends Component {
   };
 
   handleFormSubmit = event => {
+    console.log('handleFormSubmit');
     event.preventDefault();
     const { email, password } = this.state;
     document.querySelector('.login input#email').style.border = 'solid 2px transparent';
@@ -49,6 +50,7 @@ class Login extends Component {
   };
 
   handleChange = event => {
+    console.log('handleChange');
     const { name, value } = event.target;
     this.setState({ [name]: value });
   };

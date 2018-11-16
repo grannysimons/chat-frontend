@@ -11,8 +11,6 @@ import AuthProvider from './components/AuthProvider';
 import SureDelete from "./pages/SureDelete/SureDelete";
 import './App.css';
 
-require('dotenv').config();
-
 class App extends Component {
   render() {
     return (

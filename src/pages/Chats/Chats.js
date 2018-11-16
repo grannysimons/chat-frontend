@@ -16,9 +16,9 @@ class Chats extends Component {
   }
   componentDidMount = () => {
     this.hideModal();
-    socketManagerClient.initSocketUser(this.props.user._id);
-    let socket = socketManagerClient.getSocket();
-    socket.on(NEW_USER, (msg)=>{});
+    // socketManagerClient.initSocketUser(this.props.user._id);
+    // let socket = socketManagerClient.getSocket();
+    // socket.on(NEW_USER, (msg)=>{});
   }
 
   render() {
